@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WellnessRouteImport } from './routes/wellness'
 import { Route as TrainingRouteImport } from './routes/training'
+import { Route as SuccessRouteImport } from './routes/success'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CoachingRouteImport } from './routes/coaching'
@@ -27,6 +28,11 @@ const WellnessRoute = WellnessRouteImport.update({
 const TrainingRoute = TrainingRouteImport.update({
   id: '/training',
   path: '/training',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SuccessRoute = SuccessRouteImport.update({
+  id: '/success',
+  path: '/success',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShopRoute = ShopRouteImport.update({
@@ -71,6 +77,7 @@ export interface FileRoutesByFullPath {
   '/coaching': typeof CoachingRoute
   '/contact': typeof ContactRoute
   '/shop': typeof ShopRouteWithChildren
+  '/success': typeof SuccessRoute
   '/training': typeof TrainingRoute
   '/wellness': typeof WellnessRoute
   '/shop/$slug': typeof ShopSlugRoute
@@ -82,6 +89,7 @@ export interface FileRoutesByTo {
   '/coaching': typeof CoachingRoute
   '/contact': typeof ContactRoute
   '/shop': typeof ShopRouteWithChildren
+  '/success': typeof SuccessRoute
   '/training': typeof TrainingRoute
   '/wellness': typeof WellnessRoute
   '/shop/$slug': typeof ShopSlugRoute
@@ -94,6 +102,7 @@ export interface FileRoutesById {
   '/coaching': typeof CoachingRoute
   '/contact': typeof ContactRoute
   '/shop': typeof ShopRouteWithChildren
+  '/success': typeof SuccessRoute
   '/training': typeof TrainingRoute
   '/wellness': typeof WellnessRoute
   '/shop/$slug': typeof ShopSlugRoute
@@ -107,6 +116,7 @@ export interface FileRouteTypes {
     | '/coaching'
     | '/contact'
     | '/shop'
+    | '/success'
     | '/training'
     | '/wellness'
     | '/shop/$slug'
@@ -118,6 +128,7 @@ export interface FileRouteTypes {
     | '/coaching'
     | '/contact'
     | '/shop'
+    | '/success'
     | '/training'
     | '/wellness'
     | '/shop/$slug'
@@ -129,6 +140,7 @@ export interface FileRouteTypes {
     | '/coaching'
     | '/contact'
     | '/shop'
+    | '/success'
     | '/training'
     | '/wellness'
     | '/shop/$slug'
@@ -141,6 +153,7 @@ export interface RootRouteChildren {
   CoachingRoute: typeof CoachingRoute
   ContactRoute: typeof ContactRoute
   ShopRoute: typeof ShopRouteWithChildren
+  SuccessRoute: typeof SuccessRoute
   TrainingRoute: typeof TrainingRoute
   WellnessRoute: typeof WellnessRoute
   ApiPublicStripeWebhookRoute: typeof ApiPublicStripeWebhookRoute
@@ -160,6 +173,13 @@ declare module '@tanstack/react-router' {
       path: '/training'
       fullPath: '/training'
       preLoaderRoute: typeof TrainingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/success': {
+      id: '/success'
+      path: '/success'
+      fullPath: '/success'
+      preLoaderRoute: typeof SuccessRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shop': {
@@ -230,6 +250,7 @@ const rootRouteChildren: RootRouteChildren = {
   CoachingRoute: CoachingRoute,
   ContactRoute: ContactRoute,
   ShopRoute: ShopRouteWithChildren,
+  SuccessRoute: SuccessRoute,
   TrainingRoute: TrainingRoute,
   WellnessRoute: WellnessRoute,
   ApiPublicStripeWebhookRoute: ApiPublicStripeWebhookRoute,
