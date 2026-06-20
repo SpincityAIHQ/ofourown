@@ -302,11 +302,11 @@ function ChatPanel({
     onPersist(messages);
   }, [messages, status, onPersist]);
 
-  // Focus textarea on mount and after streams complete.
-  const formRef = useRef<HTMLFormElement | null>(null);
+  // Focus textarea after streams complete.
+  const panelRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     if (status === "ready") {
-      formRef.current?.querySelector<HTMLTextAreaElement>("textarea")?.focus();
+      panelRef.current?.querySelector<HTMLTextAreaElement>("textarea")?.focus();
     }
   }, [status, thread.id]);
 
@@ -320,7 +320,7 @@ function ChatPanel({
   }
 
   return (
-    <>
+    <div ref={panelRef} className="flex flex-1 flex-col overflow-hidden">
       <Conversation className="flex-1">
         <ConversationContent>
           {messages.length === 0 ? (
@@ -357,7 +357,6 @@ function ChatPanel({
       </Conversation>
 
       <PromptInput
-        ref={formRef}
         onSubmit={async (_msg, event) => {
           event.preventDefault();
           await handleSubmit();
@@ -374,6 +373,6 @@ function ChatPanel({
           <PromptInputSubmit status={status} disabled={!text.trim() || isLoading} />
         </PromptInputFooter>
       </PromptInput>
-    </>
+    </div>
   );
 }
