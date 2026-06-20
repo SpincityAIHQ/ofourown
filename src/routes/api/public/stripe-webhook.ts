@@ -79,7 +79,7 @@ export const Route = createFileRoute("/api/public/stripe-webhook")({
             amount_total: session.amount_total ?? null,
             currency: session.currency ?? null,
             status: "paid",
-            raw: session as unknown as Record<string, never>,
+            raw: JSON.parse(JSON.stringify(session)),
           },
           { onConflict: "stripe_session_id" },
         );
