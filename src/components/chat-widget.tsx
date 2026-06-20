@@ -290,7 +290,6 @@ function ChatPanel({
     },
   });
 
-  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [text, setText] = useState("");
 
   // Persist messages whenever they change (after stream completes especially).
@@ -303,13 +302,13 @@ function ChatPanel({
     onPersist(messages);
   }, [messages, status, onPersist]);
 
-  // Focus the textarea on mount and after sends/stream completes.
+  // Focus textarea on mount and after streams complete.
+  const formRef = useRef<HTMLFormElement | null>(null);
   useEffect(() => {
-    textareaRef.current?.focus();
-  }, [thread.id]);
-  useEffect(() => {
-    if (status === "ready") textareaRef.current?.focus();
-  }, [status]);
+    if (status === "ready") {
+      formRef.current?.querySelector<HTMLTextAreaElement>("textarea")?.focus();
+    }
+  }, [status, thread.id]);
 
   const isLoading = status === "submitted" || status === "streaming";
 
@@ -358,6 +357,7 @@ function ChatPanel({
       </Conversation>
 
       <PromptInput
+        ref={formRef}
         onSubmit={async (_msg, event) => {
           event.preventDefault();
           await handleSubmit();
@@ -365,7 +365,7 @@ function ChatPanel({
         className="border-t border-border bg-background"
       >
         <PromptInputTextarea
-          ref={textareaRef}
+          autoFocus
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="Ask about training, wellness, coaching…"
