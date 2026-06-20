@@ -1,29 +1,115 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
+import { EmailCapture } from "@/components/email-capture";
+import { Section, Eyebrow } from "@/components/section";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "Ben Gordon — Training, Wellness, Coaching" },
+      { name: "description", content: "The digital home of Ben Gordon. Training programs, wellness protocols, and 1:1 coaching to help you perform and recover." },
+      { property: "og:title", content: "Ben Gordon — Training, Wellness, Coaching" },
+      { property: "og:description", content: "Training programs, wellness protocols, and 1:1 coaching with Ben Gordon." },
     ],
   }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+const OFFERS = [
+  {
+    to: "/training",
+    label: "Training",
+    blurb: "1:1 sessions and programs built around strength, conditioning, and recovery.",
+  },
+  {
+    to: "/wellness",
+    label: "Wellness",
+    blurb: "Sustainable habits for sleep, nutrition, and longevity — booked privately.",
+  },
+  {
+    to: "/coaching",
+    label: "Coaching",
+    blurb: "Mentorship for athletes, founders, and operators serious about their craft.",
+  },
+  {
+    to: "/shop",
+    label: "Shop",
+    blurb: "Programs, guides, and tools Ben uses with private clients.",
+  },
+] as const;
+
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <section className="border-b border-border">
+        <div className="mx-auto max-w-6xl px-6 py-24 md:py-40">
+          <Eyebrow>Benjamin Gordon</Eyebrow>
+          <h1 className="font-display text-6xl font-semibold leading-[1.02] tracking-tight md:text-[8rem]">
+            Train hard.
+            <br />
+            Live well.
+          </h1>
+          <p className="mt-8 max-w-xl text-lg text-muted-foreground md:text-xl">
+            Programs, protocols, and 1:1 work for the people who take their body — and
+            their life — seriously.
+          </p>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <Link
+              to="/training"
+              className="inline-flex h-12 items-center gap-2 bg-foreground px-6 text-sm uppercase tracking-wider text-background transition hover:opacity-90"
+            >
+              Start with training <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              to="/shop"
+              className="inline-flex h-12 items-center gap-2 border border-foreground px-6 text-sm uppercase tracking-wider transition hover:bg-foreground hover:text-background"
+            >
+              Browse the shop
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <Section className="border-b border-border">
+        <Eyebrow>Work with Ben</Eyebrow>
+        <h2 className="font-display text-4xl font-semibold md:text-5xl">
+          Four ways in.
+        </h2>
+        <div className="mt-12 grid gap-px bg-border md:grid-cols-2">
+          {OFFERS.map((o) => (
+            <Link
+              key={o.to}
+              to={o.to}
+              className="group flex flex-col justify-between gap-12 bg-background p-8 transition hover:bg-accent md:p-12"
+            >
+              <h3 className="font-display text-3xl font-semibold">{o.label}</h3>
+              <div>
+                <p className="text-muted-foreground">{o.blurb}</p>
+                <p className="mt-6 inline-flex items-center gap-2 text-sm uppercase tracking-wider">
+                  Explore <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </Section>
+
+      <Section>
+        <div className="grid gap-12 md:grid-cols-2 md:items-end">
+          <div>
+            <Eyebrow>Stay close</Eyebrow>
+            <h2 className="font-display text-4xl font-semibold md:text-5xl">
+              Get Ben's notes.
+            </h2>
+            <p className="mt-4 max-w-md text-muted-foreground">
+              Occasional dispatches on training, recovery, and the work behind
+              performing at your best. No noise.
+            </p>
+          </div>
+          <EmailCapture source="home_hero" cta="Subscribe" />
+        </div>
+      </Section>
+    </>
   );
 }
