@@ -9,9 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TrainingRouteImport } from './routes/training'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiPublicStripeWebhookRouteImport } from './routes/api/public/stripe-webhook'
 
+const TrainingRoute = TrainingRouteImport.update({
+  id: '/training',
+  path: '/training',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -25,32 +31,43 @@ const ApiPublicStripeWebhookRoute = ApiPublicStripeWebhookRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/training': typeof TrainingRoute
   '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/training': typeof TrainingRoute
   '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/training': typeof TrainingRoute
   '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/public/stripe-webhook'
+  fullPaths: '/' | '/training' | '/api/public/stripe-webhook'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/public/stripe-webhook'
-  id: '__root__' | '/' | '/api/public/stripe-webhook'
+  to: '/' | '/training' | '/api/public/stripe-webhook'
+  id: '__root__' | '/' | '/training' | '/api/public/stripe-webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  TrainingRoute: typeof TrainingRoute
   ApiPublicStripeWebhookRoute: typeof ApiPublicStripeWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/training': {
+      id: '/training'
+      path: '/training'
+      fullPath: '/training'
+      preLoaderRoute: typeof TrainingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  TrainingRoute: TrainingRoute,
   ApiPublicStripeWebhookRoute: ApiPublicStripeWebhookRoute,
 }
 export const routeTree = rootRouteImport
