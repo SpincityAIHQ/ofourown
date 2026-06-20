@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WellnessRouteImport } from './routes/wellness'
 import { Route as TrainingRouteImport } from './routes/training'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CoachingRouteImport } from './routes/coaching'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
@@ -24,6 +25,11 @@ const WellnessRoute = WellnessRouteImport.update({
 const TrainingRoute = TrainingRouteImport.update({
   id: '/training',
   path: '/training',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CoachingRoute = CoachingRouteImport.update({
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/coaching': typeof CoachingRoute
+  '/contact': typeof ContactRoute
   '/training': typeof TrainingRoute
   '/wellness': typeof WellnessRoute
   '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/coaching': typeof CoachingRoute
+  '/contact': typeof ContactRoute
   '/training': typeof TrainingRoute
   '/wellness': typeof WellnessRoute
   '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
@@ -68,6 +76,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/coaching': typeof CoachingRoute
+  '/contact': typeof ContactRoute
   '/training': typeof TrainingRoute
   '/wellness': typeof WellnessRoute
   '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
@@ -78,6 +87,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/coaching'
+    | '/contact'
     | '/training'
     | '/wellness'
     | '/api/public/stripe-webhook'
@@ -86,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/coaching'
+    | '/contact'
     | '/training'
     | '/wellness'
     | '/api/public/stripe-webhook'
@@ -94,6 +105,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/coaching'
+    | '/contact'
     | '/training'
     | '/wellness'
     | '/api/public/stripe-webhook'
@@ -103,6 +115,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   CoachingRoute: typeof CoachingRoute
+  ContactRoute: typeof ContactRoute
   TrainingRoute: typeof TrainingRoute
   WellnessRoute: typeof WellnessRoute
   ApiPublicStripeWebhookRoute: typeof ApiPublicStripeWebhookRoute
@@ -122,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/training'
       fullPath: '/training'
       preLoaderRoute: typeof TrainingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/coaching': {
@@ -159,6 +179,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   CoachingRoute: CoachingRoute,
+  ContactRoute: ContactRoute,
   TrainingRoute: TrainingRoute,
   WellnessRoute: WellnessRoute,
   ApiPublicStripeWebhookRoute: ApiPublicStripeWebhookRoute,
