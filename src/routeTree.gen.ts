@@ -19,6 +19,7 @@ import { Route as CancelRouteImport } from './routes/cancel'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ShopSlugRouteImport } from './routes/shop.$slug'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as ApiPublicStripeWebhookRouteImport } from './routes/api/public/stripe-webhook'
 
 const WellnessRoute = WellnessRouteImport.update({
@@ -71,6 +72,11 @@ const ShopSlugRoute = ShopSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => ShopRoute,
 } as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicStripeWebhookRoute = ApiPublicStripeWebhookRouteImport.update({
   id: '/api/public/stripe-webhook',
   path: '/api/public/stripe-webhook',
@@ -87,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/success': typeof SuccessRoute
   '/training': typeof TrainingRoute
   '/wellness': typeof WellnessRoute
+  '/api/chat': typeof ApiChatRoute
   '/shop/$slug': typeof ShopSlugRoute
   '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
 }
@@ -100,6 +107,7 @@ export interface FileRoutesByTo {
   '/success': typeof SuccessRoute
   '/training': typeof TrainingRoute
   '/wellness': typeof WellnessRoute
+  '/api/chat': typeof ApiChatRoute
   '/shop/$slug': typeof ShopSlugRoute
   '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
 }
@@ -114,6 +122,7 @@ export interface FileRoutesById {
   '/success': typeof SuccessRoute
   '/training': typeof TrainingRoute
   '/wellness': typeof WellnessRoute
+  '/api/chat': typeof ApiChatRoute
   '/shop/$slug': typeof ShopSlugRoute
   '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
 }
@@ -129,6 +138,7 @@ export interface FileRouteTypes {
     | '/success'
     | '/training'
     | '/wellness'
+    | '/api/chat'
     | '/shop/$slug'
     | '/api/public/stripe-webhook'
   fileRoutesByTo: FileRoutesByTo
@@ -142,6 +152,7 @@ export interface FileRouteTypes {
     | '/success'
     | '/training'
     | '/wellness'
+    | '/api/chat'
     | '/shop/$slug'
     | '/api/public/stripe-webhook'
   id:
@@ -155,6 +166,7 @@ export interface FileRouteTypes {
     | '/success'
     | '/training'
     | '/wellness'
+    | '/api/chat'
     | '/shop/$slug'
     | '/api/public/stripe-webhook'
   fileRoutesById: FileRoutesById
@@ -169,6 +181,7 @@ export interface RootRouteChildren {
   SuccessRoute: typeof SuccessRoute
   TrainingRoute: typeof TrainingRoute
   WellnessRoute: typeof WellnessRoute
+  ApiChatRoute: typeof ApiChatRoute
   ApiPublicStripeWebhookRoute: typeof ApiPublicStripeWebhookRoute
 }
 
@@ -244,6 +257,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShopSlugRouteImport
       parentRoute: typeof ShopRoute
     }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/stripe-webhook': {
       id: '/api/public/stripe-webhook'
       path: '/api/public/stripe-webhook'
@@ -274,6 +294,7 @@ const rootRouteChildren: RootRouteChildren = {
   SuccessRoute: SuccessRoute,
   TrainingRoute: TrainingRoute,
   WellnessRoute: WellnessRoute,
+  ApiChatRoute: ApiChatRoute,
   ApiPublicStripeWebhookRoute: ApiPublicStripeWebhookRoute,
 }
 export const routeTree = rootRouteImport
