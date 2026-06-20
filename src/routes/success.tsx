@@ -4,7 +4,7 @@ import { Section, Eyebrow } from "@/components/section";
 export const Route = createFileRoute("/success")({
   head: () => ({
     meta: [
-      { title: "Thank you — Ben Gordon" },
+      { title: "Thank you — OfOurOwn.com" },
       { name: "description", content: "Order confirmed." },
       { name: "robots", content: "noindex" },
     ],

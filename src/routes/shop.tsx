@@ -11,9 +11,9 @@ const productsQuery = queryOptions({
 export const Route = createFileRoute("/shop")({
   head: () => ({
     meta: [
-      { title: "Shop — Ben Gordon" },
-      { name: "description", content: "Programs, guides, and tools from Ben Gordon's private practice." },
-      { property: "og:title", content: "Shop — Ben Gordon" },
+      { title: "Shop — Ben Gordon, NBA legend | OfOurOwn.com" },
+      { name: "description", content: "Programs, guides, and tools from Ben Gordon, NBA legend." },
+      { property: "og:title", content: "Shop — Ben Gordon, NBA legend" },
       { property: "og:description", content: "Programs, guides, and tools from Ben Gordon." },
     ],
   }),
@@ -37,7 +37,7 @@ function ShopPage() {
       <PageHero
         eyebrow="Shop"
         title="Tools of the trade."
-        lede="Programs, guides, and tools Ben uses with private clients — packaged for you to run on your own."
+          lede="Programs, guides, and tools Ben Gordon uses with private clients — packaged for you to run on your own."
       />
       <Section>
         {products.length === 0 ? (

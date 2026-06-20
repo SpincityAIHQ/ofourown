@@ -5,9 +5,9 @@ import { PageHero, Section } from "@/components/section";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact Ben Gordon" },
-      { name: "description", content: "Reach out about training, wellness, coaching, press, or partnerships." },
-      { property: "og:title", content: "Contact Ben Gordon" },
+      { title: "Contact Ben Gordon — NBA legend | OfOurOwn.com" },
+      { name: "description", content: "Reach out to Ben Gordon, NBA legend, about training, wellness, coaching, press, or partnerships." },
+      { property: "og:title", content: "Contact Ben Gordon — NBA legend" },
       { property: "og:description", content: "Reach out to Ben Gordon's team." },
     ],
   }),
