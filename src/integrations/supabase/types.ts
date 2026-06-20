@@ -14,7 +14,206 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      booking_requests: {
+        Row: {
+          created_at: string
+          email: string
+          goals: string | null
+          id: string
+          name: string
+          notes: string | null
+          phone: string | null
+          preferred_time: string | null
+          status: string
+          type: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          goals?: string | null
+          id?: string
+          name: string
+          notes?: string | null
+          phone?: string | null
+          preferred_time?: string | null
+          status?: string
+          type: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          goals?: string | null
+          id?: string
+          name?: string
+          notes?: string | null
+          phone?: string | null
+          preferred_time?: string | null
+          status?: string
+          type?: string
+        }
+        Relationships: []
+      }
+      inquiries: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string
+          reason: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          name: string
+          reason?: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          reason?: string
+          status?: string
+        }
+        Relationships: []
+      }
+      leads: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          source: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          source?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          source?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
+      orders: {
+        Row: {
+          amount_total: number | null
+          created_at: string
+          currency: string | null
+          email: string | null
+          id: string
+          product_id: string | null
+          raw: Json | null
+          status: string
+          stripe_customer_id: string | null
+          stripe_session_id: string
+        }
+        Insert: {
+          amount_total?: number | null
+          created_at?: string
+          currency?: string | null
+          email?: string | null
+          id?: string
+          product_id?: string | null
+          raw?: Json | null
+          status?: string
+          stripe_customer_id?: string | null
+          stripe_session_id: string
+        }
+        Update: {
+          amount_total?: number | null
+          created_at?: string
+          currency?: string | null
+          email?: string | null
+          id?: string
+          product_id?: string | null
+          raw?: Json | null
+          status?: string
+          stripe_customer_id?: string | null
+          stripe_session_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "orders_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      products: {
+        Row: {
+          created_at: string
+          currency: string
+          description: string | null
+          id: string
+          image_url: string | null
+          is_active: boolean
+          name: string
+          price_cents: number | null
+          slug: string
+          sort_order: number
+          stripe_price_id: string | null
+          tagline: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          currency?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          name: string
+          price_cents?: number | null
+          slug: string
+          sort_order?: number
+          stripe_price_id?: string | null
+          tagline?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          currency?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          name?: string
+          price_cents?: number | null
+          slug?: string
+          sort_order?: number
+          stripe_price_id?: string | null
+          tagline?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
