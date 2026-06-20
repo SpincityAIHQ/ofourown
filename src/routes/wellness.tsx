@@ -5,10 +5,10 @@ import { PageHero, Section, Eyebrow } from "@/components/section";
 export const Route = createFileRoute("/wellness")({
   head: () => ({
     meta: [
-      { title: "Wellness with Ben Gordon" },
-      { name: "description", content: "Private wellness consults — sleep, nutrition, and recovery protocols with Ben Gordon." },
-      { property: "og:title", content: "Wellness with Ben Gordon" },
-      { property: "og:description", content: "Private wellness consults and protocols with Ben Gordon." },
+      { title: "Wellness with Ben Gordon — NBA legend | OfOurOwn.com" },
+      { name: "description", content: "Private wellness consults — sleep, nutrition, and recovery protocols with Ben Gordon, NBA legend." },
+      { property: "og:title", content: "Wellness with Ben Gordon — NBA legend" },
+      { property: "og:description", content: "Private wellness consults and protocols with Ben Gordon, NBA legend." },
     ],
   }),
   component: WellnessPage,
@@ -35,7 +35,7 @@ function WellnessPage() {
           <div>
             <Eyebrow>What you walk away with</Eyebrow>
             <ul className="space-y-3 text-lg">
-              {["A protocol you can actually run", "Clear morning and evening anchors", "A short list of metrics worth tracking", "A direct line back to Ben for adjustments"].map((x) => (
+              {["A protocol you can actually run", "Clear morning and evening anchors", "A short list of metrics worth tracking", "A direct line back to Ben Gordon for adjustments"].map((x) => (
                 <li key={x} className="border-b border-border pb-3">{x}</li>
               ))}
             </ul>
@@ -48,7 +48,7 @@ function WellnessPage() {
             <Eyebrow>Request a consult</Eyebrow>
             <h2 className="font-display text-4xl font-semibold md:text-5xl">Tell us where you are.</h2>
             <p className="mt-4 text-muted-foreground">
-              Share what you're working on and what isn't working. Ben's team will confirm fit and timing.
+              Share what you're working on and what isn't working. Ben Gordon's team will confirm fit and timing.
             </p>
           </div>
           <BookingForm type="wellness" />

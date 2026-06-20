@@ -5,9 +5,9 @@ export function SiteFooter() {
     <footer className="border-t border-border">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-12 md:flex-row md:items-center md:justify-between">
         <div>
-          <p className="font-display text-lg font-semibold">Ben Gordon</p>
+          <p className="font-display text-lg font-semibold">OfOurOwn.com</p>
           <p className="mt-1 text-sm text-muted-foreground">
-            Training. Wellness. Coaching.
+            Ben Gordon, NBA legend — Training. Wellness. Coaching.
           </p>
         </div>
         <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
@@ -19,7 +19,7 @@ export function SiteFooter() {
           <Link to="/contact" className="hover:text-foreground">Contact</Link>
         </nav>
         <p className="text-xs text-muted-foreground">
-          © {new Date().getFullYear()} Ben Gordon. All rights reserved.
+          © {new Date().getFullYear()} OfOurOwn.com. All rights reserved.
         </p>
       </div>
     </footer>

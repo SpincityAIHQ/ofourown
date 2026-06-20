@@ -23,13 +23,13 @@ export const Route = createFileRoute("/shop/$slug")({
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [
-          { title: `${loaderData.name} — Ben Gordon` },
+          { title: `${loaderData.name} — Ben Gordon, NBA legend | OfOurOwn.com` },
           { name: "description", content: loaderData.tagline ?? loaderData.description ?? "" },
-          { property: "og:title", content: `${loaderData.name} — Ben Gordon` },
+          { property: "og:title", content: `${loaderData.name} — Ben Gordon, NBA legend` },
           { property: "og:description", content: loaderData.tagline ?? "" },
           ...(loaderData.image_url ? [{ property: "og:image", content: loaderData.image_url } as const] : []),
         ]
-      : [{ title: "Product — Ben Gordon" }],
+      : [{ title: "Product — Ben Gordon, NBA legend | OfOurOwn.com" }],
   }),
   component: ProductPage,
   notFoundComponent: () => (
@@ -81,7 +81,7 @@ function ProductPage() {
           ) : null}
         </div>
         <div>
-          <Eyebrow>Ben Gordon</Eyebrow>
+          <Eyebrow>Ben Gordon · NBA legend</Eyebrow>
           <h1 className="font-display text-5xl font-semibold">{product.name}</h1>
           {product.tagline ? (
             <p className="mt-3 text-lg text-muted-foreground">{product.tagline}</p>

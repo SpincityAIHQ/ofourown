@@ -7,10 +7,10 @@ import { Section, Eyebrow } from "@/components/section";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Ben Gordon — Training, Wellness, Coaching" },
-      { name: "description", content: "The digital home of Ben Gordon. Training programs, wellness protocols, and 1:1 coaching to help you perform and recover." },
-      { property: "og:title", content: "Ben Gordon — Training, Wellness, Coaching" },
-      { property: "og:description", content: "Training programs, wellness protocols, and 1:1 coaching with Ben Gordon." },
+      { title: "OfOurOwn.com — Ben Gordon, NBA legend" },
+      { name: "description", content: "OfOurOwn.com — the digital home of Ben Gordon, NBA legend. Training programs, wellness protocols, and 1:1 coaching to help you perform and recover." },
+      { property: "og:title", content: "OfOurOwn.com — Ben Gordon, NBA legend" },
+      { property: "og:description", content: "Training, wellness, and coaching with Ben Gordon, NBA legend." },
     ],
   }),
   component: Index,
@@ -35,7 +35,7 @@ const OFFERS = [
   {
     to: "/shop",
     label: "Shop",
-    blurb: "Programs, guides, and tools Ben uses with private clients.",
+    blurb: "Programs, guides, and tools Ben Gordon uses with private clients.",
   },
 ] as const;
 
@@ -44,7 +44,7 @@ function Index() {
     <>
       <section className="border-b border-border">
         <div className="mx-auto max-w-6xl px-6 py-24 md:py-40">
-          <Eyebrow>Benjamin Gordon</Eyebrow>
+          <Eyebrow>Ben Gordon · NBA legend</Eyebrow>
           <h1 className="font-display text-6xl font-semibold leading-[1.02] tracking-tight md:text-[8rem]">
             Train hard.
             <br />
@@ -72,7 +72,7 @@ function Index() {
       </section>
 
       <Section className="border-b border-border">
-        <Eyebrow>Work with Ben</Eyebrow>
+        <Eyebrow>Work with Ben Gordon</Eyebrow>
         <h2 className="font-display text-4xl font-semibold md:text-5xl">
           Four ways in.
         </h2>
@@ -100,7 +100,7 @@ function Index() {
           <div>
             <Eyebrow>Stay close</Eyebrow>
             <h2 className="font-display text-4xl font-semibold md:text-5xl">
-              Get Ben's notes.
+              Get Ben Gordon's notes.
             </h2>
             <p className="mt-4 max-w-md text-muted-foreground">
               Occasional dispatches on training, recovery, and the work behind
