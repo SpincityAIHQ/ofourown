@@ -27,6 +27,7 @@ export function SiteHeader() {
               to={item.to}
               className="text-sm tracking-wide text-muted-foreground transition-colors hover:text-foreground"
               activeProps={{ className: "text-foreground" }}
+              activeOptions={item.to === "/" ? { exact: true } : undefined}
             >
               {item.label}
             </Link>
@@ -51,6 +52,7 @@ export function SiteHeader() {
                 onClick={() => setOpen(false)}
                 className="py-3 text-sm tracking-wide text-muted-foreground hover:text-foreground"
                 activeProps={{ className: "text-foreground" }}
+                activeOptions={item.to === "/" ? { exact: true } : undefined}
               >
                 {item.label}
               </Link>
