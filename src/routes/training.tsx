@@ -1,6 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BookingForm } from "@/components/booking-form";
-import { PageHero, Section, Eyebrow } from "@/components/section";
+import {
+  VSLHero,
+  FunnelSection,
+  FunnelGate,
+  BulletList,
+} from "@/components/vsl-funnel";
 
 export const Route = createFileRoute("/training")({
   head: () => ({
@@ -17,38 +22,101 @@ export const Route = createFileRoute("/training")({
 function TrainingPage() {
   return (
     <>
-      <PageHero
+      <VSLHero
         eyebrow="Training"
-        title="Built for output."
-        lede="Private 1:1 sessions and structured programs combining strength, conditioning, and recovery — designed for athletes and operators who need their body to keep up with their ambitions."
+        headline="Train like your career depends on it. Because it does."
+        subhead="Private 1:1 strength, conditioning, and recovery built on the same methods Ben Gordon used through 12 years in the NBA."
+        nextLabel="See why most programs fail"
       />
-      <Section className="border-b border-border">
-        <div className="grid gap-12 md:grid-cols-3">
-          {[
-            { h: "Assess", p: "Movement screen, history, and a clear baseline before any program starts." },
-            { h: "Program", p: "A focused block — strength, work capacity, and recovery — calibrated weekly." },
-            { h: "Adjust", p: "Continuous iteration based on what your body tells us, not a template." },
-          ].map((s, i) => (
-            <div key={s.h}>
-              <p className="font-display text-5xl font-semibold">{String(i + 1).padStart(2, "0")}</p>
-              <h3 className="mt-4 font-display text-2xl font-semibold">{s.h}</h3>
-              <p className="mt-2 text-muted-foreground">{s.p}</p>
-            </div>
-          ))}
-        </div>
-      </Section>
-      <Section>
-        <div className="grid gap-12 md:grid-cols-2 md:gap-20">
-          <div>
-            <Eyebrow>Request a session</Eyebrow>
-            <h2 className="font-display text-4xl font-semibold md:text-5xl">Tell Ben Gordon about you.</h2>
-            <p className="mt-4 text-muted-foreground">
-              Sessions are limited. Share a few details and someone from Ben Gordon's team will be in touch within 48 hours to confirm fit and next steps.
-            </p>
-          </div>
-          <BookingForm type="training" />
-        </div>
-      </Section>
+
+      <FunnelSection
+        id="problem"
+        step="01"
+        eyebrow="The Problem"
+        title="Most training plans were never built for your real life."
+        nextHref="#solution"
+        nextLabel="See the fix"
+      >
+        <p>
+          You don't have an off-season. You have meetings, flights, kids,
+          recovery debt, and a body that's quietly compensating in twenty
+          places. Generic templates make that worse.
+        </p>
+        <p>
+          The result: you train hard for six weeks, get injured, fall off, and
+          start over. Again.
+        </p>
+      </FunnelSection>
+
+      <FunnelSection
+        id="solution"
+        step="02"
+        eyebrow="The Solution"
+        title="A program built around you, recalibrated every week."
+        nextHref="#proof"
+        nextLabel="See it work"
+        tone="invert"
+      >
+        <p>
+          Three steps, repeated until the work is dialed in:
+        </p>
+        <BulletList
+          items={[
+            "Assess — movement screen, history, and a clean baseline.",
+            "Program — strength, conditioning, and recovery in one block.",
+            "Adjust — weekly recalibration based on what your body says.",
+          ]}
+        />
+      </FunnelSection>
+
+      <FunnelSection
+        id="proof"
+        step="03"
+        eyebrow="The Proof"
+        title="Twelve NBA seasons. One reason."
+        nextHref="#offer"
+        nextLabel="See what you get"
+      >
+        <p>
+          Ben Gordon played 12 seasons at the highest level of basketball —
+          and the back half of that career was bought with the exact training
+          and recovery system you'll run.
+        </p>
+        <p className="text-muted-foreground">
+          Private clients now use the same framework to come back from
+          injury, add years to their athletic life, and feel sharp on Monday
+          morning.
+        </p>
+      </FunnelSection>
+
+      <FunnelSection
+        id="offer"
+        step="04"
+        eyebrow="The Offer"
+        title="Private 1:1 sessions with Ben Gordon."
+        nextHref="#cta"
+        nextLabel="Claim your slot"
+      >
+        <BulletList
+          items={[
+            "60–90 minute private sessions, in-person or remote",
+            "Custom program updated weekly to match your load",
+            "Direct line to Ben for questions between sessions",
+            "Movement assessment + return-to-play roadmap if you're coming back from injury",
+          ]}
+        />
+      </FunnelSection>
+
+      <FunnelGate
+        id="cta"
+        source="training_funnel"
+        eyebrow="Step 05 — Apply"
+        title="Slots are limited. Start with your email."
+        pitch="Drop your email to unlock the application form. Ben's team replies within 48 hours to confirm fit and timing."
+        ctaLabel="Unlock application"
+      >
+        <BookingForm type="training" />
+      </FunnelGate>
     </>
   );
 }
