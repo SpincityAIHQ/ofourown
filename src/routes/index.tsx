@@ -67,6 +67,12 @@ function Index() {
               Explore wellness
             </Link>
           </div>
+          <div className="mt-14 border-t border-border pt-10">
+            <p className="mb-4 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+              Get Ben Gordon's notes
+            </p>
+            <EmailCapture source="home_hero" placeholder="you@example.com" cta="Subscribe" />
+          </div>
         </div>
       </section>
 
