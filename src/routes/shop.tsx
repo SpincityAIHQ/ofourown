@@ -1,7 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { listProducts } from "@/lib/products.functions";
-import { PageHero, Section } from "@/components/section";
+import {
+  VSLHero,
+  FunnelSection,
+  FunnelGate,
+  BulletList,
+} from "@/components/vsl-funnel";
 
 const productsQuery = queryOptions({
   queryKey: ["products"],
@@ -34,16 +39,74 @@ function ShopPage() {
   const { data: products } = useSuspenseQuery(productsQuery);
   return (
     <>
-      <PageHero
+      <VSLHero
         eyebrow="Shop"
-        title="Tools of the trade."
-          lede="Programs, guides, and tools Ben Gordon uses with private clients — packaged for you to run on your own."
+        headline="Run Ben Gordon's playbook on your own."
+        subhead="Programs, guides, and tools used with private clients — packaged so you can run them solo, on your schedule."
+        nextLabel="See what's inside"
       />
-      <Section>
+
+      <FunnelSection
+        id="problem"
+        step="01"
+        eyebrow="The Problem"
+        title="You don't need more information. You need a playbook."
+        nextHref="#solution"
+        nextLabel="See the fix"
+      >
+        <p>
+          The internet has buried you in routines, splits, and protocols.
+          None of it is structured, sequenced, or tested against real life.
+          You bounce between programs and lose the compounding.
+        </p>
+      </FunnelSection>
+
+      <FunnelSection
+        id="solution"
+        step="02"
+        eyebrow="The Solution"
+        title="Programs built in the room, packaged for the road."
+        nextHref="#proof"
+        nextLabel="See the proof"
+        tone="invert"
+      >
+        <BulletList
+          items={[
+            "Programmed week-by-week — no guessing what's next",
+            "Built from work done with private clients",
+            "Designed to run on your schedule, your equipment, your life",
+            "Updated as Ben learns more in the room",
+          ]}
+        />
+      </FunnelSection>
+
+      <FunnelSection
+        id="proof"
+        step="03"
+        eyebrow="The Proof"
+        title="The same frameworks Ben uses 1:1."
+        nextHref="#offer"
+        nextLabel="See the catalog"
+      >
+        <p>
+          These aren't repackaged content. They're the actual playbooks Ben
+          runs with paying clients — minus the personalized week-to-week
+          adjustments, plus enough structure to run them solo.
+        </p>
+      </FunnelSection>
+
+      <FunnelSection
+        id="offer"
+        step="04"
+        eyebrow="The Catalog"
+        title="Pick your starting point."
+        nextHref="#cta"
+        nextLabel="Unlock the shop"
+      >
         {products.length === 0 ? (
           <p className="text-muted-foreground">New products coming soon.</p>
         ) : (
-          <div className="grid gap-px bg-border md:grid-cols-2 lg:grid-cols-3">
+          <div className="-mx-2 grid gap-px bg-border md:grid-cols-2 lg:grid-cols-3">
             {products.map((p) => (
               <Link
                 key={p.id}
@@ -72,7 +135,21 @@ function ShopPage() {
             ))}
           </div>
         )}
-      </Section>
+      </FunnelSection>
+
+      <FunnelGate
+        id="cta"
+        source="shop_funnel"
+        eyebrow="Step 05 — Get the drops"
+        title="Save 10% on your first program."
+        pitch="Drop your email — we send a one-time discount code plus first access when new programs ship."
+        ctaLabel="Send my code"
+      >
+        <p className="text-base">
+          You're on the list. Browse the catalog above and use the code we
+          just emailed you at checkout.
+        </p>
+      </FunnelGate>
     </>
   );
 }
