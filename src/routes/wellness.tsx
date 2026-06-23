@@ -1,6 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BookingForm } from "@/components/booking-form";
-import { PageHero, Section, Eyebrow } from "@/components/section";
+import {
+  VSLHero,
+  FunnelSection,
+  FunnelGate,
+  BulletList,
+} from "@/components/vsl-funnel";
 
 export const Route = createFileRoute("/wellness")({
   head: () => ({
@@ -17,43 +22,92 @@ export const Route = createFileRoute("/wellness")({
 function WellnessPage() {
   return (
     <>
-      <PageHero
+      <VSLHero
         eyebrow="Wellness"
-        title="Recover like it matters."
-        lede="Private consults focused on the unglamorous side of performance — sleep, nutrition, stress, and the daily protocols that compound over years."
+        headline="Performance is what you recover from."
+        subhead="Private wellness consults built around the unglamorous work — sleep, nutrition, stress, and daily protocols that compound for decades."
+        nextLabel="See why you're tired"
       />
-      <Section className="border-b border-border">
-        <div className="grid gap-12 md:grid-cols-2">
-          <div>
-            <Eyebrow>What we look at</Eyebrow>
-            <ul className="space-y-3 text-lg">
-              {["Sleep architecture & wind-down", "Nutrition that supports your training", "Stress & nervous-system load", "Recovery modalities that actually move the needle"].map((x) => (
-                <li key={x} className="border-b border-border pb-3">{x}</li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <Eyebrow>What you walk away with</Eyebrow>
-            <ul className="space-y-3 text-lg">
-              {["A protocol you can actually run", "Clear morning and evening anchors", "A short list of metrics worth tracking", "A direct line back to Ben Gordon for adjustments"].map((x) => (
-                <li key={x} className="border-b border-border pb-3">{x}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </Section>
-      <Section>
-        <div className="grid gap-12 md:grid-cols-2 md:gap-20">
-          <div>
-            <Eyebrow>Request a consult</Eyebrow>
-            <h2 className="font-display text-4xl font-semibold md:text-5xl">Tell us where you are.</h2>
-            <p className="mt-4 text-muted-foreground">
-              Share what you're working on and what isn't working. Ben Gordon's team will confirm fit and timing.
-            </p>
-          </div>
-          <BookingForm type="wellness" />
-        </div>
-      </Section>
+
+      <FunnelSection
+        id="problem"
+        step="01"
+        eyebrow="The Problem"
+        title="You're not undertrained. You're underrecovered."
+        nextHref="#solution"
+        nextLabel="See the protocol"
+      >
+        <p>
+          Bad sleep, blood sugar swings, and a nervous system stuck on high
+          have a cost. You feel it as soft mornings, flat workouts, and a
+          fuse that's a little too short by 4pm.
+        </p>
+        <p>
+          More effort won't fix any of that. Better infrastructure will.
+        </p>
+      </FunnelSection>
+
+      <FunnelSection
+        id="solution"
+        step="02"
+        eyebrow="The Solution"
+        title="A protocol you'll actually run."
+        nextHref="#proof"
+        nextLabel="See what we look at"
+        tone="invert"
+      >
+        <BulletList
+          items={[
+            "Sleep architecture and wind-down that actually fires",
+            "Nutrition that supports the training you're doing",
+            "Stress and nervous-system load — measured and managed",
+            "Recovery modalities that move the needle (and a list of the ones that don't)",
+          ]}
+        />
+      </FunnelSection>
+
+      <FunnelSection
+        id="proof"
+        step="03"
+        eyebrow="The Proof"
+        title="What private clients walk away with."
+        nextHref="#offer"
+        nextLabel="See the consult"
+      >
+        <BulletList
+          items={[
+            "A written protocol you can actually run in your real life",
+            "Clear morning and evening anchors",
+            "A short list of metrics worth tracking — and the ones to ignore",
+            "A direct line back to Ben Gordon for adjustments",
+          ]}
+        />
+      </FunnelSection>
+
+      <FunnelSection
+        id="offer"
+        step="04"
+        eyebrow="The Offer"
+        title="A private wellness consult, built for your life."
+        nextHref="#cta"
+        nextLabel="Apply now"
+      >
+        <p>
+          A focused engagement: intake call, written protocol, and follow-up
+          to make sure the protocol survives contact with your week.
+        </p>
+      </FunnelSection>
+
+      <FunnelGate
+        id="cta"
+        source="wellness_funnel"
+        eyebrow="Step 05 — Apply"
+        title="Drop your email to open the consult application."
+        pitch="Ben's team confirms fit and timing within 48 hours. Spots are intentionally limited."
+        ctaLabel="Unlock application"
+      >
+        <BookingForm type="wellness" />
+      </FunnelGate>
     </>
   );
 }
