@@ -45,31 +45,31 @@ function Index() {
       <section className="border-b border-border">
         <div className="mx-auto max-w-6xl px-6 py-24 md:py-40">
           <Eyebrow>Ben Gordon · NBA legend</Eyebrow>
-          <h1 className="font-display text-6xl font-semibold leading-[1.02] tracking-tight md:text-[8rem]">
-            Train hard.
-            <br />
-            Live well.
+          <h1 className="font-display text-5xl font-semibold leading-[1.05] tracking-tight md:text-7xl lg:text-8xl">
+            Elite training and wellness for people who refuse to settle.
           </h1>
-          <p className="mt-8 max-w-xl text-lg text-muted-foreground md:text-xl">
-            Programs, protocols, and 1:1 work for the people who take their body — and
-            their life — seriously.
+          <p className="mt-8 max-w-2xl text-lg text-muted-foreground md:text-xl">
+            Train like a pro and build a body that lasts. Private coaching,
+            personalized programming, and recovery-first wellness built on the
+            methods Ben Gordon used through a 12-year NBA career.
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <Link
               to="/training"
               className="inline-flex h-12 items-center gap-2 bg-foreground px-6 text-sm uppercase tracking-wider text-background transition hover:opacity-90"
             >
-              Start with training <ArrowRight className="h-4 w-4" />
+              Start training <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
-              to="/shop"
+              to="/wellness"
               className="inline-flex h-12 items-center gap-2 border border-foreground px-6 text-sm uppercase tracking-wider transition hover:bg-foreground hover:text-background"
             >
-              Browse the shop
+              Explore wellness
             </Link>
           </div>
         </div>
       </section>
+
 
       <Section className="border-b border-border">
         <Eyebrow>Work with Ben Gordon</Eyebrow>
