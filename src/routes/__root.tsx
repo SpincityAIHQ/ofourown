@@ -21,6 +21,8 @@ import { SiteHeader } from "../components/site-header";
 import { SiteFooter } from "../components/site-footer";
 import { ChatWidget } from "../components/chat-widget";
 import { Toaster } from "../components/ui/sonner";
+import { CartProvider } from "../lib/cart";
+import { CartDrawer } from "../components/cart-drawer";
 
 function NotFoundComponent() {
   return (
@@ -129,16 +131,19 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="flex min-h-screen flex-col">
-        <SiteHeader />
-        <main className="flex-1">
-          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-          <Outlet />
-        </main>
-        <SiteFooter />
-        <ChatWidget />
-      </div>
-      <Toaster />
+      <CartProvider>
+        <div className="flex min-h-screen flex-col">
+          <SiteHeader />
+          <main className="flex-1">
+            {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+            <Outlet />
+          </main>
+          <SiteFooter />
+          <ChatWidget />
+        </div>
+        <CartDrawer />
+        <Toaster />
+      </CartProvider>
     </QueryClientProvider>
   );
 }
