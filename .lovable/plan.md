@@ -1,46 +1,38 @@
-## Goal
-Every offer page (Training, Wellness, FST, Coaching, Speaking, plus existing Shop items) has a price and a Buy button that takes the visitor straight to Stripe Checkout. No more booking-only services.
 
-## Step 1 — Enable seamless Stripe
-Call `enable_stripe_payments`. This sets up test-mode Stripe instantly (no account or API key needed). Live payments come later once you verify.
+## Plan: Apply Ben Gordon reference photos to the site
 
-## Step 2 — Create products for each offer
-Using the built-in product tool, create a Stripe + DB record for each service:
+You uploaded 6 reference photos of Ben Gordon. Here's how I'll use them.
 
-| Slug | Offer | Suggested price (editable) |
-|---|---|---|
-| `training-session` | 1-on-1 Elite Training | $X |
-| `wellness-session` | Wellness Session | $X |
-| `fst-session` | Fascia Stretch Therapy | $X |
-| `coaching-program` | Coaching Program | $X |
-| `speaking-engagement` | Speaking — deposit/booking fee | $X |
+### What I can do with these references
 
-You'll be prompted for the actual prices when we create them. Each gets a `stripe_price_id` and lands in the existing `products` table, so the same checkout pipeline already used by the Shop handles them.
+The `edit_image` tool accepts multiple input images and can blend/extend them into new scenes while keeping the subject's likeness. That means I can take these 6 references and produce all 36 site images with a recognizable Ben Gordon — not a generic athlete.
 
-## Step 3 — Add inline Buy buttons to each offer page
-On `/training`, `/wellness`, `/fst`, `/coaching`, `/speaking`:
+### Reference photo roles
 
-- Keep the current VSL funnel layout (hero, problem/solution/proof).
-- Replace the booking-form gate at the bottom with a **Price + "Buy now"** block that calls the existing `createCheckoutSession({ slug })` server function and redirects to Stripe.
-- Keep a small secondary link: *"Have questions first? Contact Ben"* → `/contact`. (Booking forms move to post-purchase: after Stripe success, the `/success` page collects scheduling info via the existing booking form, tagged to the order.)
+- `Ben_Gordon.jpg` (gym, smiling, black tee) → **primary likeness anchor** for training/wellness/coaching action shots
+- `images_3.jpeg` (charcoal check shirt, neutral) → wardrobe + lighting anchor for editorial portraits (About, Book cover, Speaking)
+- `images_4.jpeg` / `images_5.jpeg` / `images_7.jpeg` (clean headshots, multiple angles) → likeness reinforcement for face-forward shots
+- `images_6.jpeg` (moody studio portrait) → mood/grade reference for darker editorial pieces (Advocacy, Community)
 
-For Speaking, the Buy button reserves an engagement slot (deposit); the full speaking inquiry form still shows post-purchase on `/success`.
+### Build steps
 
-## Step 4 — Post-purchase scheduling on `/success`
-Update `/success` to:
-- Read `session_id` from the URL.
-- Show "Payment received" + the matching offer name.
-- Render the appropriate booking form (training/wellness/fst/coaching) or speaking form, pre-filled with the Stripe email, so the buyer can pick a time immediately.
+1. **Save references** → upload all 6 to `src/assets/refs/` via `lovable-assets` so the edit tool can pull them by URL across multiple generations.
+2. **Generate the 36 images** in batches by category, each call passing 2–3 of the reference photos plus the scene prompt from the asset list I already shared. Categories:
+   - Brand (logo, favicon, OG defaults) — 3 images
+   - Training funnel (VSL cover, drills, court stills) — 6
+   - Wellness funnel (recovery, FST table, breathwork) — 6
+   - Coaching (1:1, whiteboard, portrait) — 4
+   - Speaking (stage, audience, podium portrait) — 4
+   - Shop (book mockup, manuals, supplements, merch) — 6
+   - Home / About / Community / Advocacy — 7
+3. **Wire into the site** — replace every `MediaSlot`/`VideoEmbed` placeholder with the generated `.asset.json` imports across the 13 route files and shared components.
+4. **QA pass** — visual check of each page to confirm likeness is consistent and grading reads as one cohesive editorial set (warm daylight, muted earth tones, as previously approved).
 
-## Step 5 — Shop unchanged
-Shop products keep the cart flow. Services bypass the cart (single-item buy) since they're one-at-a-time bookings.
+### What to expect
 
-## Technical notes
-- Reuses existing `createCheckoutSession` server fn, `products` table, and `stripe-webhook` route — no new infra.
-- New small component `BuyButton` in `src/components/buy-button.tsx` (price + CTA), used by every offer page.
-- `/success` extended to fetch order by `session_id` (new lightweight server fn returning offer slug + email) and conditionally render the right booking form.
-- No schema changes required. Optionally add a `booking_requests.order_id` column later to link bookings to paid orders.
+- Likeness will be **strong but not photographic** — it's AI-edited, not real photography. Faces will read as Ben from a distance; up close, fine features may drift between shots. That's the trade-off vs. a real photoshoot.
+- I'll do the full set in one pass and you review. Anything off, I regenerate that single slot.
 
-## What I need from you before building
-1. Confirm I should call `enable_stripe_payments` now.
-2. Prices for each of the 5 services (or say "use placeholders $X and I'll edit later").
+### Approve to proceed
+
+Say "go" and I'll execute steps 1–4 in build mode. If you'd rather I generate a small test batch first (e.g. 3 hero shots) before committing to all 36, say "test batch first."
