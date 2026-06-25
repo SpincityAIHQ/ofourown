@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { CartButton } from "./cart-drawer";
 
 const NAV = [
   { to: "/", label: "Home" },
@@ -33,14 +34,17 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <button
-          type="button"
-          className="md:hidden"
-          aria-label="Toggle menu"
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        <div className="flex items-center gap-2">
+          <CartButton />
+          <button
+            type="button"
+            className="md:hidden"
+            aria-label="Toggle menu"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
       {open ? (
         <div className="border-t border-border bg-background md:hidden">
