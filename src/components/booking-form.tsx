@@ -7,7 +7,11 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 
-export function BookingForm({ type }: { type: "training" | "wellness" }) {
+export function BookingForm({
+  type,
+}: {
+  type: "training" | "wellness" | "fst" | "coaching";
+}) {
   const submit = useServerFn(submitBooking);
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
