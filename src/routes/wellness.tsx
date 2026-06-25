@@ -10,7 +10,7 @@ import {
 export const Route = createFileRoute("/wellness")({
   head: () => ({
     meta: [
-      { title: "Wellness with Ben Gordon — NBA legend | OfOurOwn.com" },
+      { title: "Wellness with Ben Gordon — NBA legend | OfOurOwn" },
       { name: "description", content: "Private wellness consults — sleep, nutrition, and recovery protocols with Ben Gordon, NBA legend." },
       { property: "og:title", content: "Wellness with Ben Gordon — NBA legend" },
       { property: "og:description", content: "Private wellness consults and protocols with Ben Gordon, NBA legend." },

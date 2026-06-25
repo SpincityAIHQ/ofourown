@@ -7,9 +7,9 @@ import { Section, Eyebrow } from "@/components/section";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "OfOurOwn.com — Ben Gordon, NBA legend" },
-      { name: "description", content: "OfOurOwn.com — the digital home of Ben Gordon, NBA legend. Training programs, wellness protocols, and 1:1 coaching to help you perform and recover." },
-      { property: "og:title", content: "OfOurOwn.com — Ben Gordon, NBA legend" },
+      { title: "OfOurOwn — Ben Gordon, NBA legend" },
+      { name: "description", content: "OfOurOwn — the digital home of Ben Gordon, NBA legend. Training programs, wellness protocols, and 1:1 coaching to help you perform and recover." },
+      { property: "og:title", content: "OfOurOwn — Ben Gordon, NBA legend" },
       { property: "og:description", content: "Training, wellness, and coaching with Ben Gordon, NBA legend." },
     ],
   }),

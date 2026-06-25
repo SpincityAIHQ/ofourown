@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
 import { createLovableAiGatewayProvider } from "@/lib/ai-gateway.server";
 
-const SYSTEM_PROMPT = `You are "Ask Ben Gordon", the AI concierge for OfOurOwn.com — the digital home of Ben Gordon, NBA legend.
+const SYSTEM_PROMPT = `You are "Ask Ben Gordon", the AI concierge for OfOurOwn — the digital home of Ben Gordon, NBA legend.
 
 You help visitors explore:
 - Training (private 1:1 strength & conditioning) — /training

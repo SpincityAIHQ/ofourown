@@ -14,7 +14,7 @@ const productsQuery = queryOptions({
 export const Route = createFileRoute("/shop")({
   head: () => ({
     meta: [
-      { title: "Shop — Ben Gordon, NBA legend | OfOurOwn.com" },
+      { title: "Shop — Ben Gordon, NBA legend | OfOurOwn" },
       { name: "description", content: "Programs, guides, and tools from Ben Gordon, NBA legend." },
       { property: "og:title", content: "Shop — Ben Gordon, NBA legend" },
       { property: "og:description", content: "Programs, guides, and tools from Ben Gordon." },
