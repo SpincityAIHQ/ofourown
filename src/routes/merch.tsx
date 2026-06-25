@@ -10,13 +10,19 @@ import merch5 from "@/assets/merch-5.jpg";
 import merch6 from "@/assets/merch-6.jpg";
 
 const ITEMS = [
-  { name: "Signature tee", image: merch1 },
-  { name: "Black cap", image: merch2 },
-  { name: "Heavyweight hoodie", image: merch3 },
-  { name: "Insulated bottle", image: merch4 },
-  { name: "Training shorts", image: merch5 },
-  { name: "Gym towel", image: merch6 },
+  { name: "Signature tee", image: merch1, alt: "OfOurOwn signature tee in soft black cotton, folded on a neutral linen backdrop with the embroidered OOO mark visible." },
+  { name: "Black cap", image: merch2, alt: "OfOurOwn six-panel black cap with low-profile crown and tonal OOO embroidery, shot from a three-quarter angle." },
+  { name: "Heavyweight hoodie", image: merch3, alt: "OfOurOwn heavyweight pullover hoodie in washed charcoal, laid flat under warm window light." },
+  { name: "Insulated bottle", image: merch4, alt: "OfOurOwn insulated steel water bottle in matte black with subtle OOO wordmark, standing on a stone surface." },
+  { name: "Training shorts", image: merch5, alt: "OfOurOwn training shorts in oat-toned technical fabric, folded next to a gym towel on a wooden bench." },
+  { name: "Gym towel", image: merch6, alt: "OfOurOwn ribbed cotton gym towel in walnut brown, rolled tight beside a kettlebell." },
 ];
+      meta: [
+        { title: "Merch — OfOurOwn | Ben Gordon, NBA legend" },
+        { name: "description", content: "Apparel and goods from OfOurOwn — Ben Gordon, NBA legend." },
+        { property: "og:title", content: "Merch — OfOurOwn" },
+        { property: "og:description", content: "Apparel and goods from OfOurOwn." },
+      ],
 
 export const Route = createFileRoute("/merch")({
   head: () => ({
