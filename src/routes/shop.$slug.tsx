@@ -1,12 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
-import { useState } from "react";
-import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { getProductBySlug } from "@/lib/products.functions";
-import { createCheckoutSession } from "@/lib/checkout.functions";
 import { Section, Eyebrow } from "@/components/section";
 import { Button } from "@/components/ui/button";
+import { useCart } from "@/lib/cart";
 
 const productQuery = (slug: string) =>
   queryOptions({
@@ -54,22 +52,20 @@ function formatPrice(cents: number | null, currency: string) {
 function ProductPage() {
   const { slug } = Route.useParams();
   const { data: product } = useSuspenseQuery(productQuery(slug));
-  const checkout = useServerFn(createCheckoutSession);
-  const [loading, setLoading] = useState(false);
+  const { add } = useCart();
 
   if (!product) return null;
 
-  async function buy() {
+  function addToCart() {
     if (!product) return;
-    setLoading(true);
-    try {
-      const { url } = await checkout({ data: { slug: product.slug } });
-      if (url) window.location.href = url;
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Could not start checkout.");
-    } finally {
-      setLoading(false);
-    }
+    add({
+      slug: product.slug,
+      name: product.name,
+      price_cents: product.price_cents,
+      currency: product.currency,
+      image_url: product.image_url,
+    });
+    toast.success(`${product.name} added to cart`);
   }
 
   return (
@@ -95,11 +91,10 @@ function ProductPage() {
           <div className="mt-10">
             {product.stripe_price_id ? (
               <Button
-                onClick={buy}
-                disabled={loading}
+                onClick={addToCart}
                 className="h-12 rounded-none px-8 uppercase tracking-wider"
               >
-                {loading ? "Starting checkout..." : "Buy now"}
+                Add to cart
               </Button>
             ) : (
               <Button disabled className="h-12 rounded-none px-8 uppercase tracking-wider">
