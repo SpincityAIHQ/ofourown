@@ -21,13 +21,13 @@ export const Route = createFileRoute("/shop/$slug")({
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [
-          { title: `${loaderData.name} — Ben Gordon, NBA legend | OfOurOwn.com` },
+          { title: `${loaderData.name} — Ben Gordon, NBA legend | OfOurOwn` },
           { name: "description", content: loaderData.tagline ?? loaderData.description ?? "" },
           { property: "og:title", content: `${loaderData.name} — Ben Gordon, NBA legend` },
           { property: "og:description", content: loaderData.tagline ?? "" },
           ...(loaderData.image_url ? [{ property: "og:image", content: loaderData.image_url } as const] : []),
         ]
-      : [{ title: "Product — Ben Gordon, NBA legend | OfOurOwn.com" }],
+      : [{ title: "Product — Ben Gordon, NBA legend | OfOurOwn" }],
   }),
   component: ProductPage,
   notFoundComponent: () => (

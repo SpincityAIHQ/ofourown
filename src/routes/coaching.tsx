@@ -10,7 +10,7 @@ import {
 export const Route = createFileRoute("/coaching")({
   head: () => ({
     meta: [
-      { title: "Coaching with Ben Gordon — NBA legend | OfOurOwn.com" },
+      { title: "Coaching with Ben Gordon — NBA legend | OfOurOwn" },
       { name: "description", content: "1:1 coaching with Ben Gordon, NBA legend — for athletes, founders, and operators serious about their craft." },
       { property: "og:title", content: "Coaching with Ben Gordon — NBA legend" },
       { property: "og:description", content: "1:1 coaching with Ben Gordon, NBA legend." },
