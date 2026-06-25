@@ -17,12 +17,6 @@ const ITEMS = [
   { name: "Training shorts", image: merch5, alt: "OfOurOwn training shorts in oat-toned technical fabric, folded next to a gym towel on a wooden bench." },
   { name: "Gym towel", image: merch6, alt: "OfOurOwn ribbed cotton gym towel in walnut brown, rolled tight beside a kettlebell." },
 ];
-      meta: [
-        { title: "Merch — OfOurOwn | Ben Gordon, NBA legend" },
-        { name: "description", content: "Apparel and goods from OfOurOwn — Ben Gordon, NBA legend." },
-        { property: "og:title", content: "Merch — OfOurOwn" },
-        { property: "og:description", content: "Apparel and goods from OfOurOwn." },
-      ],
 
 export const Route = createFileRoute("/merch")({
   head: () => ({
@@ -49,7 +43,7 @@ function MerchPage() {
           {ITEMS.map((item, i) => (
             <FadeIn key={item.name} delay={(i % 3) * 0.04} className="bg-background">
               <div className="flex h-full flex-col gap-4 p-6">
-                <MediaSlot label={`MERCH · product ${i + 1}`} aspect="1:1" src={item.image} alt={item.name} />
+                <MediaSlot label={`MERCH · product ${i + 1}`} aspect="1:1" src={item.image} alt={item.alt} />
                 <p className="text-sm text-muted-foreground">{item.name}</p>
               </div>
             </FadeIn>
