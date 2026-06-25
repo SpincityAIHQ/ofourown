@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { PageHero, Section, Eyebrow } from "@/components/section";
 import { EmailCapture } from "@/components/email-capture";
 import { FadeIn, MediaSlot } from "@/components/media";
+import communityPhoto from "@/assets/community-photo.jpg";
 
 export const Route = createFileRoute("/community")({
   head: () => ({
@@ -43,7 +44,7 @@ function CommunityPage() {
               </div>
             </FadeIn>
           </div>
-          <div className="md:col-span-5"><FadeIn delay={0.1}><MediaSlot label="COMMUNITY · placeholder" aspect="4:3" /></FadeIn></div>
+          <div className="md:col-span-5"><FadeIn delay={0.1}><MediaSlot label="COMMUNITY · placeholder" aspect="4:3" src={communityPhoto} alt="Ben Gordon talking with a young player in a community gym" /></FadeIn></div>
         </div>
       </Section>
       <Section>

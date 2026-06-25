@@ -1,7 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { PageHero, Section, Eyebrow } from "@/components/section";
-import { FadeIn, MediaSlot, Stat, VideoEmbed } from "@/components/media";
+import { FadeIn, MediaSlot, Stat } from "@/components/media";
+import aboutPortrait from "@/assets/about-portrait.jpg";
+import aboutVideo from "@/assets/about-video.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -46,13 +48,18 @@ function AboutPage() {
                 The man, on his own terms.
               </h2>
               <p className="mt-4 max-w-md text-muted-foreground">
-                Image slot — drop in a high-resolution portrait when ready.
+                Ben Gordon, framed with the same restraint the rest of the site carries.
               </p>
             </FadeIn>
           </div>
           <div className="md:col-span-7">
             <FadeIn delay={0.1}>
-              <MediaSlot label="PORTRAIT · 4:3 · placeholder" aspect="4:3" />
+              <MediaSlot
+                label="PORTRAIT · 4:3 · placeholder"
+                aspect="4:3"
+                src={aboutPortrait}
+                alt="Editorial portrait of Ben Gordon seated on a stool"
+              />
             </FadeIn>
           </div>
         </div>
@@ -84,13 +91,18 @@ function AboutPage() {
                 A conversation.
               </h2>
               <p className="mt-4 max-w-md text-muted-foreground">
-                Drop in a long-form interview or featured talk when available.
+                Long-form interview still while the feature conversation is being finalized.
               </p>
             </FadeIn>
           </div>
           <div className="md:col-span-7">
             <FadeIn delay={0.1}>
-              <VideoEmbed label="VIDEO · feature interview · 16:9" />
+              <MediaSlot
+                label="VIDEO · feature interview · 16:9"
+                aspect="16:9"
+                src={aboutVideo}
+                alt="Ben Gordon speaking during a filmed interview"
+              />
             </FadeIn>
           </div>
         </div>

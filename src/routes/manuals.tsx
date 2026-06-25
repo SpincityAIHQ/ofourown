@@ -2,6 +2,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { PageHero, Section, Eyebrow } from "@/components/section";
 import { FadeIn, MediaSlot } from "@/components/media";
+import manualStrength from "@/assets/manual-strength.jpg";
+import manualWellness from "@/assets/manual-wellness.jpg";
+import manualRtp from "@/assets/manual-rtp.jpg";
 
 export const Route = createFileRoute("/manuals")({
   head: () => ({
@@ -16,9 +19,9 @@ export const Route = createFileRoute("/manuals")({
 });
 
 const ITEMS = [
-  { title: "Training manual", blurb: "Strength, conditioning, and recovery — programmed." },
-  { title: "Wellness manual", blurb: "Sleep, nutrition, and habits for the long game." },
-  { title: "Return-to-play", blurb: "A roadmap for getting back from injury, intelligently." },
+  { title: "Training manual", blurb: "Strength, conditioning, and recovery — programmed.", image: manualStrength },
+  { title: "Wellness manual", blurb: "Sleep, nutrition, and habits for the long game.", image: manualWellness },
+  { title: "Return-to-play", blurb: "A roadmap for getting back from injury, intelligently.", image: manualRtp },
 ];
 
 function ManualsPage() {
@@ -34,7 +37,7 @@ function ManualsPage() {
           {ITEMS.map((m, i) => (
             <FadeIn key={m.title} delay={i * 0.04} className="bg-background">
               <div className="flex h-full flex-col gap-6 p-8">
-                <MediaSlot label={`MANUAL · ${m.title}`} aspect="3:4" />
+                <MediaSlot label={`MANUAL · ${m.title}`} aspect="3:4" src={m.image} alt={m.title} />
                 <div>
                   <h3 className="font-display text-2xl font-semibold">{m.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{m.blurb}</p>

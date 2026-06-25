@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { PageHero, Section, Eyebrow } from "@/components/section";
 import { FadeIn, MediaSlot } from "@/components/media";
+import supplementProduct from "@/assets/supplement-product.jpg";
 
 export const Route = createFileRoute("/supplements")({
   head: () => ({
@@ -39,7 +40,7 @@ function SupplementsPage() {
               </div>
             </FadeIn>
           </div>
-          <div className="md:col-span-7"><FadeIn delay={0.1}><MediaSlot label="SUPPLEMENT · product · placeholder" aspect="4:3" /></FadeIn></div>
+          <div className="md:col-span-7"><FadeIn delay={0.1}><MediaSlot label="SUPPLEMENT · product · placeholder" aspect="4:3" src={supplementProduct} alt="OOO recovery daily supplement bottle" /></FadeIn></div>
         </div>
       </Section>
     </>

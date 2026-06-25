@@ -15,12 +15,16 @@ export function VSLHero({
   subhead,
   nextHref = "#problem",
   nextLabel = "Watch why",
+  mediaSrc,
+  mediaAlt,
 }: {
   eyebrow: string;
   headline: string;
   subhead: string;
   nextHref?: string;
   nextLabel?: string;
+  mediaSrc?: string;
+  mediaAlt?: string;
 }) {
   return (
     <section className="border-b border-border bg-background">
@@ -40,10 +44,20 @@ export function VSLHero({
             aria-label="Play video"
             className="group relative grid h-full w-full place-items-center bg-foreground text-background transition hover:opacity-90"
           >
-            <div className="grid h-20 w-20 place-items-center rounded-full border border-background/40 transition group-hover:scale-110 md:h-24 md:w-24">
+            {mediaSrc ? (
+              <>
+                <img
+                  src={mediaSrc}
+                  alt={mediaAlt ?? headline}
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/25" />
+              </>
+            ) : null}
+            <div className="relative z-10 grid h-20 w-20 place-items-center rounded-full border border-background/40 bg-black/20 transition group-hover:scale-110 md:h-24 md:w-24">
               <Play className="h-8 w-8 translate-x-0.5 fill-background" />
             </div>
-            <span className="absolute bottom-4 right-4 text-[10px] uppercase tracking-[0.2em] text-background/60">
+            <span className="absolute bottom-4 right-4 z-10 text-[10px] uppercase tracking-[0.2em] text-background/75">
               Video coming soon
             </span>
           </button>

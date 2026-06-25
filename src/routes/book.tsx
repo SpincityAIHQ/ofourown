@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { PageHero, Section, Eyebrow } from "@/components/section";
 import { FadeIn, MediaSlot } from "@/components/media";
+import bookCover from "@/assets/book-cover.jpg";
 
 export const Route = createFileRoute("/book")({
   head: () => ({
@@ -25,7 +26,7 @@ function BookPage() {
       />
       <Section className="border-b border-border">
         <div className="grid gap-12 md:grid-cols-12 md:items-center">
-          <div className="md:col-span-5"><FadeIn><MediaSlot label="BOOK · cover · 3:4 placeholder" aspect="3:4" /></FadeIn></div>
+          <div className="md:col-span-5"><FadeIn><MediaSlot label="BOOK · cover · 3:4 placeholder" aspect="3:4" src={bookCover} alt="Book cover for Of Our Own by Ben Gordon" /></FadeIn></div>
           <div className="md:col-span-7">
             <FadeIn delay={0.05}>
               <Eyebrow>About the book</Eyebrow>

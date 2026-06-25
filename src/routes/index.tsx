@@ -3,7 +3,11 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { EmailCapture } from "@/components/email-capture";
 import { Section, Eyebrow } from "@/components/section";
-import { FadeIn, MediaSlot, Stat, TestimonialRow, VideoEmbed } from "@/components/media";
+import { FadeIn, MediaSlot, Stat, TestimonialRow } from "@/components/media";
+import homeReel from "@/assets/home-reel.jpg";
+import teaserSpeaking from "@/assets/teaser-speaking.jpg";
+import teaserCommunity from "@/assets/teaser-community.jpg";
+import teaserAdvocacy from "@/assets/teaser-advocacy.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -54,6 +58,7 @@ const TEASERS = [
     title: "Bring Ben in.",
     blurb: "Keynotes, team talks, and intimate room work for organizations doing real work.",
     label: "Speaking · placeholder",
+    image: teaserSpeaking,
   },
   {
     to: "/community",
@@ -61,6 +66,7 @@ const TEASERS = [
     title: "Of Our Own — together.",
     blurb: "A growing community for people training, recovering, and building lives that last.",
     label: "Community · placeholder",
+    image: teaserCommunity,
   },
   {
     to: "/advocacy",
@@ -68,6 +74,7 @@ const TEASERS = [
     title: "Mental health, on the record.",
     blurb: "Ben's ongoing advocacy work in mental health, mens' wellbeing, and athlete aftercare.",
     label: "Advocacy · placeholder",
+    image: teaserAdvocacy,
   },
 ] as const;
 
@@ -167,7 +174,12 @@ function Index() {
           </div>
           <div className="md:col-span-7">
             <FadeIn delay={0.1}>
-              <VideoEmbed label="VIDEO · home reel · 16:9" />
+              <MediaSlot
+                label="VIDEO · home reel · 16:9"
+                aspect="16:9"
+                src={homeReel}
+                alt="Ben Gordon walking onto an empty basketball court at golden hour"
+              />
             </FadeIn>
           </div>
         </div>
@@ -201,7 +213,7 @@ function Index() {
                 to={t.to}
                 className="group flex h-full flex-col gap-6 p-8 transition hover:bg-accent"
               >
-                <MediaSlot label={t.label} aspect="4:3" />
+                 <MediaSlot label={t.label} aspect="4:3" src={t.image} alt={t.title} />
                 <div>
                   <p className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
                     {t.eyebrow}

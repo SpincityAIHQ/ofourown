@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BookingForm } from "@/components/booking-form";
-import { FadeIn, MediaSlot, VideoEmbed } from "@/components/media";
+import { FadeIn, MediaSlot } from "@/components/media";
 import { PageHero, Section, Eyebrow } from "@/components/section";
+import fstOverview from "@/assets/fst-overview.jpg";
+import fstSession from "@/assets/fst-session.jpg";
 
 export const Route = createFileRoute("/fst")({
   head: () => ({
@@ -31,11 +33,11 @@ function FSTPage() {
               <Eyebrow>What it is</Eyebrow>
               <h2 className="font-display text-4xl font-semibold md:text-5xl">Assisted stretch, end-to-end.</h2>
               <p className="mt-4 max-w-md text-muted-foreground">
-                FST is a table-based, assisted stretching method that works the whole fascial chain — joint by joint — to restore range, ease tension, and improve how you move and recover.
+                Ben's FST work focuses on guided self-stretch positions that restore range, ease tension, and improve how you move and recover without turning recovery into another performance.
               </p>
             </FadeIn>
           </div>
-          <div className="md:col-span-7"><FadeIn delay={0.1}><VideoEmbed label="VIDEO · FST overview · 16:9" /></FadeIn></div>
+          <div className="md:col-span-7"><FadeIn delay={0.1}><MediaSlot label="VIDEO · FST overview · 16:9" aspect="16:9" src={fstOverview} alt="Ben Gordon doing a self-guided fascia stretch on a mat" /></FadeIn></div>
         </div>
       </Section>
 
@@ -67,11 +69,11 @@ function FSTPage() {
               <Eyebrow>What a session looks like</Eyebrow>
               <h2 className="font-display text-4xl font-semibold md:text-5xl">60–90 minutes, table-based.</h2>
               <p className="mt-4 max-w-md text-muted-foreground">
-                Quick intake, full-body assessment, then progressive, joint-by-joint stretch work. You leave with a short reset routine to keep the gains.
+                Quick intake, full-body assessment, then progressive self-stretch work with coaching on position, breath, and control. You leave with a short reset routine to keep the gains.
               </p>
             </FadeIn>
           </div>
-          <div className="md:col-span-7"><FadeIn delay={0.1}><MediaSlot label="PHOTO · session · placeholder" aspect="4:3" /></FadeIn></div>
+          <div className="md:col-span-7"><FadeIn delay={0.1}><MediaSlot label="PHOTO · session · placeholder" aspect="4:3" src={fstSession} alt="Ben Gordon performing a seated self-stretch" /></FadeIn></div>
         </div>
       </Section>
 
