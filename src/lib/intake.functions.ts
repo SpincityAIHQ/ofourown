@@ -87,7 +87,7 @@ export const submitLead = createServerFn({ method: "POST" })
 /* ---------------- BOOKING REQUESTS ---------------- */
 
 const bookingSchema = z.object({
-  type: z.enum(["training", "wellness"]),
+  type: z.enum(["training", "wellness", "fst", "coaching"]),
   name: z.string().trim().min(1).max(120),
   email: z.string().trim().email().max(255),
   phone: z.string().trim().max(40).optional(),
@@ -139,5 +139,44 @@ export const submitInquiry = createServerFn({ method: "POST" })
       `<p><strong>${data.name}</strong> (${data.email}) — ${data.reason}</p>
        <p>${data.message.replace(/\n/g, "<br>")}</p>`,
     );
+    return { ok: true };
+  });
+
+/* ---------------- SPEAKING INQUIRIES ---------------- */
+
+const speakingSchema = z.object({
+  name: z.string().trim().min(1).max(120),
+  email: z.string().trim().email().max(255),
+  organization: z.string().trim().max(200).optional(),
+  engagement_type: z.string().trim().max(80).optional(),
+  event_date: z.string().trim().max(120).optional(),
+  audience_size: z.string().trim().max(80).optional(),
+  budget_range: z.string().trim().max(80).optional(),
+  message: z.string().trim().max(4000).optional(),
+});
+
+export const submitSpeakingInquiry = createServerFn({ method: "POST" })
+  .inputValidator((input: unknown) => speakingSchema.parse(input))
+  .handler(async ({ data }) => {
+    const supabase = getServerClient();
+    const { error } = await supabase.from("speaking_inquiries").insert(data);
+    if (error) {
+      console.error("[submitSpeakingInquiry]", error);
+      throw new Error("Could not send your inquiry. Please try again.");
+    }
+    await notify(
+      `New speaking inquiry — ${data.name}`,
+      `<p><strong>${data.name}</strong> (${data.email}) — ${data.organization ?? "—"}</p>
+       <p><strong>Engagement:</strong> ${data.engagement_type ?? "—"}</p>
+       <p><strong>Event date:</strong> ${data.event_date ?? "—"}</p>
+       <p><strong>Audience size:</strong> ${data.audience_size ?? "—"}</p>
+       <p><strong>Budget:</strong> ${data.budget_range ?? "—"}</p>
+       <p><strong>Message:</strong><br>${(data.message ?? "—").replace(/\n/g, "<br>")}</p>`,
+    );
+    await forwardToGhl({
+      email: data.email,
+      name: data.name,
+      source: "speaking_inquiry",
+    });
     return { ok: true };
   });

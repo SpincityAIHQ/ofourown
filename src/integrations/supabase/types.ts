@@ -214,6 +214,48 @@ export type Database = {
         }
         Relationships: []
       }
+      speaking_inquiries: {
+        Row: {
+          audience_size: string | null
+          budget_range: string | null
+          created_at: string
+          email: string
+          engagement_type: string | null
+          event_date: string | null
+          id: string
+          message: string | null
+          name: string
+          organization: string | null
+          status: string
+        }
+        Insert: {
+          audience_size?: string | null
+          budget_range?: string | null
+          created_at?: string
+          email: string
+          engagement_type?: string | null
+          event_date?: string | null
+          id?: string
+          message?: string | null
+          name: string
+          organization?: string | null
+          status?: string
+        }
+        Update: {
+          audience_size?: string | null
+          budget_range?: string | null
+          created_at?: string
+          email?: string
+          engagement_type?: string | null
+          event_date?: string | null
+          id?: string
+          message?: string | null
+          name?: string
+          organization?: string | null
+          status?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

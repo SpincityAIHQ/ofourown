@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { EmailCapture } from "@/components/email-capture";
 import { Section, Eyebrow } from "@/components/section";
+import { FadeIn, MediaSlot, Stat, TestimonialRow, VideoEmbed } from "@/components/media";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -36,6 +37,37 @@ const OFFERS = [
     to: "/shop",
     label: "Shop",
     blurb: "Programs, guides, and tools Ben Gordon uses with private clients.",
+  },
+] as const;
+
+const ACCOLADES = [
+  { value: "12", label: "NBA seasons" },
+  { value: "1st rd.", label: "2004 NBA Draft pick" },
+  { value: "6th Man", label: "of the Year, 2004–05" },
+  { value: "UConn", label: "2004 NCAA champion" },
+] as const;
+
+const TEASERS = [
+  {
+    to: "/speaking",
+    eyebrow: "Speaking",
+    title: "Bring Ben in.",
+    blurb: "Keynotes, team talks, and intimate room work for organizations doing real work.",
+    label: "Speaking · placeholder",
+  },
+  {
+    to: "/community",
+    eyebrow: "Community",
+    title: "Of Our Own — together.",
+    blurb: "A growing community for people training, recovering, and building lives that last.",
+    label: "Community · placeholder",
+  },
+  {
+    to: "/advocacy",
+    eyebrow: "Advocacy",
+    title: "Mental health, on the record.",
+    blurb: "Ben's ongoing advocacy work in mental health, mens' wellbeing, and athlete aftercare.",
+    label: "Advocacy · placeholder",
   },
 ] as const;
 
@@ -97,6 +129,91 @@ function Index() {
                 </p>
               </div>
             </Link>
+          ))}
+        </div>
+      </Section>
+
+      <Section className="border-b border-border">
+        <FadeIn>
+          <Eyebrow>Accolades</Eyebrow>
+          <h2 className="font-display text-4xl font-semibold md:text-5xl">
+            A career built on the long game.
+          </h2>
+        </FadeIn>
+        <FadeIn delay={0.1}>
+          <div className="mt-10 grid grid-cols-2 border border-border md:grid-cols-4">
+            {ACCOLADES.map((a) => (
+              <Stat key={a.label} value={a.value} label={a.label} />
+            ))}
+          </div>
+        </FadeIn>
+        <p className="mt-6 text-xs uppercase tracking-[0.2em] text-muted-foreground/70">
+          Confirm exact figures before publish
+        </p>
+      </Section>
+
+      <Section className="border-b border-border">
+        <div className="grid gap-12 md:grid-cols-12 md:items-center">
+          <div className="md:col-span-5">
+            <FadeIn>
+              <Eyebrow>Watch</Eyebrow>
+              <h2 className="font-display text-4xl font-semibold md:text-5xl">
+                A minute with Ben.
+              </h2>
+              <p className="mt-4 max-w-md text-muted-foreground">
+                Short film coming soon. Drop in a YouTube or Vimeo URL when ready.
+              </p>
+            </FadeIn>
+          </div>
+          <div className="md:col-span-7">
+            <FadeIn delay={0.1}>
+              <VideoEmbed label="VIDEO · home reel · 16:9" />
+            </FadeIn>
+          </div>
+        </div>
+      </Section>
+
+      <Section className="border-b border-border">
+        <FadeIn>
+          <Eyebrow>What people say</Eyebrow>
+          <h2 className="font-display text-4xl font-semibold md:text-5xl">
+            On the record.
+          </h2>
+        </FadeIn>
+        <div className="mt-10">
+          <FadeIn delay={0.1}>
+            <TestimonialRow />
+          </FadeIn>
+        </div>
+      </Section>
+
+      <Section className="border-b border-border">
+        <FadeIn>
+          <Eyebrow>More from OfOurOwn</Eyebrow>
+          <h2 className="font-display text-4xl font-semibold md:text-5xl">
+            Beyond the training floor.
+          </h2>
+        </FadeIn>
+        <div className="mt-12 grid gap-px bg-border md:grid-cols-3">
+          {TEASERS.map((t, i) => (
+            <FadeIn key={t.to} delay={i * 0.05} className="bg-background">
+              <Link
+                to={t.to}
+                className="group flex h-full flex-col gap-6 p-8 transition hover:bg-accent"
+              >
+                <MediaSlot label={t.label} aspect="4:3" />
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
+                    {t.eyebrow}
+                  </p>
+                  <h3 className="mt-2 font-display text-2xl font-semibold">{t.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{t.blurb}</p>
+                  <p className="mt-5 inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em]">
+                    Explore <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                  </p>
+                </div>
+              </Link>
+            </FadeIn>
           ))}
         </div>
       </Section>
