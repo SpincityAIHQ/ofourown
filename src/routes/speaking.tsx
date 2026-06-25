@@ -1,0 +1,113 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { PageHero, Section, Eyebrow } from "@/components/section";
+import { FadeIn, MediaSlot, TestimonialRow, VideoEmbed } from "@/components/media";
+import { SpeakingInquiryForm } from "@/components/speaking-inquiry-form";
+
+export const Route = createFileRoute("/speaking")({
+  head: () => ({
+    meta: [
+      { title: "Speaking — Ben Gordon, NBA legend | OfOurOwn" },
+      { name: "description", content: "Book Ben Gordon, NBA legend, for keynotes, team talks, college visits, and corporate events." },
+      { property: "og:title", content: "Book Ben Gordon to speak" },
+      { property: "og:description", content: "Keynotes, team talks, and intimate room work with Ben Gordon, NBA legend." },
+    ],
+  }),
+  component: SpeakingPage,
+});
+
+const FORMATS = [
+  { title: "Keynote", blurb: "Headline talk on resilience, longevity, and life after the highest level." },
+  { title: "Team / Locker room", blurb: "Closed-door work with athletes — performance, mindset, and the long career." },
+  { title: "College / Youth", blurb: "Honest talks for young athletes on identity, pressure, and what nobody tells you." },
+  { title: "Corporate / Leadership", blurb: "Pressure, performance, and team dynamics — borrowed from the league, used at work." },
+  { title: "Men's Group", blurb: "Intimate room work on mental health, fatherhood, and brotherhood." },
+  { title: "Advisory", blurb: "Ongoing advisory engagements for organizations Ben believes in." },
+];
+
+function SpeakingPage() {
+  return (
+    <>
+      <PageHero
+        eyebrow="Speaking"
+        title="Book Ben Gordon to speak."
+        lede="Keynotes, team talks, college visits, corporate events, and intimate room work — built around your audience and the moment you're trying to create."
+      />
+
+      <Section className="border-b border-border">
+        <div className="grid gap-12 md:grid-cols-12 md:items-center">
+          <div className="md:col-span-5">
+            <FadeIn>
+              <Eyebrow>Watch</Eyebrow>
+              <h2 className="font-display text-4xl font-semibold md:text-5xl">A look at the room.</h2>
+              <p className="mt-4 max-w-md text-muted-foreground">
+                Speaker reel coming soon — drop in a sizzle when ready.
+              </p>
+            </FadeIn>
+          </div>
+          <div className="md:col-span-7">
+            <FadeIn delay={0.1}><VideoEmbed label="VIDEO · speaker reel · 16:9" /></FadeIn>
+          </div>
+        </div>
+      </Section>
+
+      <Section className="border-b border-border">
+        <FadeIn>
+          <Eyebrow>Formats</Eyebrow>
+          <h2 className="font-display text-4xl font-semibold md:text-5xl">Built around your audience.</h2>
+        </FadeIn>
+        <div className="mt-12 grid gap-px bg-border md:grid-cols-3">
+          {FORMATS.map((f, i) => (
+            <FadeIn key={f.title} delay={i * 0.04} className="bg-background">
+              <div className="h-full p-8">
+                <h3 className="font-display text-2xl font-semibold">{f.title}</h3>
+                <p className="mt-3 text-sm text-muted-foreground">{f.blurb}</p>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </Section>
+
+      <Section className="border-b border-border">
+        <FadeIn>
+          <Eyebrow>Past rooms</Eyebrow>
+          <h2 className="font-display text-4xl font-semibold md:text-5xl">Where Ben has spoken.</h2>
+          <p className="mt-4 max-w-2xl text-muted-foreground">
+            Logo wall coming — drop in event marks, schools, and organizations once cleared for publication.
+          </p>
+        </FadeIn>
+        <FadeIn delay={0.1}>
+          <div className="mt-10 grid grid-cols-2 gap-px bg-border sm:grid-cols-3 md:grid-cols-6">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <MediaSlot key={i} label={`LOGO ${i + 1}`} aspect="1:1" />
+            ))}
+          </div>
+        </FadeIn>
+      </Section>
+
+      <Section className="border-b border-border">
+        <FadeIn>
+          <Eyebrow>Said in the room</Eyebrow>
+          <h2 className="font-display text-4xl font-semibold md:text-5xl">What organizers say.</h2>
+        </FadeIn>
+        <div className="mt-10"><FadeIn delay={0.1}><TestimonialRow /></FadeIn></div>
+      </Section>
+
+      <Section>
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <FadeIn>
+              <Eyebrow>Inquire</Eyebrow>
+              <h2 className="font-display text-4xl font-semibold md:text-5xl">Tell us about the event.</h2>
+              <p className="mt-4 max-w-md text-muted-foreground">
+                Share the basics and Ben's team will follow up to confirm fit, date, and scope.
+              </p>
+            </FadeIn>
+          </div>
+          <div className="md:col-span-7">
+            <FadeIn delay={0.05}><SpeakingInquiryForm /></FadeIn>
+          </div>
+        </div>
+      </Section>
+    </>
+  );
+}
