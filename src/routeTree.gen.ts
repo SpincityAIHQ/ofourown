@@ -11,11 +11,19 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WellnessRouteImport } from './routes/wellness'
 import { Route as TrainingRouteImport } from './routes/training'
+import { Route as SupplementsRouteImport } from './routes/supplements'
 import { Route as SuccessRouteImport } from './routes/success'
+import { Route as SpeakingRouteImport } from './routes/speaking'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as MerchRouteImport } from './routes/merch'
+import { Route as ManualsRouteImport } from './routes/manuals'
+import { Route as FstRouteImport } from './routes/fst'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CommunityRouteImport } from './routes/community'
 import { Route as CoachingRouteImport } from './routes/coaching'
 import { Route as CancelRouteImport } from './routes/cancel'
+import { Route as BookRouteImport } from './routes/book'
+import { Route as AdvocacyRouteImport } from './routes/advocacy'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ShopSlugRouteImport } from './routes/shop.$slug'
@@ -32,9 +40,19 @@ const TrainingRoute = TrainingRouteImport.update({
   path: '/training',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SupplementsRoute = SupplementsRouteImport.update({
+  id: '/supplements',
+  path: '/supplements',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SuccessRoute = SuccessRouteImport.update({
   id: '/success',
   path: '/success',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SpeakingRoute = SpeakingRouteImport.update({
+  id: '/speaking',
+  path: '/speaking',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShopRoute = ShopRouteImport.update({
@@ -42,9 +60,29 @@ const ShopRoute = ShopRouteImport.update({
   path: '/shop',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MerchRoute = MerchRouteImport.update({
+  id: '/merch',
+  path: '/merch',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ManualsRoute = ManualsRouteImport.update({
+  id: '/manuals',
+  path: '/manuals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FstRoute = FstRouteImport.update({
+  id: '/fst',
+  path: '/fst',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommunityRoute = CommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CoachingRoute = CoachingRouteImport.update({
@@ -55,6 +93,16 @@ const CoachingRoute = CoachingRouteImport.update({
 const CancelRoute = CancelRouteImport.update({
   id: '/cancel',
   path: '/cancel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookRoute = BookRouteImport.update({
+  id: '/book',
+  path: '/book',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdvocacyRoute = AdvocacyRouteImport.update({
+  id: '/advocacy',
+  path: '/advocacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -86,11 +134,19 @@ const ApiPublicStripeWebhookRoute = ApiPublicStripeWebhookRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/advocacy': typeof AdvocacyRoute
+  '/book': typeof BookRoute
   '/cancel': typeof CancelRoute
   '/coaching': typeof CoachingRoute
+  '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
+  '/fst': typeof FstRoute
+  '/manuals': typeof ManualsRoute
+  '/merch': typeof MerchRoute
   '/shop': typeof ShopRouteWithChildren
+  '/speaking': typeof SpeakingRoute
   '/success': typeof SuccessRoute
+  '/supplements': typeof SupplementsRoute
   '/training': typeof TrainingRoute
   '/wellness': typeof WellnessRoute
   '/api/chat': typeof ApiChatRoute
@@ -100,11 +156,19 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/advocacy': typeof AdvocacyRoute
+  '/book': typeof BookRoute
   '/cancel': typeof CancelRoute
   '/coaching': typeof CoachingRoute
+  '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
+  '/fst': typeof FstRoute
+  '/manuals': typeof ManualsRoute
+  '/merch': typeof MerchRoute
   '/shop': typeof ShopRouteWithChildren
+  '/speaking': typeof SpeakingRoute
   '/success': typeof SuccessRoute
+  '/supplements': typeof SupplementsRoute
   '/training': typeof TrainingRoute
   '/wellness': typeof WellnessRoute
   '/api/chat': typeof ApiChatRoute
@@ -115,11 +179,19 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/advocacy': typeof AdvocacyRoute
+  '/book': typeof BookRoute
   '/cancel': typeof CancelRoute
   '/coaching': typeof CoachingRoute
+  '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
+  '/fst': typeof FstRoute
+  '/manuals': typeof ManualsRoute
+  '/merch': typeof MerchRoute
   '/shop': typeof ShopRouteWithChildren
+  '/speaking': typeof SpeakingRoute
   '/success': typeof SuccessRoute
+  '/supplements': typeof SupplementsRoute
   '/training': typeof TrainingRoute
   '/wellness': typeof WellnessRoute
   '/api/chat': typeof ApiChatRoute
@@ -131,11 +203,19 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/advocacy'
+    | '/book'
     | '/cancel'
     | '/coaching'
+    | '/community'
     | '/contact'
+    | '/fst'
+    | '/manuals'
+    | '/merch'
     | '/shop'
+    | '/speaking'
     | '/success'
+    | '/supplements'
     | '/training'
     | '/wellness'
     | '/api/chat'
@@ -145,11 +225,19 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/advocacy'
+    | '/book'
     | '/cancel'
     | '/coaching'
+    | '/community'
     | '/contact'
+    | '/fst'
+    | '/manuals'
+    | '/merch'
     | '/shop'
+    | '/speaking'
     | '/success'
+    | '/supplements'
     | '/training'
     | '/wellness'
     | '/api/chat'
@@ -159,11 +247,19 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/advocacy'
+    | '/book'
     | '/cancel'
     | '/coaching'
+    | '/community'
     | '/contact'
+    | '/fst'
+    | '/manuals'
+    | '/merch'
     | '/shop'
+    | '/speaking'
     | '/success'
+    | '/supplements'
     | '/training'
     | '/wellness'
     | '/api/chat'
@@ -174,11 +270,19 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AdvocacyRoute: typeof AdvocacyRoute
+  BookRoute: typeof BookRoute
   CancelRoute: typeof CancelRoute
   CoachingRoute: typeof CoachingRoute
+  CommunityRoute: typeof CommunityRoute
   ContactRoute: typeof ContactRoute
+  FstRoute: typeof FstRoute
+  ManualsRoute: typeof ManualsRoute
+  MerchRoute: typeof MerchRoute
   ShopRoute: typeof ShopRouteWithChildren
+  SpeakingRoute: typeof SpeakingRoute
   SuccessRoute: typeof SuccessRoute
+  SupplementsRoute: typeof SupplementsRoute
   TrainingRoute: typeof TrainingRoute
   WellnessRoute: typeof WellnessRoute
   ApiChatRoute: typeof ApiChatRoute
@@ -201,11 +305,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TrainingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/supplements': {
+      id: '/supplements'
+      path: '/supplements'
+      fullPath: '/supplements'
+      preLoaderRoute: typeof SupplementsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/success': {
       id: '/success'
       path: '/success'
       fullPath: '/success'
       preLoaderRoute: typeof SuccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/speaking': {
+      id: '/speaking'
+      path: '/speaking'
+      fullPath: '/speaking'
+      preLoaderRoute: typeof SpeakingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shop': {
@@ -215,11 +333,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShopRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/merch': {
+      id: '/merch'
+      path: '/merch'
+      fullPath: '/merch'
+      preLoaderRoute: typeof MerchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manuals': {
+      id: '/manuals'
+      path: '/manuals'
+      fullPath: '/manuals'
+      preLoaderRoute: typeof ManualsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fst': {
+      id: '/fst'
+      path: '/fst'
+      fullPath: '/fst'
+      preLoaderRoute: typeof FstRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/community': {
+      id: '/community'
+      path: '/community'
+      fullPath: '/community'
+      preLoaderRoute: typeof CommunityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/coaching': {
@@ -234,6 +380,20 @@ declare module '@tanstack/react-router' {
       path: '/cancel'
       fullPath: '/cancel'
       preLoaderRoute: typeof CancelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/book': {
+      id: '/book'
+      path: '/book'
+      fullPath: '/book'
+      preLoaderRoute: typeof BookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/advocacy': {
+      id: '/advocacy'
+      path: '/advocacy'
+      fullPath: '/advocacy'
+      preLoaderRoute: typeof AdvocacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -287,11 +447,19 @@ const ShopRouteWithChildren = ShopRoute._addFileChildren(ShopRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AdvocacyRoute: AdvocacyRoute,
+  BookRoute: BookRoute,
   CancelRoute: CancelRoute,
   CoachingRoute: CoachingRoute,
+  CommunityRoute: CommunityRoute,
   ContactRoute: ContactRoute,
+  FstRoute: FstRoute,
+  ManualsRoute: ManualsRoute,
+  MerchRoute: MerchRoute,
   ShopRoute: ShopRouteWithChildren,
+  SpeakingRoute: SpeakingRoute,
   SuccessRoute: SuccessRoute,
+  SupplementsRoute: SupplementsRoute,
   TrainingRoute: TrainingRoute,
   WellnessRoute: WellnessRoute,
   ApiChatRoute: ApiChatRoute,
