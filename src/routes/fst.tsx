@@ -5,6 +5,8 @@ import { PageHero, Section, Eyebrow } from "@/components/section";
 import fstOverview from "@/assets/fst-overview.jpg";
 import fstSession from "@/assets/fst-session.jpg";
 
+const SITE_ORIGIN = "https://oooelitebasketballtraining.com";
+
 export const Route = createFileRoute("/fst")({
   head: () => ({
     meta: [
@@ -12,6 +14,10 @@ export const Route = createFileRoute("/fst")({
       { name: "description", content: "Private Fascia Stretch Therapy (FST) sessions for mobility, recovery, and pain — with Ben Gordon, NBA legend." },
       { property: "og:title", content: "Fascia Stretch Therapy with Ben Gordon" },
       { property: "og:description", content: "Mobility, recovery, and pain work — booked privately." },
+      { property: "og:image", content: `${SITE_ORIGIN}${fstOverview}` },
+      { property: "og:image:alt", content: "Ben Gordon holding a deep self-guided fascia stretch on a mat in a quiet, sunlit studio." },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE_ORIGIN}${fstOverview}` },
     ],
   }),
   component: FSTPage,
@@ -37,7 +43,7 @@ function FSTPage() {
               </p>
             </FadeIn>
           </div>
-          <div className="md:col-span-7"><FadeIn delay={0.1}><MediaSlot label="VIDEO · FST overview · 16:9" aspect="16:9" src={fstOverview} alt="Ben Gordon doing a self-guided fascia stretch on a mat" /></FadeIn></div>
+          <div className="md:col-span-7"><FadeIn delay={0.1}><MediaSlot label="VIDEO · FST overview · 16:9" aspect="16:9" src={fstOverview} alt="Ben Gordon holding a deep self-guided fascia stretch on a mat in a sunlit studio — overview still for the FST methodology." priority /></FadeIn></div>
         </div>
       </Section>
 
@@ -73,7 +79,7 @@ function FSTPage() {
               </p>
             </FadeIn>
           </div>
-          <div className="md:col-span-7"><FadeIn delay={0.1}><MediaSlot label="PHOTO · session · placeholder" aspect="4:3" src={fstSession} alt="Ben Gordon performing a seated self-stretch" /></FadeIn></div>
+          <div className="md:col-span-7"><FadeIn delay={0.1}><MediaSlot label="PHOTO · session · placeholder" aspect="4:3" src={fstSession} alt="Ben Gordon mid-session, seated on a stretch table working a hip-opener with controlled breath and quiet focus." /></FadeIn></div>
         </div>
       </Section>
 
