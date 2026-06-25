@@ -62,7 +62,14 @@ function ShopPage() {
               >
                 <div className="aspect-square w-full border border-border bg-muted">
                   {p.image_url ? (
-                    <img src={p.image_url} alt={p.name} className="h-full w-full object-cover transition group-hover:opacity-90" />
+                    <img
+                      src={p.image_url}
+                      alt={p.tagline ? `${p.name} — ${p.tagline}` : `${p.name} from the OfOurOwn shop`}
+                      title={p.name}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-cover transition group-hover:opacity-90"
+                    />
                   ) : null}
                 </div>
               </Link>
