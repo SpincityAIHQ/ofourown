@@ -83,7 +83,9 @@ export function CartDrawer() {
                     {item.image_url ? (
                       <img
                         src={item.image_url}
-                        alt={item.name}
+                        alt={`${item.name} thumbnail`}
+                        loading="lazy"
+                        decoding="async"
                         className="h-full w-full object-cover"
                       />
                     ) : null}

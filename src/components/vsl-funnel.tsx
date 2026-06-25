@@ -49,6 +49,10 @@ export function VSLHero({
                 <img
                   src={mediaSrc}
                   alt={mediaAlt ?? headline}
+                  title={mediaAlt ?? headline}
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
                   className="absolute inset-0 h-full w-full object-cover"
                 />
                 <div className="absolute inset-0 bg-black/25" />

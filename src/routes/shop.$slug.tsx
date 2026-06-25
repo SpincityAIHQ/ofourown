@@ -73,7 +73,15 @@ function ProductPage() {
       <div className="grid gap-12 md:grid-cols-2">
         <div className="aspect-square w-full border border-border bg-muted">
           {product.image_url ? (
-            <img src={product.image_url} alt={product.name} className="h-full w-full object-cover" />
+            <img
+              src={product.image_url}
+              alt={product.tagline ? `${product.name} — ${product.tagline}` : `${product.name} from the OfOurOwn shop`}
+              title={product.name}
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+              className="h-full w-full object-cover"
+            />
           ) : null}
         </div>
         <div>

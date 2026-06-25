@@ -8,6 +8,8 @@ import {
 } from "@/components/vsl-funnel";
 import wellnessVslCover from "@/assets/wellness-vsl-cover.jpg";
 
+const SITE_ORIGIN = "https://oooelitebasketballtraining.com";
+
 export const Route = createFileRoute("/wellness")({
   head: () => ({
     meta: [
@@ -15,6 +17,10 @@ export const Route = createFileRoute("/wellness")({
       { name: "description", content: "Private wellness consults — sleep, nutrition, and recovery protocols with Ben Gordon, NBA legend." },
       { property: "og:title", content: "Wellness with Ben Gordon — NBA legend" },
       { property: "og:description", content: "Private wellness consults and protocols with Ben Gordon, NBA legend." },
+      { property: "og:image", content: `${SITE_ORIGIN}${wellnessVslCover}` },
+      { property: "og:image:alt", content: "Ben Gordon mid-stretch on a mat in a sunlit recovery studio, eyes closed and breathing through the position." },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE_ORIGIN}${wellnessVslCover}` },
     ],
   }),
   component: WellnessPage,
@@ -29,7 +35,7 @@ function WellnessPage() {
         subhead="Private wellness consults built around the unglamorous work — sleep, nutrition, stress, and daily protocols that compound for decades."
         nextLabel="See why you're tired"
         mediaSrc={wellnessVslCover}
-        mediaAlt="Ben Gordon stretching alone on a mat in a sunlit studio"
+        mediaAlt="Ben Gordon stretching alone on a yoga mat in a quiet sunlit studio, sleeves rolled, focused on breath and position — cover for the private wellness consult."
       />
 
       <FunnelSection

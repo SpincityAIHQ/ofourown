@@ -9,6 +9,8 @@ import teaserSpeaking from "@/assets/teaser-speaking.jpg";
 import teaserCommunity from "@/assets/teaser-community.jpg";
 import teaserAdvocacy from "@/assets/teaser-advocacy.jpg";
 
+const SITE_ORIGIN = "https://oooelitebasketballtraining.com";
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -16,6 +18,10 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "OfOurOwn — the digital home of Ben Gordon, NBA legend. Training programs, wellness protocols, and 1:1 coaching to help you perform and recover." },
       { property: "og:title", content: "OfOurOwn — Ben Gordon, NBA legend" },
       { property: "og:description", content: "Training, wellness, and coaching with Ben Gordon, NBA legend." },
+      { property: "og:image", content: `${SITE_ORIGIN}${homeReel}` },
+      { property: "og:image:alt", content: "Ben Gordon walking out onto an empty hardwood court at golden hour, lit by long warm light through the arena windows." },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE_ORIGIN}${homeReel}` },
     ],
   }),
   component: Index,
@@ -58,6 +64,7 @@ const TEASERS = [
     title: "Bring Ben in.",
     blurb: "Keynotes, team talks, and intimate room work for organizations doing real work.",
     label: "Speaking · placeholder",
+    alt: "Ben Gordon on stage under warm spotlights, addressing a seated audience during a keynote.",
     image: teaserSpeaking,
   },
   {
@@ -66,6 +73,7 @@ const TEASERS = [
     title: "Of Our Own — together.",
     blurb: "A growing community for people training, recovering, and building lives that last.",
     label: "Community · placeholder",
+    alt: "Members of the Of Our Own community working out together in a sunlit gym, mid-set and mid-conversation.",
     image: teaserCommunity,
   },
   {
@@ -74,6 +82,7 @@ const TEASERS = [
     title: "Mental health, on the record.",
     blurb: "Ben's ongoing advocacy work in mental health, mens' wellbeing, and athlete aftercare.",
     label: "Advocacy · placeholder",
+    alt: "Ben Gordon in a quiet panel setting, mid-conversation about mental health and athlete aftercare.",
     image: teaserAdvocacy,
   },
 ] as const;
@@ -178,7 +187,8 @@ function Index() {
                 label="VIDEO · home reel · 16:9"
                 aspect="16:9"
                 src={homeReel}
-                alt="Ben Gordon walking onto an empty basketball court at golden hour"
+                alt="Ben Gordon walking out onto an empty hardwood basketball court at golden hour, lit by long warm light through the arena windows — opening still of the home reel."
+                priority
               />
             </FadeIn>
           </div>
@@ -213,7 +223,7 @@ function Index() {
                 to={t.to}
                 className="group flex h-full flex-col gap-6 p-8 transition hover:bg-accent"
               >
-                 <MediaSlot label={t.label} aspect="4:3" src={t.image} alt={t.title} />
+                 <MediaSlot label={t.label} aspect="4:3" src={t.image} alt={t.alt} />
                 <div>
                   <p className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
                     {t.eyebrow}

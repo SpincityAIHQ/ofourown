@@ -17,12 +17,14 @@ export function MediaSlot({
   src,
   alt,
   className,
+  priority = false,
 }: {
   label: string;
   aspect?: Aspect;
   src?: string;
   alt?: string;
   className?: string;
+  priority?: boolean;
 }) {
   if (src) {
     return (
@@ -36,8 +38,11 @@ export function MediaSlot({
         <img
           src={src}
           alt={alt ?? label}
+          title={alt ?? label}
           className="h-full w-full object-cover"
-          loading="lazy"
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
+          {...(priority ? { fetchPriority: "high" as const } : {})}
         />
       </div>
     );

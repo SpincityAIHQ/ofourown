@@ -4,6 +4,8 @@ import { PageHero, Section, Eyebrow } from "@/components/section";
 import { FadeIn, MediaSlot } from "@/components/media";
 import bookCover from "@/assets/book-cover.jpg";
 
+const SITE_ORIGIN = "https://oooelitebasketballtraining.com";
+
 export const Route = createFileRoute("/book")({
   head: () => ({
     meta: [
@@ -11,6 +13,10 @@ export const Route = createFileRoute("/book")({
       { name: "description", content: "The forthcoming book from Ben Gordon, NBA legend — on training, recovery, and the long game." },
       { property: "og:title", content: "Book — Ben Gordon" },
       { property: "og:description", content: "The forthcoming book from Ben Gordon, NBA legend." },
+      { property: "og:image", content: `${SITE_ORIGIN}${bookCover}` },
+      { property: "og:image:alt", content: "Cover of the forthcoming book Of Our Own by Ben Gordon — minimal editorial design with the title in a refined serif." },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE_ORIGIN}${bookCover}` },
     ],
   }),
   component: BookPage,
@@ -26,7 +32,7 @@ function BookPage() {
       />
       <Section className="border-b border-border">
         <div className="grid gap-12 md:grid-cols-12 md:items-center">
-          <div className="md:col-span-5"><FadeIn><MediaSlot label="BOOK · cover · 3:4 placeholder" aspect="3:4" src={bookCover} alt="Book cover for Of Our Own by Ben Gordon" /></FadeIn></div>
+          <div className="md:col-span-5"><FadeIn><MediaSlot label="BOOK · cover · 3:4 placeholder" aspect="3:4" src={bookCover} alt="Cover of the forthcoming book Of Our Own by Ben Gordon — minimalist editorial design with the title set in a refined serif over a textured neutral ground." /></FadeIn></div>
           <div className="md:col-span-7">
             <FadeIn delay={0.05}>
               <Eyebrow>About the book</Eyebrow>

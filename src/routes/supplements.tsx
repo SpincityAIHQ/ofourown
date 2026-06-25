@@ -4,6 +4,8 @@ import { PageHero, Section, Eyebrow } from "@/components/section";
 import { FadeIn, MediaSlot } from "@/components/media";
 import supplementProduct from "@/assets/supplement-product.jpg";
 
+const SITE_ORIGIN = "https://oooelitebasketballtraining.com";
+
 export const Route = createFileRoute("/supplements")({
   head: () => ({
     meta: [
@@ -11,6 +13,10 @@ export const Route = createFileRoute("/supplements")({
       { name: "description", content: "Daily supplement protocols from Ben Gordon, NBA legend — coming soon to the shop." },
       { property: "og:title", content: "Supplements — Ben Gordon" },
       { property: "og:description", content: "Daily supplement protocols — coming soon." },
+      { property: "og:image", content: `${SITE_ORIGIN}${supplementProduct}` },
+      { property: "og:image:alt", content: "OfOurOwn daily recovery supplement bottle in matte amber glass, photographed against a warm neutral backdrop." },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE_ORIGIN}${supplementProduct}` },
     ],
   }),
   component: SupplementsPage,
@@ -40,7 +46,7 @@ function SupplementsPage() {
               </div>
             </FadeIn>
           </div>
-          <div className="md:col-span-7"><FadeIn delay={0.1}><MediaSlot label="SUPPLEMENT · product · placeholder" aspect="4:3" src={supplementProduct} alt="OOO recovery daily supplement bottle" /></FadeIn></div>
+          <div className="md:col-span-7"><FadeIn delay={0.1}><MediaSlot label="SUPPLEMENT · product · placeholder" aspect="4:3" src={supplementProduct} alt="OfOurOwn daily recovery supplement bottle in matte amber glass, lit by warm window light against a soft neutral backdrop." /></FadeIn></div>
         </div>
       </Section>
     </>

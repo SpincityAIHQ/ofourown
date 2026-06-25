@@ -5,6 +5,8 @@ import { FadeIn, MediaSlot, Stat } from "@/components/media";
 import aboutPortrait from "@/assets/about-portrait.jpg";
 import aboutVideo from "@/assets/about-video.jpg";
 
+const SITE_ORIGIN = "https://oooelitebasketballtraining.com";
+
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
@@ -12,6 +14,10 @@ export const Route = createFileRoute("/about")({
       { name: "description", content: "About Ben Gordon, NBA legend — training, wellness, and coaching." },
       { property: "og:title", content: "About Ben Gordon — NBA legend" },
       { property: "og:description", content: "About Ben Gordon, NBA legend." },
+      { property: "og:image", content: `${SITE_ORIGIN}${aboutPortrait}` },
+      { property: "og:image:alt", content: "Editorial portrait of Ben Gordon seated on a stool in soft daylight, wearing a charcoal crewneck." },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE_ORIGIN}${aboutPortrait}` },
     ],
   }),
   component: AboutPage,
@@ -58,7 +64,7 @@ function AboutPage() {
                 label="PORTRAIT · 4:3 · placeholder"
                 aspect="4:3"
                 src={aboutPortrait}
-                alt="Editorial portrait of Ben Gordon seated on a stool"
+                alt="Editorial portrait of Ben Gordon seated on a wooden stool against a warm neutral backdrop, dressed in a charcoal crewneck, calm and direct gaze."
               />
             </FadeIn>
           </div>
@@ -101,7 +107,7 @@ function AboutPage() {
                 label="VIDEO · feature interview · 16:9"
                 aspect="16:9"
                 src={aboutVideo}
-                alt="Ben Gordon speaking during a filmed interview"
+                alt="Ben Gordon mid-thought during a filmed long-form interview, lit from one side in a quiet studio — still from the upcoming feature conversation."
               />
             </FadeIn>
           </div>
