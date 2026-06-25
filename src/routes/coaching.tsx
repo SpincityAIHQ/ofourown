@@ -8,6 +8,8 @@ import {
 } from "@/components/vsl-funnel";
 import coachingVslCover from "@/assets/coaching-vsl-cover.jpg";
 
+const SITE_ORIGIN = "https://oooelitebasketballtraining.com";
+
 export const Route = createFileRoute("/coaching")({
   head: () => ({
     meta: [
@@ -15,6 +17,10 @@ export const Route = createFileRoute("/coaching")({
       { name: "description", content: "1:1 coaching with Ben Gordon, NBA legend — for athletes, founders, and operators serious about their craft." },
       { property: "og:title", content: "Coaching with Ben Gordon — NBA legend" },
       { property: "og:description", content: "1:1 coaching with Ben Gordon, NBA legend." },
+      { property: "og:image", content: `${SITE_ORIGIN}${coachingVslCover}` },
+      { property: "og:image:alt", content: "Ben Gordon coaching beside a whiteboard on a quiet basketball court, mid-conversation with a single athlete off-frame." },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE_ORIGIN}${coachingVslCover}` },
     ],
   }),
   component: CoachingPage,
@@ -29,7 +35,7 @@ function CoachingPage() {
         subhead="A private ongoing engagement for people whose job is to perform — athletes, founders, operators. Ben Gordon works with a small roster at a time."
         nextLabel="See why most coaches miss"
         mediaSrc={coachingVslCover}
-        mediaAlt="Ben Gordon coaching on a basketball court with a whiteboard"
+        mediaAlt="Ben Gordon mid-coaching on a quiet basketball court — whiteboard at his side, sleeves pushed up, walking a private client through a play in warm gym light."
       />
 
       <FunnelSection
