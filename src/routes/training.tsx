@@ -8,6 +8,8 @@ import {
 } from "@/components/vsl-funnel";
 import trainingVslCover from "@/assets/training-vsl-cover.jpg";
 
+const SITE_ORIGIN = "https://oooelitebasketballtraining.com";
+
 export const Route = createFileRoute("/training")({
   head: () => ({
     meta: [
@@ -15,6 +17,10 @@ export const Route = createFileRoute("/training")({
       { name: "description", content: "Private 1:1 strength and conditioning. Request a session with Ben Gordon, NBA legend." },
       { property: "og:title", content: "Training with Ben Gordon — NBA legend" },
       { property: "og:description", content: "Private 1:1 strength and conditioning with Ben Gordon, NBA legend." },
+      { property: "og:image", content: `${SITE_ORIGIN}${trainingVslCover}` },
+      { property: "og:image:alt", content: "Ben Gordon on a hardwood basketball court holding a ball, lit by warm afternoon sunlight." },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE_ORIGIN}${trainingVslCover}` },
     ],
   }),
   component: TrainingPage,
@@ -29,7 +35,7 @@ function TrainingPage() {
         subhead="Private 1:1 strength, conditioning, and recovery built on the same methods Ben Gordon used through 12 years in the NBA."
         nextLabel="See why most programs fail"
         mediaSrc={trainingVslCover}
-        mediaAlt="Ben Gordon standing on a basketball court holding a basketball"
+        mediaAlt="Ben Gordon, former NBA guard, standing center-court on polished hardwood holding a basketball at his hip, framed by warm late-afternoon light — cover for the 1:1 training program."
       />
 
       <FunnelSection
