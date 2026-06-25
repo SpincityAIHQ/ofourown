@@ -5,6 +5,8 @@ import { EmailCapture } from "@/components/email-capture";
 import { FadeIn, MediaSlot } from "@/components/media";
 import communityPhoto from "@/assets/community-photo.jpg";
 
+const SITE_ORIGIN = "https://oooelitebasketballtraining.com";
+
 export const Route = createFileRoute("/community")({
   head: () => ({
     meta: [
@@ -12,6 +14,10 @@ export const Route = createFileRoute("/community")({
       { name: "description", content: "Of Our Own — a growing community for people training, recovering, and building lives that last, with Ben Gordon, NBA legend." },
       { property: "og:title", content: "Of Our Own — Community" },
       { property: "og:description", content: "A community for people doing the work." },
+      { property: "og:image", content: `${SITE_ORIGIN}${communityPhoto}` },
+      { property: "og:image:alt", content: "Ben Gordon talking with a young player courtside in a community gym, the two of them mid-conversation." },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE_ORIGIN}${communityPhoto}` },
     ],
   }),
   component: CommunityPage,
@@ -44,7 +50,7 @@ function CommunityPage() {
               </div>
             </FadeIn>
           </div>
-          <div className="md:col-span-5"><FadeIn delay={0.1}><MediaSlot label="COMMUNITY · placeholder" aspect="4:3" src={communityPhoto} alt="Ben Gordon talking with a young player in a community gym" /></FadeIn></div>
+          <div className="md:col-span-5"><FadeIn delay={0.1}><MediaSlot label="COMMUNITY · placeholder" aspect="4:3" src={communityPhoto} alt="Ben Gordon courtside in a community gym, leaning in to talk with a young player — the everyday work of Of Our Own." /></FadeIn></div>
         </div>
       </Section>
       <Section>
