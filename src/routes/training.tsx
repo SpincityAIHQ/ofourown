@@ -6,6 +6,7 @@ import {
   FunnelGate,
   BulletList,
 } from "@/components/vsl-funnel";
+import trainingVslCover from "@/assets/training-vsl-cover.jpg";
 
 export const Route = createFileRoute("/training")({
   head: () => ({
@@ -27,6 +28,8 @@ function TrainingPage() {
         headline="Train like your career depends on it. Because it does."
         subhead="Private 1:1 strength, conditioning, and recovery built on the same methods Ben Gordon used through 12 years in the NBA."
         nextLabel="See why most programs fail"
+        mediaSrc={trainingVslCover}
+        mediaAlt="Ben Gordon standing on a basketball court holding a basketball"
       />
 
       <FunnelSection

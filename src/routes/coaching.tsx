@@ -6,6 +6,7 @@ import {
   FunnelGate,
   BulletList,
 } from "@/components/vsl-funnel";
+import coachingVslCover from "@/assets/coaching-vsl-cover.jpg";
 
 export const Route = createFileRoute("/coaching")({
   head: () => ({
@@ -27,6 +28,8 @@ function CoachingPage() {
         headline="The second set of eyes you've been missing."
         subhead="A private ongoing engagement for people whose job is to perform — athletes, founders, operators. Ben Gordon works with a small roster at a time."
         nextLabel="See why most coaches miss"
+        mediaSrc={coachingVslCover}
+        mediaAlt="Ben Gordon coaching on a basketball court with a whiteboard"
       />
 
       <FunnelSection

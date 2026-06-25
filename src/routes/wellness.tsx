@@ -6,6 +6,7 @@ import {
   FunnelGate,
   BulletList,
 } from "@/components/vsl-funnel";
+import wellnessVslCover from "@/assets/wellness-vsl-cover.jpg";
 
 export const Route = createFileRoute("/wellness")({
   head: () => ({
@@ -27,6 +28,8 @@ function WellnessPage() {
         headline="Performance is what you recover from."
         subhead="Private wellness consults built around the unglamorous work — sleep, nutrition, stress, and daily protocols that compound for decades."
         nextLabel="See why you're tired"
+        mediaSrc={wellnessVslCover}
+        mediaAlt="Ben Gordon stretching alone on a mat in a sunlit studio"
       />
 
       <FunnelSection

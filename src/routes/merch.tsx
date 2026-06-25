@@ -2,6 +2,21 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { PageHero, Section, Eyebrow } from "@/components/section";
 import { FadeIn, MediaSlot } from "@/components/media";
+import merch1 from "@/assets/merch-1.jpg";
+import merch2 from "@/assets/merch-2.jpg";
+import merch3 from "@/assets/merch-3.jpg";
+import merch4 from "@/assets/merch-4.jpg";
+import merch5 from "@/assets/merch-5.jpg";
+import merch6 from "@/assets/merch-6.jpg";
+
+const ITEMS = [
+  { name: "Signature tee", image: merch1 },
+  { name: "Black cap", image: merch2 },
+  { name: "Heavyweight hoodie", image: merch3 },
+  { name: "Insulated bottle", image: merch4 },
+  { name: "Training shorts", image: merch5 },
+  { name: "Gym towel", image: merch6 },
+];
 
 export const Route = createFileRoute("/merch")({
   head: () => ({
@@ -25,11 +40,11 @@ function MerchPage() {
       />
       <Section className="border-b border-border">
         <div className="grid gap-px bg-border md:grid-cols-3">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <FadeIn key={i} delay={(i % 3) * 0.04} className="bg-background">
+          {ITEMS.map((item, i) => (
+            <FadeIn key={item.name} delay={(i % 3) * 0.04} className="bg-background">
               <div className="flex h-full flex-col gap-4 p-6">
-                <MediaSlot label={`MERCH · product ${i + 1}`} aspect="1:1" />
-                <p className="text-sm text-muted-foreground">Product name · placeholder</p>
+                <MediaSlot label={`MERCH · product ${i + 1}`} aspect="1:1" src={item.image} alt={item.name} />
+                <p className="text-sm text-muted-foreground">{item.name}</p>
               </div>
             </FadeIn>
           ))}

@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero, Section, Eyebrow } from "@/components/section";
-import { FadeIn, MediaSlot, TestimonialRow, VideoEmbed } from "@/components/media";
+import { FadeIn, MediaSlot, TestimonialRow } from "@/components/media";
 import { SpeakingInquiryForm } from "@/components/speaking-inquiry-form";
+import speakingReel from "@/assets/speaking-reel.jpg";
 
 export const Route = createFileRoute("/speaking")({
   head: () => ({
@@ -40,12 +41,12 @@ function SpeakingPage() {
               <Eyebrow>Watch</Eyebrow>
               <h2 className="font-display text-4xl font-semibold md:text-5xl">A look at the room.</h2>
               <p className="mt-4 max-w-md text-muted-foreground">
-                Speaker reel coming soon — drop in a sizzle when ready.
+                Speaker reel coming soon — for now, the page leads with a still from the room.
               </p>
             </FadeIn>
           </div>
           <div className="md:col-span-7">
-            <FadeIn delay={0.1}><VideoEmbed label="VIDEO · speaker reel · 16:9" /></FadeIn>
+            <FadeIn delay={0.1}><MediaSlot label="VIDEO · speaker reel · 16:9" aspect="16:9" src={speakingReel} alt="Ben Gordon speaking on stage" /></FadeIn>
           </div>
         </div>
       </Section>
