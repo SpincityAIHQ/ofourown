@@ -89,15 +89,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "OfOurOwn.com — Ben Gordon, NBA legend" },
+      { title: "OfOurOwn— by Ben Gordon, NBA superstar" },
       { name: "description", content: "OfOurOwn.com — the digital home of Ben Gordon, NBA legend. Training, wellness, and coaching." },
       { name: "author", content: "Ben Gordon" },
       { property: "og:site_name", content: "OfOurOwn.com" },
-      { property: "og:title", content: "OfOurOwn.com — Ben Gordon, NBA legend" },
-      { property: "og:description", content: "Training, wellness, and coaching with Ben Gordon, NBA legend." },
+      { property: "og:title", content: "OfOurOwn— by Ben Gordon, NBA superstar" },
+      { property: "og:description", content: "OfOurOwn.com — the digital home of Ben Gordon, NBA legend. Training, wellness, and coaching." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "OfOurOwn— by Ben Gordon, NBA superstar" },
+      { name: "twitter:description", content: "OfOurOwn.com — the digital home of Ben Gordon, NBA legend. Training, wellness, and coaching." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/91edbcbd-0031-4427-a7eb-5e49a8488d51/id-preview-4cb82412--c36aa13e-931b-46f2-a19c-17ef0a97b3f6.lovable.app-1782237511100.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/91edbcbd-0031-4427-a7eb-5e49a8488d51/id-preview-4cb82412--c36aa13e-931b-46f2-a19c-17ef0a97b3f6.lovable.app-1782237511100.png" },
     ],
     links: [
       {
