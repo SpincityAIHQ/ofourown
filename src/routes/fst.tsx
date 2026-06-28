@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BookingForm } from "@/components/booking-form";
 import { FadeIn, MediaSlot } from "@/components/media";
 import { PageHero, Section, Eyebrow } from "@/components/section";
+import { TestimonialGrid } from "@/components/proof";
+import { SpotsBanner } from "@/components/urgency";
 import fstOverview from "@/assets/fst-overview.jpg";
 import fstSession from "@/assets/fst-session.jpg";
 
@@ -11,7 +13,7 @@ export const Route = createFileRoute("/fst")({
   head: () => ({
     meta: [
       { title: "Fascia Stretch Therapy — with Ben Gordon | OfOurOwn" },
-      { name: "description", content: "Private Fascia Stretch Therapy (FST) sessions for mobility, recovery, and pain — with Ben Gordon, NBA legend." },
+      { name: "description", content: "Private Fascia Stretch Therapy (FST) sessions for mobility, recovery, and pain — with Ben Gordon, NBA Veteran." },
       { property: "og:title", content: "Fascia Stretch Therapy with Ben Gordon" },
       { property: "og:description", content: "Mobility, recovery, and pain work — booked privately." },
       { property: "og:image", content: `${SITE_ORIGIN}${fstOverview}` },
@@ -31,6 +33,8 @@ function FSTPage() {
         title="Move better. Recover faster. Hurt less."
         lede="Private FST sessions for athletes and everyday people — to restore range, calm the nervous system, and get out of pain."
       />
+
+      <SpotsBanner programKey="evaluation" message="Limited in-person FST availability — reserve your session" />
 
       <Section className="border-b border-border">
         <div className="grid gap-12 md:grid-cols-12 md:items-center">
@@ -83,6 +87,14 @@ function FSTPage() {
         </div>
       </Section>
 
+      <Section className="border-b border-border">
+        <FadeIn>
+          <Eyebrow>What people say</Eyebrow>
+          <h2 className="font-display text-4xl font-semibold md:text-5xl">In their words.</h2>
+        </FadeIn>
+        <div className="mt-10"><FadeIn delay={0.05}><TestimonialGrid /></FadeIn></div>
+      </Section>
+
       <Section>
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
@@ -96,6 +108,12 @@ function FSTPage() {
           </div>
           <div className="md:col-span-7"><FadeIn delay={0.05}><BookingForm type="fst" /></FadeIn></div>
         </div>
+        <p className="mt-12 max-w-3xl border-t border-border pt-6 text-xs leading-relaxed text-muted-foreground/70">
+          Fascia Stretch Therapy sessions are for mobility, recovery, and general
+          well-being. They are not medical care and are not a substitute for
+          diagnosis or treatment from a licensed healthcare provider. If you have
+          pain, an injury, or a medical condition, consult a qualified professional.
+        </p>
       </Section>
     </>
   );

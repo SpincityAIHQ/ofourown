@@ -10,10 +10,10 @@ const SITE_ORIGIN = "https://oooelitebasketballtraining.com";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Ben Gordon — NBA legend | OfOurOwn" },
-      { name: "description", content: "About Ben Gordon, NBA legend — training, wellness, and coaching." },
-      { property: "og:title", content: "About Ben Gordon — NBA legend" },
-      { property: "og:description", content: "About Ben Gordon, NBA legend." },
+      { title: "About Ben Gordon — NBA Veteran | OfOurOwn" },
+      { name: "description", content: "About Ben Gordon, NBA Veteran — training, wellness, and coaching." },
+      { property: "og:title", content: "About Ben Gordon — NBA Veteran" },
+      { property: "og:description", content: "About Ben Gordon, NBA Veteran." },
       { property: "og:image", content: `${SITE_ORIGIN}${aboutPortrait}` },
       { property: "og:image:alt", content: "Editorial portrait of Ben Gordon seated on a stool in soft daylight, wearing a charcoal crewneck." },
       { name: "twitter:card", content: "summary_large_image" },
@@ -26,11 +26,11 @@ export const Route = createFileRoute("/about")({
 function AboutPage() {
   return (
     <>
-      <PageHero eyebrow="About" title="Ben Gordon — NBA legend." />
+      <PageHero eyebrow="About" title="Ben Gordon — NBA Veteran." />
       <Section className="border-b border-border">
         <div className="mx-auto max-w-2xl space-y-6 text-lg leading-relaxed text-foreground/90">
           <p>
-            Ben Gordon, NBA legend, has spent the last decade building a body
+            Ben Gordon, NBA Veteran, has spent the last decade building a body
             of work around one simple question: how do we keep performing —
             and stay healthy — for the long haul?
           </p>
@@ -80,10 +80,10 @@ function AboutPage() {
         </FadeIn>
         <FadeIn delay={0.1}>
           <div className="mt-10 grid grid-cols-2 border border-border md:grid-cols-4">
-            <Stat value="12" label="NBA seasons" />
+            <Stat value="11" label="NBA seasons" />
             <Stat value="6th Man" label="of the Year, 2004–05" />
             <Stat value="2004" label="UConn national champion" />
-            <Stat value="1st rd." label="2004 NBA Draft pick" />
+            <Stat value="#3 overall" label="2004 NBA Draft pick" />
           </div>
         </FadeIn>
       </Section>

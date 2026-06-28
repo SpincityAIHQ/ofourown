@@ -6,6 +6,10 @@ import {
   FunnelGate,
   BulletList,
 } from "@/components/vsl-funnel";
+import { Section, Eyebrow } from "@/components/section";
+import { FadeIn } from "@/components/media";
+import { TestimonialGrid } from "@/components/proof";
+import { SpotsBanner } from "@/components/urgency";
 import coachingVslCover from "@/assets/coaching-vsl-cover.jpg";
 
 const SITE_ORIGIN = "https://oooelitebasketballtraining.com";
@@ -13,10 +17,10 @@ const SITE_ORIGIN = "https://oooelitebasketballtraining.com";
 export const Route = createFileRoute("/coaching")({
   head: () => ({
     meta: [
-      { title: "Coaching with Ben Gordon — NBA legend | OfOurOwn" },
-      { name: "description", content: "1:1 coaching with Ben Gordon, NBA legend — for athletes, founders, and operators serious about their craft." },
-      { property: "og:title", content: "Coaching with Ben Gordon — NBA legend" },
-      { property: "og:description", content: "1:1 coaching with Ben Gordon, NBA legend." },
+      { title: "Coaching with Ben Gordon — NBA Veteran | OfOurOwn" },
+      { name: "description", content: "1:1 coaching with Ben Gordon, NBA Veteran — for athletes, founders, and operators serious about their craft." },
+      { property: "og:title", content: "Coaching with Ben Gordon — NBA Veteran" },
+      { property: "og:description", content: "1:1 coaching with Ben Gordon, NBA Veteran." },
       { property: "og:image", content: `${SITE_ORIGIN}${coachingVslCover}` },
       { property: "og:image:alt", content: "Ben Gordon coaching beside a whiteboard on a quiet basketball court, mid-conversation with a single athlete off-frame." },
       { name: "twitter:card", content: "summary_large_image" },
@@ -37,6 +41,8 @@ function CoachingPage() {
         mediaSrc={coachingVslCover}
         mediaAlt="Ben Gordon mid-coaching on a quiet basketball court — whiteboard at his side, sleeves pushed up, walking a private client through a play in warm gym light."
       />
+
+      <SpotsBanner programKey="collegepro" message="A small roster by design — a few coaching slots open each year" />
 
       <FunnelSection
         id="problem"
@@ -104,6 +110,14 @@ function CoachingPage() {
           career as a long game.
         </p>
       </FunnelSection>
+
+      <Section className="border-b border-border">
+        <FadeIn>
+          <Eyebrow>What clients say</Eyebrow>
+          <h2 className="font-display text-4xl font-semibold md:text-5xl">From the roster.</h2>
+        </FadeIn>
+        <div className="mt-10"><FadeIn delay={0.05}><TestimonialGrid /></FadeIn></div>
+      </Section>
 
       <FunnelGate
         id="cta"

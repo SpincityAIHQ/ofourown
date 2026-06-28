@@ -21,8 +21,8 @@ const ITEMS = [
 export const Route = createFileRoute("/merch")({
   head: () => ({
     meta: [
-      { title: "Merch — OfOurOwn | Ben Gordon, NBA legend" },
-      { name: "description", content: "Apparel and goods from OfOurOwn — Ben Gordon, NBA legend." },
+      { title: "Merch — OfOurOwn | Ben Gordon, NBA Veteran" },
+      { name: "description", content: "Apparel and goods from OfOurOwn — Ben Gordon, NBA Veteran." },
       { property: "og:title", content: "Merch — OfOurOwn" },
       { property: "og:description", content: "Apparel and goods from OfOurOwn." },
     ],

@@ -9,8 +9,8 @@ const SITE_ORIGIN = "https://oooelitebasketballtraining.com";
 export const Route = createFileRoute("/supplements")({
   head: () => ({
     meta: [
-      { title: "Supplements — OfOurOwn | Ben Gordon, NBA legend" },
-      { name: "description", content: "Daily supplement protocols from Ben Gordon, NBA legend — coming soon to the shop." },
+      { title: "Supplements — OfOurOwn | Ben Gordon, NBA Veteran" },
+      { name: "description", content: "Daily supplement protocols from Ben Gordon, NBA Veteran — coming soon to the shop." },
       { property: "og:title", content: "Supplements — Ben Gordon" },
       { property: "og:description", content: "Daily supplement protocols — coming soon." },
       { property: "og:image", content: `${SITE_ORIGIN}${supplementProduct}` },
@@ -48,6 +48,13 @@ function SupplementsPage() {
           </div>
           <div className="md:col-span-7"><FadeIn delay={0.1}><MediaSlot label="SUPPLEMENT · product · placeholder" aspect="4:3" src={supplementProduct} alt="OfOurOwn daily recovery supplement bottle in matte amber glass, lit by warm window light against a soft neutral backdrop." /></FadeIn></div>
         </div>
+        <p className="mt-12 max-w-3xl border-t border-border pt-6 text-xs leading-relaxed text-muted-foreground/70">
+          These statements have not been evaluated by the Food and Drug
+          Administration. Any products mentioned are not intended to diagnose,
+          treat, cure, or prevent any disease. Information here is for general
+          education only and is not medical or nutrition advice — consult a
+          qualified healthcare professional before starting any supplement.
+        </p>
       </Section>
     </>
   );

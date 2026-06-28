@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero, Section, Eyebrow } from "@/components/section";
-import { FadeIn, MediaSlot, TestimonialRow } from "@/components/media";
+import { FadeIn, MediaSlot, VideoEmbed, TestimonialRow } from "@/components/media";
 import { SpeakingInquiryForm } from "@/components/speaking-inquiry-form";
 import speakingReel from "@/assets/speaking-reel.jpg";
 
@@ -9,10 +9,10 @@ const SITE_ORIGIN = "https://oooelitebasketballtraining.com";
 export const Route = createFileRoute("/speaking")({
   head: () => ({
     meta: [
-      { title: "Speaking — Ben Gordon, NBA legend | OfOurOwn" },
-      { name: "description", content: "Book Ben Gordon, NBA legend, for keynotes, team talks, college visits, and corporate events." },
+      { title: "Speaking — Ben Gordon, NBA Veteran | OfOurOwn" },
+      { name: "description", content: "Book Ben Gordon, NBA Veteran, for keynotes, team talks, college visits, and corporate events." },
       { property: "og:title", content: "Book Ben Gordon to speak" },
-      { property: "og:description", content: "Keynotes, team talks, and intimate room work with Ben Gordon, NBA legend." },
+      { property: "og:description", content: "Keynotes, team talks, and intimate room work with Ben Gordon, NBA Veteran." },
       { property: "og:image", content: `${SITE_ORIGIN}${speakingReel}` },
       { property: "og:image:alt", content: "Ben Gordon on stage under warm spotlights, mid-keynote, addressing a seated audience." },
       { name: "twitter:card", content: "summary_large_image" },
@@ -52,7 +52,7 @@ function SpeakingPage() {
             </FadeIn>
           </div>
           <div className="md:col-span-7">
-            <FadeIn delay={0.1}><MediaSlot label="VIDEO · speaker reel · 16:9" aspect="16:9" src={speakingReel} alt="Ben Gordon on stage under warm spotlights, microphone in hand, mid-keynote in front of a seated audience — still from the speaker reel." priority /></FadeIn>
+            <FadeIn delay={0.1}><VideoEmbed label="SPEAKER REEL · 16:9" aspect="16:9" poster={speakingReel} posterAlt="Ben Gordon on stage under warm spotlights, microphone in hand, mid-keynote in front of a seated audience — still from the speaker reel." priority /></FadeIn>
           </div>
         </div>
       </Section>
