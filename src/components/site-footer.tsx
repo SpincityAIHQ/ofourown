@@ -1,20 +1,23 @@
 import { Link } from "@tanstack/react-router";
+import { StarRating } from "@/components/proof";
 
 const COLUMNS = [
   {
-    title: "Work with Ben",
+    title: "Develop",
     links: [
       { to: "/training", label: "Training" },
+      { to: "/philosophy", label: "Philosophy" },
+      { to: "/evaluation", label: "Book Evaluation" },
       { to: "/fst", label: "Fascia Stretch Therapy" },
-      { to: "/wellness", label: "Wellness" },
       { to: "/coaching", label: "Coaching" },
-      { to: "/speaking", label: "Speaking" },
+      { to: "/wellness", label: "Wellness" },
     ],
   },
   {
     title: "Shop",
     links: [
       { to: "/shop", label: "Shop home" },
+      { to: "/collection", label: "Collection" },
       { to: "/book", label: "Book" },
       { to: "/manuals", label: "Manuals" },
       { to: "/supplements", label: "Supplements" },
@@ -50,10 +53,20 @@ export function SiteFooter() {
 
       <div className="mx-auto grid max-w-6xl gap-12 px-6 py-16 md:grid-cols-12">
         <div className="md:col-span-4">
-          <p className="font-display text-2xl font-semibold">OfOurOwn</p>
-          <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-            The home of Ben Gordon, NBA legend. Training, wellness, coaching, speaking, and a community for people doing the work.
+          <p className="font-display text-2xl font-semibold">
+            OOO <span className="text-muted-foreground">Performance</span>
           </p>
+          <p className="mt-3 max-w-xs text-sm text-muted-foreground">
+            An elite performance brand built by NBA Veteran Ben Gordon. Training,
+            apparel, media, and community — for athletes building something that lasts.
+          </p>
+          <div className="mt-6">
+            <StarRating />
+            {/* Rotating-quote placeholder — swap for real, permissioned quotes. */}
+            <p className="mt-3 max-w-xs font-display text-base leading-snug text-muted-foreground">
+              “Placeholder client quote — rotating testimonials appear here once collected.”
+            </p>
+          </div>
         </div>
         {COLUMNS.map((col) => (
           <div key={col.title} className="md:col-span-2">
@@ -83,7 +96,7 @@ export function SiteFooter() {
 
       <div className="border-t border-border">
         <div className="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-6 text-xs text-muted-foreground md:flex-row md:items-center md:justify-between">
-          <p>© {new Date().getFullYear()} OfOurOwn. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} OOO Performance. All rights reserved.</p>
           <p className="max-w-2xl text-muted-foreground/70">
             Information on this site is for general education only and is not medical, mental-health, financial, or legal advice. Always consult a qualified professional for your situation.
           </p>
