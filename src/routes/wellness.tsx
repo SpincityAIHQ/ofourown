@@ -13,10 +13,10 @@ const SITE_ORIGIN = "https://oooelitebasketballtraining.com";
 export const Route = createFileRoute("/wellness")({
   head: () => ({
     meta: [
-      { title: "Wellness with Ben Gordon — NBA legend | OfOurOwn" },
-      { name: "description", content: "Private wellness consults — sleep, nutrition, and recovery protocols with Ben Gordon, NBA legend." },
-      { property: "og:title", content: "Wellness with Ben Gordon — NBA legend" },
-      { property: "og:description", content: "Private wellness consults and protocols with Ben Gordon, NBA legend." },
+      { title: "Wellness with Ben Gordon — NBA Veteran | OfOurOwn" },
+      { name: "description", content: "Private wellness consults — sleep, nutrition, and recovery protocols with Ben Gordon, NBA Veteran." },
+      { property: "og:title", content: "Wellness with Ben Gordon — NBA Veteran" },
+      { property: "og:description", content: "Private wellness consults and protocols with Ben Gordon, NBA Veteran." },
       { property: "og:image", content: `${SITE_ORIGIN}${wellnessVslCover}` },
       { property: "og:image:alt", content: "Ben Gordon mid-stretch on a mat in a sunlit recovery studio, eyes closed and breathing through the position." },
       { name: "twitter:card", content: "summary_large_image" },

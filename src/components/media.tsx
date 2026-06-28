@@ -1,5 +1,6 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { motion, useReducedMotion } from "motion/react";
+import { Play } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type Aspect = "16:9" | "1:1" | "4:3" | "3:4";
@@ -86,21 +87,44 @@ function toEmbedUrl(url: string): string | null {
   }
 }
 
+type VideoAspect = "16:9" | "21:9";
+
+const VIDEO_ASPECT_CLASS: Record<VideoAspect, string> = {
+  "16:9": "aspect-video",
+  "21:9": "aspect-[21/9]",
+};
+
+/**
+ * Responsive video. With a `url`, shows a poster + play button and lazy-loads
+ * the iframe only on click (no autoplay-with-sound). Without one, renders a
+ * labeled placeholder so editors can see where video belongs.
+ */
 export function VideoEmbed({
   label = "VIDEO · paste YouTube or Vimeo URL",
   url,
+  poster,
+  posterAlt,
+  aspect = "16:9",
   className,
+  priority = false,
 }: {
   label?: string;
   url?: string;
+  poster?: string;
+  posterAlt?: string;
+  aspect?: VideoAspect;
   className?: string;
+  priority?: boolean;
 }) {
+  const [playing, setPlaying] = useState(false);
   const embed = url ? toEmbedUrl(url) : null;
-  if (embed) {
+  const aspectClass = VIDEO_ASPECT_CLASS[aspect];
+
+  if (embed && playing) {
     return (
-      <div className={cn("aspect-video w-full overflow-hidden border border-foreground bg-foreground", className)}>
+      <div className={cn(aspectClass, "w-full overflow-hidden border border-foreground bg-foreground", className)}>
         <iframe
-          src={embed}
+          src={`${embed}${embed.includes("?") ? "&" : "?"}autoplay=1`}
           title={label}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
@@ -109,7 +133,71 @@ export function VideoEmbed({
       </div>
     );
   }
-  return <MediaSlot label={label} aspect="16:9" className={className} />;
+
+  if (embed) {
+    return (
+      <button
+        type="button"
+        onClick={() => setPlaying(true)}
+        aria-label={`Play video: ${label}`}
+        className={cn(
+          "group relative grid w-full place-items-center overflow-hidden border border-foreground bg-foreground text-background transition",
+          aspectClass,
+          className,
+        )}
+      >
+        {poster ? (
+          <>
+            <img
+              src={poster}
+              alt={posterAlt ?? label}
+              title={posterAlt ?? label}
+              loading={priority ? "eager" : "lazy"}
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/30" />
+          </>
+        ) : null}
+        <div className="relative z-10 grid h-16 w-16 place-items-center rounded-full border border-background/40 bg-black/30 transition group-hover:scale-110 md:h-20 md:w-20">
+          <Play className="h-7 w-7 translate-x-0.5 fill-background" />
+        </div>
+      </button>
+    );
+  }
+
+  // No URL yet — labeled placeholder with a play affordance.
+  return (
+    <div
+      role="img"
+      aria-label={label}
+      className={cn(
+        "group relative grid w-full place-items-center overflow-hidden border border-foreground bg-foreground text-background",
+        aspectClass,
+        className,
+      )}
+    >
+      {poster ? (
+        <>
+          <img
+            src={poster}
+            alt={posterAlt ?? label}
+            title={posterAlt ?? label}
+            loading={priority ? "eager" : "lazy"}
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-cover opacity-80"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/40" />
+        </>
+      ) : null}
+      <div className="relative z-10 grid h-16 w-16 place-items-center rounded-full border border-background/40 bg-black/30 md:h-20 md:w-20">
+        <Play className="h-7 w-7 translate-x-0.5 fill-background" />
+      </div>
+      <span className="absolute bottom-3 right-4 z-10 text-[10px] uppercase tracking-[0.2em] text-background/75">
+        {label}
+      </span>
+    </div>
+  );
 }
 
 export function Stat({ value, label }: { value: string; label: string }) {

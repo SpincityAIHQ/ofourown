@@ -10,7 +10,7 @@ export const Route = createFileRoute("/manuals")({
   head: () => ({
     meta: [
       { title: "Manuals — training & wellness | OfOurOwn" },
-      { name: "description", content: "Programmed training and wellness manuals from Ben Gordon, NBA legend." },
+      { name: "description", content: "Programmed training and wellness manuals from Ben Gordon, NBA Veteran." },
       { property: "og:title", content: "Manuals — Ben Gordon" },
       { property: "og:description", content: "Programmed training and wellness manuals." },
     ],
