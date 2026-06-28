@@ -116,17 +116,19 @@ function CommunityPage() {
           </h2>
           <p className="mt-6 max-w-xl text-lg text-background/70">
             A recurring membership for athletes and families in the OOO ecosystem.
-            Step inside on Skool, or get on the list for what's next.
+            Get on the list for what's next.
           </p>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-            <a
-              href={SKOOL_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-12 items-center gap-2 bg-background px-6 text-sm uppercase tracking-wider text-foreground transition hover:opacity-90"
-            >
-              Join the Community <ArrowRight className="h-4 w-4" />
-            </a>
+            {SKOOL_URL ? (
+              <a
+                href={SKOOL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-12 items-center gap-2 bg-background px-6 text-sm uppercase tracking-wider text-foreground transition hover:opacity-90"
+              >
+                Join the Community <ArrowRight className="h-4 w-4" />
+              </a>
+            ) : null}
             <div className="max-w-md">
               <EmailCapture source="community_interest" cta="Notify me" />
             </div>
