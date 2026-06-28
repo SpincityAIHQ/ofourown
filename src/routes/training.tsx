@@ -1,11 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
+import { Section, Eyebrow } from "@/components/section";
+import { FadeIn, VideoEmbed } from "@/components/media";
+import { TestimonialGrid, ProofStatBar } from "@/components/proof";
+import { SpotsBanner, EnrollmentBadge } from "@/components/urgency";
 import { BookingForm } from "@/components/booking-form";
-import {
-  VSLHero,
-  FunnelSection,
-  FunnelGate,
-  BulletList,
-} from "@/components/vsl-funnel";
 import trainingVslCover from "@/assets/training-vsl-cover.jpg";
 
 const SITE_ORIGIN = "https://oooelitebasketballtraining.com";
@@ -13,10 +12,10 @@ const SITE_ORIGIN = "https://oooelitebasketballtraining.com";
 export const Route = createFileRoute("/training")({
   head: () => ({
     meta: [
-      { title: "Training with Ben Gordon — NBA legend | OfOurOwn" },
-      { name: "description", content: "Private 1:1 strength and conditioning. Request a session with Ben Gordon, NBA legend." },
-      { property: "og:title", content: "Training with Ben Gordon — NBA legend" },
-      { property: "og:description", content: "Private 1:1 strength and conditioning with Ben Gordon, NBA legend." },
+      { title: "Training — OOO Performance | Elite Basketball Development" },
+      { name: "description", content: "Elite basketball development with OOO Performance — youth through professional. Find your level and book an evaluation." },
+      { property: "og:title", content: "Training — OOO Performance" },
+      { property: "og:description", content: "Elite basketball development, youth through professional. Built by NBA Veteran Ben Gordon." },
       { property: "og:image", content: `${SITE_ORIGIN}${trainingVslCover}` },
       { property: "og:image:alt", content: "Ben Gordon on a hardwood basketball court holding a ball, lit by warm afternoon sunlight." },
       { name: "twitter:card", content: "summary_large_image" },
@@ -26,106 +25,220 @@ export const Route = createFileRoute("/training")({
   component: TrainingPage,
 });
 
+const TIERS = [
+  {
+    id: "youth",
+    age: "Ages 6–10",
+    name: "Youth Development",
+    focus: "Fundamentals",
+    key: "youth",
+    apex: false,
+    blurb:
+      "First touches done right. Ballhandling, footwork, and a love for the game — built on real fundamentals, not bad habits.",
+    points: ["Ballhandling & footwork", "Coordination & athleticism", "Confidence and a love for the game"],
+  },
+  {
+    id: "academy",
+    age: "Ages 11–14",
+    name: "Elite Academy",
+    focus: "Skill Development",
+    key: "academy",
+    apex: false,
+    blurb:
+      "The skill-building years. Shooting mechanics, finishing, and decision-making that scale with the athlete.",
+    points: ["Shooting mechanics", "Finishing & scoring", "Decision-making & IQ"],
+  },
+  {
+    id: "highschool",
+    age: "Ages 15–18",
+    name: "High School Elite",
+    focus: "Position Training",
+    key: "highschool",
+    apex: false,
+    blurb:
+      "Position-specific training for players competing for varsity minutes, recruitment, and the next level.",
+    points: ["Position-specific skill work", "Strength & conditioning", "Recruiting readiness"],
+  },
+  {
+    id: "collegepro",
+    age: "Invite Only",
+    name: "College / Pro",
+    focus: "Pro Preparation",
+    key: "collegepro",
+    apex: true,
+    blurb:
+      "Invite-only preparation for college and professional athletes — the same standard Ben held across an 11-year NBA career.",
+    points: ["Pro-level skill refinement", "Performance & recovery system", "Film, IQ, and the mental game"],
+  },
+] as const;
+
 function TrainingPage() {
   return (
     <>
-      <VSLHero
-        eyebrow="Training"
-        headline="Train like your career depends on it. Because it does."
-        subhead="Private 1:1 strength, conditioning, and recovery built on the same methods Ben Gordon used through 12 years in the NBA."
-        nextLabel="See why most programs fail"
-        mediaSrc={trainingVslCover}
-        mediaAlt="Ben Gordon, former NBA guard, standing center-court on polished hardwood holding a basketball at his hip, framed by warm late-afternoon light — cover for the 1:1 training program."
-      />
+      <section className="border-b border-border">
+        <div className="mx-auto max-w-6xl px-6 py-20 md:py-24">
+          <Eyebrow>Training</Eyebrow>
+          <h1 className="max-w-4xl font-display text-5xl font-semibold leading-[1.0] tracking-tight md:text-7xl">
+            Elite basketball development.
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg text-muted-foreground md:text-xl">
+            From a child's first dribble to a pro's pre-season — one standard,
+            built by NBA Veteran Ben Gordon. Find your level below.
+          </p>
+          <div className="mt-10">
+            <FadeIn>
+              <VideoEmbed
+                label="FEATURE VIDEO · training · 16:9"
+                aspect="16:9"
+                poster={trainingVslCover}
+                posterAlt="Ben Gordon center-court holding a basketball in warm afternoon light."
+                priority
+              />
+            </FadeIn>
+          </div>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              to="/evaluation"
+              className="inline-flex h-12 items-center gap-2 bg-foreground px-6 text-sm uppercase tracking-wider text-background transition hover:opacity-90"
+            >
+              Book Evaluation <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
 
-      <FunnelSection
-        id="problem"
-        step="01"
-        eyebrow="The Problem"
-        title="Most training plans were never built for your real life."
-        nextHref="#solution"
-        nextLabel="See the fix"
-      >
-        <p>
-          You don't have an off-season. You have meetings, flights, kids,
-          recovery debt, and a body that's quietly compensating in twenty
-          places. Generic templates make that worse.
-        </p>
-        <p>
-          The result: you train hard for six weeks, get injured, fall off, and
-          start over. Again.
-        </p>
-      </FunnelSection>
+      <SpotsBanner programKey="evaluation" />
 
-      <FunnelSection
-        id="solution"
-        step="02"
-        eyebrow="The Solution"
-        title="A program built around you, recalibrated every week."
-        nextHref="#proof"
-        nextLabel="See it work"
-        tone="invert"
-      >
-        <p>
-          Three steps, repeated until the work is dialed in:
-        </p>
-        <BulletList
-          items={[
-            "Assess — movement screen, history, and a clean baseline.",
-            "Program — strength, conditioning, and recovery in one block.",
-            "Adjust — weekly recalibration based on what your body says.",
-          ]}
-        />
-      </FunnelSection>
+      {/* Tier sections — anchored from the homepage program ladder */}
+      {TIERS.map((t) => (
+        <section
+          key={t.id}
+          id={t.id}
+          className={`scroll-mt-20 border-b border-border ${t.apex ? "bg-foreground text-background" : ""}`}
+        >
+          <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+            <div className="grid gap-10 md:grid-cols-12">
+              <div className="md:col-span-5">
+                <span
+                  className={`inline-block border px-3 py-1 text-[10px] uppercase tracking-[0.2em] ${
+                    t.apex ? "border-background/50 text-background/80" : "border-border text-muted-foreground"
+                  }`}
+                >
+                  {t.age}
+                </span>
+                <h2 className="mt-6 font-display text-4xl font-semibold leading-tight md:text-5xl">
+                  {t.name}
+                </h2>
+                <p className={`mt-2 text-sm uppercase tracking-[0.2em] ${t.apex ? "text-background/60" : "text-muted-foreground"}`}>
+                  {t.focus}
+                </p>
+                <div className="mt-6">
+                  <EnrollmentBadge
+                    programKey={t.key}
+                    className={t.apex ? "border-background/50 text-background/80" : undefined}
+                  />
+                </div>
+              </div>
+              <div className="md:col-span-7">
+                <p className={`text-lg ${t.apex ? "text-background/80" : "text-muted-foreground"}`}>{t.blurb}</p>
+                <ul className="mt-6 grid gap-2 sm:grid-cols-2">
+                  {t.points.map((p) => (
+                    <li
+                      key={p}
+                      className={`border-l px-4 py-2 text-sm ${
+                        t.apex ? "border-background/30 text-background/80" : "border-border text-muted-foreground"
+                      }`}
+                    >
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  to="/evaluation"
+                  className={`mt-8 inline-flex h-12 items-center gap-2 px-6 text-sm uppercase tracking-wider transition ${
+                    t.apex
+                      ? "bg-background text-foreground hover:opacity-90"
+                      : "bg-foreground text-background hover:opacity-90"
+                  }`}
+                >
+                  Reserve Your Spot <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      ))}
 
-      <FunnelSection
-        id="proof"
-        step="03"
-        eyebrow="The Proof"
-        title="Twelve NBA seasons. One reason."
-        nextHref="#offer"
-        nextLabel="See what you get"
-      >
-        <p>
-          Ben Gordon played 12 seasons at the highest level of basketball —
-          and the back half of that career was bought with the exact training
-          and recovery system you'll run.
-        </p>
-        <p className="text-muted-foreground">
-          Private clients now use the same framework to come back from
-          injury, add years to their athletic life, and feel sharp on Monday
-          morning.
-        </p>
-      </FunnelSection>
+      {/* PHASE 7 — Achievements (labeled, permissioned) */}
+      <Section className="border-b border-border">
+        <FadeIn>
+          <Eyebrow>Achievements</Eyebrow>
+          <h2 className="font-display text-4xl font-semibold md:text-5xl">The standard, by the numbers.</h2>
+          <p className="mt-4 max-w-2xl text-muted-foreground">
+            Figures publish here once verified and permissioned — never invented.
+          </p>
+        </FadeIn>
+        <FadeIn delay={0.05}>
+          <ProofStatBar
+            className="mt-10"
+            items={[
+              { value: "—", label: "College Commitments" },
+              { value: "—", label: "Pro Players Developed" },
+              { value: "—", label: "High School Achievements" },
+            ]}
+          />
+        </FadeIn>
+      </Section>
 
-      <FunnelSection
-        id="offer"
-        step="04"
-        eyebrow="The Offer"
-        title="Private 1:1 sessions with Ben Gordon."
-        nextHref="#cta"
-        nextLabel="Claim your slot"
-      >
-        <BulletList
-          items={[
-            "60–90 minute private sessions, in-person or remote",
-            "Custom program updated weekly to match your load",
-            "Direct line to Ben for questions between sessions",
-            "Movement assessment + return-to-play roadmap if you're coming back from injury",
-          ]}
-        />
-      </FunnelSection>
+      {/* PHASE 7/8 — Before / After */}
+      <Section className="border-b border-border">
+        <FadeIn>
+          <Eyebrow>Before / After</Eyebrow>
+          <h2 className="font-display text-4xl font-semibold md:text-5xl">Watch the development.</h2>
+        </FadeIn>
+        <div className="mt-12 grid gap-6 md:grid-cols-2">
+          <FadeIn>
+            <VideoEmbed label="BEFORE · athlete intake · 16:9" aspect="16:9" />
+          </FadeIn>
+          <FadeIn delay={0.05}>
+            <VideoEmbed label="AFTER · same athlete, months later · 16:9" aspect="16:9" />
+          </FadeIn>
+        </div>
+      </Section>
 
-      <FunnelGate
-        id="cta"
-        source="training_funnel"
-        eyebrow="Step 05 — Apply"
-        title="Slots are limited. Start with your email."
-        pitch="Drop your email to unlock the application form. Ben's team replies within 48 hours to confirm fit and timing."
-        ctaLabel="Unlock application"
-      >
-        <BookingForm type="training" />
-      </FunnelGate>
+      {/* PHASE 7 — Testimonials */}
+      <Section className="border-b border-border">
+        <FadeIn>
+          <Eyebrow>Results</Eyebrow>
+          <h2 className="font-display text-4xl font-semibold md:text-5xl">What players and parents say.</h2>
+        </FadeIn>
+        <div className="mt-10">
+          <FadeIn delay={0.05}>
+            <TestimonialGrid />
+          </FadeIn>
+        </div>
+      </Section>
+
+      {/* Booking */}
+      <Section>
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <FadeIn>
+              <Eyebrow>Get started</Eyebrow>
+              <h2 className="font-display text-4xl font-semibold md:text-5xl">Book your evaluation.</h2>
+              <p className="mt-4 max-w-md text-muted-foreground">
+                Tell us about your athlete. We'll assess, place them at the right
+                level, and map out next steps.
+              </p>
+            </FadeIn>
+          </div>
+          <div className="md:col-span-7">
+            <FadeIn delay={0.05}>
+              <BookingForm type="training" />
+            </FadeIn>
+          </div>
+        </div>
+      </Section>
     </>
   );
 }
