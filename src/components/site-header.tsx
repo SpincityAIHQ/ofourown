@@ -12,17 +12,19 @@ const NAV: Item[] = [
   {
     label: "Train",
     children: [
-      { to: "/training", label: "Training", blurb: "Private 1:1 strength & conditioning." },
+      { to: "/training", label: "Training", blurb: "Elite basketball development, youth through pro." },
+      { to: "/philosophy", label: "Philosophy", blurb: "How we develop complete players." },
       { to: "/fst", label: "Fascia Stretch Therapy", blurb: "Mobility & recovery sessions." },
       { to: "/coaching", label: "Coaching", blurb: "Mentorship for athletes & operators." },
+      { to: "/wellness", label: "Wellness", blurb: "Recovery, nutrition, and longevity." },
     ],
   },
-  { to: "/wellness", label: "Wellness" },
-  { to: "/speaking", label: "Speaking" },
+  { to: "/speaking", label: "Media" },
   {
     label: "Shop",
     children: [
       { to: "/shop", label: "Shop home", blurb: "All books, merch, and programs." },
+      { to: "/collection", label: "Collection", blurb: "OOO Performance Collection — coming soon." },
       { to: "/book", label: "Book" },
       { to: "/manuals", label: "Manuals" },
       { to: "/supplements", label: "Supplements" },
@@ -96,8 +98,8 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <Link to="/" className="font-display text-xl font-semibold tracking-tight">
-          OfOurOwn
+        <Link to="/" className="font-display text-xl font-semibold tracking-tight" aria-label="OOO Performance — home">
+          OOO <span className="text-muted-foreground">Performance</span>
         </Link>
         <nav className="hidden items-center gap-7 lg:flex">
           {NAV.map((item) =>
@@ -116,7 +118,13 @@ export function SiteHeader() {
             ),
           )}
         </nav>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
+          <Link
+            to="/evaluation"
+            className="hidden h-9 items-center bg-foreground px-4 text-xs uppercase tracking-wider text-background transition hover:opacity-90 lg:inline-flex"
+          >
+            Book Evaluation
+          </Link>
           <CartButton />
           <button
             type="button"
@@ -164,6 +172,13 @@ export function SiteHeader() {
                 </Link>
               ),
             )}
+            <Link
+              to="/evaluation"
+              onClick={() => setMobile(false)}
+              className="mt-3 inline-flex h-11 items-center justify-center bg-foreground px-6 text-xs uppercase tracking-wider text-background"
+            >
+              Book Evaluation
+            </Link>
           </nav>
         </div>
       ) : null}

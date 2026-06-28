@@ -9,10 +9,10 @@ const SITE_ORIGIN = "https://oooelitebasketballtraining.com";
 export const Route = createFileRoute("/book")({
   head: () => ({
     meta: [
-      { title: "Book — Ben Gordon, NBA legend | OfOurOwn" },
-      { name: "description", content: "The forthcoming book from Ben Gordon, NBA legend — on training, recovery, and the long game." },
+      { title: "Book — Ben Gordon, NBA Veteran | OfOurOwn" },
+      { name: "description", content: "The forthcoming book from Ben Gordon, NBA Veteran — on training, recovery, and the long game." },
       { property: "og:title", content: "Book — Ben Gordon" },
-      { property: "og:description", content: "The forthcoming book from Ben Gordon, NBA legend." },
+      { property: "og:description", content: "The forthcoming book from Ben Gordon, NBA Veteran." },
       { property: "og:image", content: `${SITE_ORIGIN}${bookCover}` },
       { property: "og:image:alt", content: "Cover of the forthcoming book Of Our Own by Ben Gordon — minimal editorial design with the title in a refined serif." },
       { name: "twitter:card", content: "summary_large_image" },
@@ -28,7 +28,7 @@ function BookPage() {
       <PageHero
         eyebrow="Book"
         title="The book."
-        lede="A long-form work from Ben Gordon, NBA legend — on training, recovery, identity, and the long game. Cover, title, and release window to come."
+        lede="A long-form work from Ben Gordon, NBA Veteran — on training, recovery, identity, and the long game. Cover, title, and release window to come."
       />
       <Section className="border-b border-border">
         <div className="grid gap-12 md:grid-cols-12 md:items-center">

@@ -5,7 +5,7 @@ import { FadeIn, MediaSlot } from "@/components/media";
 export const Route = createFileRoute("/advocacy")({
   head: () => ({
     meta: [
-      { title: "Advocacy — Ben Gordon, NBA legend | OfOurOwn" },
+      { title: "Advocacy — Ben Gordon, NBA Veteran | OfOurOwn" },
       { name: "description", content: "Ben Gordon's ongoing advocacy work in mental health, men's wellbeing, and athlete aftercare." },
       { property: "og:title", content: "Advocacy — Ben Gordon" },
       { property: "og:description", content: "Mental health and athlete-aftercare advocacy." },

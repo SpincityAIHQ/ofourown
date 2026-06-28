@@ -15,11 +15,14 @@ import { Route as SupplementsRouteImport } from './routes/supplements'
 import { Route as SuccessRouteImport } from './routes/success'
 import { Route as SpeakingRouteImport } from './routes/speaking'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as PhilosophyRouteImport } from './routes/philosophy'
 import { Route as MerchRouteImport } from './routes/merch'
 import { Route as ManualsRouteImport } from './routes/manuals'
 import { Route as FstRouteImport } from './routes/fst'
+import { Route as EvaluationRouteImport } from './routes/evaluation'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CommunityRouteImport } from './routes/community'
+import { Route as CollectionRouteImport } from './routes/collection'
 import { Route as CoachingRouteImport } from './routes/coaching'
 import { Route as CancelRouteImport } from './routes/cancel'
 import { Route as BookRouteImport } from './routes/book'
@@ -60,6 +63,11 @@ const ShopRoute = ShopRouteImport.update({
   path: '/shop',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PhilosophyRoute = PhilosophyRouteImport.update({
+  id: '/philosophy',
+  path: '/philosophy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MerchRoute = MerchRouteImport.update({
   id: '/merch',
   path: '/merch',
@@ -75,6 +83,11 @@ const FstRoute = FstRouteImport.update({
   path: '/fst',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EvaluationRoute = EvaluationRouteImport.update({
+  id: '/evaluation',
+  path: '/evaluation',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -83,6 +96,11 @@ const ContactRoute = ContactRouteImport.update({
 const CommunityRoute = CommunityRouteImport.update({
   id: '/community',
   path: '/community',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollectionRoute = CollectionRouteImport.update({
+  id: '/collection',
+  path: '/collection',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CoachingRoute = CoachingRouteImport.update({
@@ -138,11 +156,14 @@ export interface FileRoutesByFullPath {
   '/book': typeof BookRoute
   '/cancel': typeof CancelRoute
   '/coaching': typeof CoachingRoute
+  '/collection': typeof CollectionRoute
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
+  '/evaluation': typeof EvaluationRoute
   '/fst': typeof FstRoute
   '/manuals': typeof ManualsRoute
   '/merch': typeof MerchRoute
+  '/philosophy': typeof PhilosophyRoute
   '/shop': typeof ShopRouteWithChildren
   '/speaking': typeof SpeakingRoute
   '/success': typeof SuccessRoute
@@ -160,11 +181,14 @@ export interface FileRoutesByTo {
   '/book': typeof BookRoute
   '/cancel': typeof CancelRoute
   '/coaching': typeof CoachingRoute
+  '/collection': typeof CollectionRoute
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
+  '/evaluation': typeof EvaluationRoute
   '/fst': typeof FstRoute
   '/manuals': typeof ManualsRoute
   '/merch': typeof MerchRoute
+  '/philosophy': typeof PhilosophyRoute
   '/shop': typeof ShopRouteWithChildren
   '/speaking': typeof SpeakingRoute
   '/success': typeof SuccessRoute
@@ -183,11 +207,14 @@ export interface FileRoutesById {
   '/book': typeof BookRoute
   '/cancel': typeof CancelRoute
   '/coaching': typeof CoachingRoute
+  '/collection': typeof CollectionRoute
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
+  '/evaluation': typeof EvaluationRoute
   '/fst': typeof FstRoute
   '/manuals': typeof ManualsRoute
   '/merch': typeof MerchRoute
+  '/philosophy': typeof PhilosophyRoute
   '/shop': typeof ShopRouteWithChildren
   '/speaking': typeof SpeakingRoute
   '/success': typeof SuccessRoute
@@ -207,11 +234,14 @@ export interface FileRouteTypes {
     | '/book'
     | '/cancel'
     | '/coaching'
+    | '/collection'
     | '/community'
     | '/contact'
+    | '/evaluation'
     | '/fst'
     | '/manuals'
     | '/merch'
+    | '/philosophy'
     | '/shop'
     | '/speaking'
     | '/success'
@@ -229,11 +259,14 @@ export interface FileRouteTypes {
     | '/book'
     | '/cancel'
     | '/coaching'
+    | '/collection'
     | '/community'
     | '/contact'
+    | '/evaluation'
     | '/fst'
     | '/manuals'
     | '/merch'
+    | '/philosophy'
     | '/shop'
     | '/speaking'
     | '/success'
@@ -251,11 +284,14 @@ export interface FileRouteTypes {
     | '/book'
     | '/cancel'
     | '/coaching'
+    | '/collection'
     | '/community'
     | '/contact'
+    | '/evaluation'
     | '/fst'
     | '/manuals'
     | '/merch'
+    | '/philosophy'
     | '/shop'
     | '/speaking'
     | '/success'
@@ -274,11 +310,14 @@ export interface RootRouteChildren {
   BookRoute: typeof BookRoute
   CancelRoute: typeof CancelRoute
   CoachingRoute: typeof CoachingRoute
+  CollectionRoute: typeof CollectionRoute
   CommunityRoute: typeof CommunityRoute
   ContactRoute: typeof ContactRoute
+  EvaluationRoute: typeof EvaluationRoute
   FstRoute: typeof FstRoute
   ManualsRoute: typeof ManualsRoute
   MerchRoute: typeof MerchRoute
+  PhilosophyRoute: typeof PhilosophyRoute
   ShopRoute: typeof ShopRouteWithChildren
   SpeakingRoute: typeof SpeakingRoute
   SuccessRoute: typeof SuccessRoute
@@ -333,6 +372,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShopRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/philosophy': {
+      id: '/philosophy'
+      path: '/philosophy'
+      fullPath: '/philosophy'
+      preLoaderRoute: typeof PhilosophyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/merch': {
       id: '/merch'
       path: '/merch'
@@ -354,6 +400,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FstRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/evaluation': {
+      id: '/evaluation'
+      path: '/evaluation'
+      fullPath: '/evaluation'
+      preLoaderRoute: typeof EvaluationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -366,6 +419,13 @@ declare module '@tanstack/react-router' {
       path: '/community'
       fullPath: '/community'
       preLoaderRoute: typeof CommunityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collection': {
+      id: '/collection'
+      path: '/collection'
+      fullPath: '/collection'
+      preLoaderRoute: typeof CollectionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/coaching': {
@@ -451,11 +511,14 @@ const rootRouteChildren: RootRouteChildren = {
   BookRoute: BookRoute,
   CancelRoute: CancelRoute,
   CoachingRoute: CoachingRoute,
+  CollectionRoute: CollectionRoute,
   CommunityRoute: CommunityRoute,
   ContactRoute: ContactRoute,
+  EvaluationRoute: EvaluationRoute,
   FstRoute: FstRoute,
   ManualsRoute: ManualsRoute,
   MerchRoute: MerchRoute,
+  PhilosophyRoute: PhilosophyRoute,
   ShopRoute: ShopRouteWithChildren,
   SpeakingRoute: SpeakingRoute,
   SuccessRoute: SuccessRoute,
@@ -468,3 +531,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

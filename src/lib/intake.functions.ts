@@ -40,25 +40,6 @@ async function notify(subject: string, html: string) {
   }
 }
 
-async function forwardToGhl(payload: Record<string, unknown>) {
-  const apiKey = process.env.GHL_API_KEY;
-  const locationId = process.env.GHL_LOCATION_ID;
-  if (!apiKey || !locationId) return;
-  try {
-    await fetch("https://services.leadconnectorhq.com/contacts/", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        Version: "2021-07-28",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ locationId, ...payload }),
-    });
-  } catch (err) {
-    console.error("[ghl] failed", err);
-  }
-}
-
 /* ---------------- LEADS ---------------- */
 
 const leadSchema = z.object({
@@ -80,7 +61,11 @@ export const submitLead = createServerFn({ method: "POST" })
       console.error("[submitLead]", error);
       throw new Error("Could not save your email. Please try again.");
     }
-    await forwardToGhl({ email: data.email, source: data.source ?? "website" });
+    await notify(
+      `New lead — ${data.email}`,
+      `<p>New email signup: <strong>${data.email}</strong></p>
+       <p><strong>Source:</strong> ${data.source ?? "website"}</p>`,
+    );
     return { ok: true };
   });
 
@@ -173,10 +158,5 @@ export const submitSpeakingInquiry = createServerFn({ method: "POST" })
        <p><strong>Budget:</strong> ${data.budget_range ?? "—"}</p>
        <p><strong>Message:</strong><br>${(data.message ?? "—").replace(/\n/g, "<br>")}</p>`,
     );
-    await forwardToGhl({
-      email: data.email,
-      name: data.name,
-      source: "speaking_inquiry",
-    });
     return { ok: true };
   });
