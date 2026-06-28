@@ -4,7 +4,8 @@
  */
 
 // CONFIRM before publish: real Skool community URL + membership tiers/price.
-export const SKOOL_URL = "https://www.skool.com/"; // placeholder — replace with real OOO community URL
+// Left blank today — add real OOO community URL before publish.
+export const SKOOL_URL = ""; // placeholder
 
 // CONFIRM before publish: OOO Performance Collection launch window.
 export const COLLECTION_LAUNCH = "Coming Soon";
