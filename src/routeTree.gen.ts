@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WellnessRouteImport } from './routes/wellness'
+import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as TrainingRouteImport } from './routes/training'
 import { Route as SupplementsRouteImport } from './routes/supplements'
 import { Route as SuccessRouteImport } from './routes/success'
@@ -30,13 +31,22 @@ import { Route as AdvocacyRouteImport } from './routes/advocacy'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ShopSlugRouteImport } from './routes/shop.$slug'
+import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ApiPublicStripeWebhookRouteImport } from './routes/api/public/stripe-webhook'
+import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
+import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 
 const WellnessRoute = WellnessRouteImport.update({
   id: '/wellness',
   path: '/wellness',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UnsubscribeRoute = UnsubscribeRouteImport.update({
+  id: '/unsubscribe',
+  path: '/unsubscribe',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TrainingRoute = TrainingRouteImport.update({
@@ -139,9 +149,19 @@ const ShopSlugRoute = ShopSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => ShopRoute,
 } as any)
+const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
+  id: '/email/unsubscribe',
+  path: '/email/unsubscribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiChatRoute = ApiChatRouteImport.update({
   id: '/api/chat',
   path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
+  id: '/lovable/email/suppression',
+  path: '/lovable/email/suppression',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicStripeWebhookRoute = ApiPublicStripeWebhookRouteImport.update({
@@ -149,6 +169,18 @@ const ApiPublicStripeWebhookRoute = ApiPublicStripeWebhookRouteImport.update({
   path: '/api/public/stripe-webhook',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LovableEmailTransactionalSendRoute =
+  LovableEmailTransactionalSendRouteImport.update({
+    id: '/lovable/email/transactional/send',
+    path: '/lovable/email/transactional/send',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LovableEmailTransactionalPreviewRoute =
+  LovableEmailTransactionalPreviewRouteImport.update({
+    id: '/lovable/email/transactional/preview',
+    path: '/lovable/email/transactional/preview',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const LovableEmailQueueProcessRoute =
   LovableEmailQueueProcessRouteImport.update({
     id: '/lovable/email/queue/process',
@@ -176,11 +208,16 @@ export interface FileRoutesByFullPath {
   '/success': typeof SuccessRoute
   '/supplements': typeof SupplementsRoute
   '/training': typeof TrainingRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/wellness': typeof WellnessRoute
   '/api/chat': typeof ApiChatRoute
+  '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/shop/$slug': typeof ShopSlugRoute
   '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
+  '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
+  '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -202,11 +239,16 @@ export interface FileRoutesByTo {
   '/success': typeof SuccessRoute
   '/supplements': typeof SupplementsRoute
   '/training': typeof TrainingRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/wellness': typeof WellnessRoute
   '/api/chat': typeof ApiChatRoute
+  '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/shop/$slug': typeof ShopSlugRoute
   '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
+  '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
+  '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -229,11 +271,16 @@ export interface FileRoutesById {
   '/success': typeof SuccessRoute
   '/supplements': typeof SupplementsRoute
   '/training': typeof TrainingRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/wellness': typeof WellnessRoute
   '/api/chat': typeof ApiChatRoute
+  '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/shop/$slug': typeof ShopSlugRoute
   '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
+  '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
+  '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -257,11 +304,16 @@ export interface FileRouteTypes {
     | '/success'
     | '/supplements'
     | '/training'
+    | '/unsubscribe'
     | '/wellness'
     | '/api/chat'
+    | '/email/unsubscribe'
     | '/shop/$slug'
     | '/api/public/stripe-webhook'
+    | '/lovable/email/suppression'
     | '/lovable/email/queue/process'
+    | '/lovable/email/transactional/preview'
+    | '/lovable/email/transactional/send'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -283,11 +335,16 @@ export interface FileRouteTypes {
     | '/success'
     | '/supplements'
     | '/training'
+    | '/unsubscribe'
     | '/wellness'
     | '/api/chat'
+    | '/email/unsubscribe'
     | '/shop/$slug'
     | '/api/public/stripe-webhook'
+    | '/lovable/email/suppression'
     | '/lovable/email/queue/process'
+    | '/lovable/email/transactional/preview'
+    | '/lovable/email/transactional/send'
   id:
     | '__root__'
     | '/'
@@ -309,11 +366,16 @@ export interface FileRouteTypes {
     | '/success'
     | '/supplements'
     | '/training'
+    | '/unsubscribe'
     | '/wellness'
     | '/api/chat'
+    | '/email/unsubscribe'
     | '/shop/$slug'
     | '/api/public/stripe-webhook'
+    | '/lovable/email/suppression'
     | '/lovable/email/queue/process'
+    | '/lovable/email/transactional/preview'
+    | '/lovable/email/transactional/send'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -336,10 +398,15 @@ export interface RootRouteChildren {
   SuccessRoute: typeof SuccessRoute
   SupplementsRoute: typeof SupplementsRoute
   TrainingRoute: typeof TrainingRoute
+  UnsubscribeRoute: typeof UnsubscribeRoute
   WellnessRoute: typeof WellnessRoute
   ApiChatRoute: typeof ApiChatRoute
+  EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   ApiPublicStripeWebhookRoute: typeof ApiPublicStripeWebhookRoute
+  LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
+  LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
+  LovableEmailTransactionalSendRoute: typeof LovableEmailTransactionalSendRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -349,6 +416,13 @@ declare module '@tanstack/react-router' {
       path: '/wellness'
       fullPath: '/wellness'
       preLoaderRoute: typeof WellnessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/unsubscribe': {
+      id: '/unsubscribe'
+      path: '/unsubscribe'
+      fullPath: '/unsubscribe'
+      preLoaderRoute: typeof UnsubscribeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/training': {
@@ -491,6 +565,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShopSlugRouteImport
       parentRoute: typeof ShopRoute
     }
+    '/email/unsubscribe': {
+      id: '/email/unsubscribe'
+      path: '/email/unsubscribe'
+      fullPath: '/email/unsubscribe'
+      preLoaderRoute: typeof EmailUnsubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/chat': {
       id: '/api/chat'
       path: '/api/chat'
@@ -498,11 +579,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lovable/email/suppression': {
+      id: '/lovable/email/suppression'
+      path: '/lovable/email/suppression'
+      fullPath: '/lovable/email/suppression'
+      preLoaderRoute: typeof LovableEmailSuppressionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/stripe-webhook': {
       id: '/api/public/stripe-webhook'
       path: '/api/public/stripe-webhook'
       fullPath: '/api/public/stripe-webhook'
       preLoaderRoute: typeof ApiPublicStripeWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lovable/email/transactional/send': {
+      id: '/lovable/email/transactional/send'
+      path: '/lovable/email/transactional/send'
+      fullPath: '/lovable/email/transactional/send'
+      preLoaderRoute: typeof LovableEmailTransactionalSendRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lovable/email/transactional/preview': {
+      id: '/lovable/email/transactional/preview'
+      path: '/lovable/email/transactional/preview'
+      fullPath: '/lovable/email/transactional/preview'
+      preLoaderRoute: typeof LovableEmailTransactionalPreviewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lovable/email/queue/process': {
@@ -545,10 +647,15 @@ const rootRouteChildren: RootRouteChildren = {
   SuccessRoute: SuccessRoute,
   SupplementsRoute: SupplementsRoute,
   TrainingRoute: TrainingRoute,
+  UnsubscribeRoute: UnsubscribeRoute,
   WellnessRoute: WellnessRoute,
   ApiChatRoute: ApiChatRoute,
+  EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   ApiPublicStripeWebhookRoute: ApiPublicStripeWebhookRoute,
+  LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
+  LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
+  LovableEmailTransactionalSendRoute: LovableEmailTransactionalSendRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -90,14 +90,40 @@ export const submitBooking = createServerFn({ method: "POST" })
       console.error("[submitBooking]", error);
       throw new Error("Could not submit your booking. Please try again.");
     }
-    await notify(
-      `New ${data.type} booking — ${data.name}`,
-      `<p><strong>${data.name}</strong> (${data.email}) requested a ${data.type} session.</p>
-       <p><strong>Phone:</strong> ${data.phone ?? "—"}</p>
-       <p><strong>Preferred time:</strong> ${data.preferred_time ?? "—"}</p>
-       <p><strong>Goals:</strong><br>${data.goals ?? "—"}</p>
-       <p><strong>Notes:</strong><br>${data.notes ?? "—"}</p>`,
-    );
+    const notifyTo = process.env.NOTIFY_EMAIL;
+    if (notifyTo) {
+      try {
+        const { sendInternalTransactionalEmail, buildGoogleCalendarUrl } =
+          await import("@/lib/email/send-internal.server");
+        const calendarUrl = buildGoogleCalendarUrl({
+          title: `OOO ${data.type} — ${data.name}`,
+          details:
+            `Booking from ${data.name} (${data.email})\n` +
+            (data.phone ? `Phone: ${data.phone}\n` : "") +
+            (data.preferred_time ? `Preferred: ${data.preferred_time}\n` : "") +
+            (data.goals ? `\nGoals:\n${data.goals}\n` : "") +
+            (data.notes ? `\nNotes:\n${data.notes}\n` : ""),
+        });
+        await sendInternalTransactionalEmail({
+          templateName: "booking-confirmation",
+          recipientEmail: notifyTo,
+          idempotencyKey: `booking-${data.email}-${Date.now()}`,
+          templateData: {
+            type: data.type,
+            name: data.name,
+            email: data.email,
+            phone: data.phone,
+            preferredTime: data.preferred_time,
+            goals: data.goals,
+            notes: data.notes,
+            submittedAt: new Date().toUTCString(),
+            calendarUrl,
+          },
+        });
+      } catch (err) {
+        console.error("[submitBooking] email notify failed", err);
+      }
+    }
     return { ok: true };
   });
 
