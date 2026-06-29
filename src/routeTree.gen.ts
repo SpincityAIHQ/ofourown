@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WellnessRouteImport } from './routes/wellness'
+import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as TrainingRouteImport } from './routes/training'
 import { Route as SupplementsRouteImport } from './routes/supplements'
 import { Route as SuccessRouteImport } from './routes/success'
@@ -41,6 +42,11 @@ import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/e
 const WellnessRoute = WellnessRouteImport.update({
   id: '/wellness',
   path: '/wellness',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UnsubscribeRoute = UnsubscribeRouteImport.update({
+  id: '/unsubscribe',
+  path: '/unsubscribe',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TrainingRoute = TrainingRouteImport.update({
@@ -202,6 +208,7 @@ export interface FileRoutesByFullPath {
   '/success': typeof SuccessRoute
   '/supplements': typeof SupplementsRoute
   '/training': typeof TrainingRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/wellness': typeof WellnessRoute
   '/api/chat': typeof ApiChatRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
@@ -232,6 +239,7 @@ export interface FileRoutesByTo {
   '/success': typeof SuccessRoute
   '/supplements': typeof SupplementsRoute
   '/training': typeof TrainingRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/wellness': typeof WellnessRoute
   '/api/chat': typeof ApiChatRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
@@ -263,6 +271,7 @@ export interface FileRoutesById {
   '/success': typeof SuccessRoute
   '/supplements': typeof SupplementsRoute
   '/training': typeof TrainingRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/wellness': typeof WellnessRoute
   '/api/chat': typeof ApiChatRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
@@ -295,6 +304,7 @@ export interface FileRouteTypes {
     | '/success'
     | '/supplements'
     | '/training'
+    | '/unsubscribe'
     | '/wellness'
     | '/api/chat'
     | '/email/unsubscribe'
@@ -325,6 +335,7 @@ export interface FileRouteTypes {
     | '/success'
     | '/supplements'
     | '/training'
+    | '/unsubscribe'
     | '/wellness'
     | '/api/chat'
     | '/email/unsubscribe'
@@ -355,6 +366,7 @@ export interface FileRouteTypes {
     | '/success'
     | '/supplements'
     | '/training'
+    | '/unsubscribe'
     | '/wellness'
     | '/api/chat'
     | '/email/unsubscribe'
@@ -386,6 +398,7 @@ export interface RootRouteChildren {
   SuccessRoute: typeof SuccessRoute
   SupplementsRoute: typeof SupplementsRoute
   TrainingRoute: typeof TrainingRoute
+  UnsubscribeRoute: typeof UnsubscribeRoute
   WellnessRoute: typeof WellnessRoute
   ApiChatRoute: typeof ApiChatRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
@@ -403,6 +416,13 @@ declare module '@tanstack/react-router' {
       path: '/wellness'
       fullPath: '/wellness'
       preLoaderRoute: typeof WellnessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/unsubscribe': {
+      id: '/unsubscribe'
+      path: '/unsubscribe'
+      fullPath: '/unsubscribe'
+      preLoaderRoute: typeof UnsubscribeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/training': {
@@ -627,6 +647,7 @@ const rootRouteChildren: RootRouteChildren = {
   SuccessRoute: SuccessRoute,
   SupplementsRoute: SupplementsRoute,
   TrainingRoute: TrainingRoute,
+  UnsubscribeRoute: UnsubscribeRoute,
   WellnessRoute: WellnessRoute,
   ApiChatRoute: ApiChatRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
