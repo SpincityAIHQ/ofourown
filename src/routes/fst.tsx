@@ -104,6 +104,9 @@ function FSTPage() {
               <p className="mt-4 max-w-md text-muted-foreground">
                 In-person availability is limited. Ben's team confirms timing within 48 hours.
               </p>
+              <p className="mt-4 max-w-md text-sm text-muted-foreground">
+                Pricing: 30 min = $100, 60 min = $150, 90 min = $225. Each additional 30 min = $300.
+              </p>
             </FadeIn>
           </div>
           <div className="md:col-span-7"><FadeIn delay={0.05}><BookingForm type="fst" /></FadeIn></div>

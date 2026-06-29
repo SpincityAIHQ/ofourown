@@ -108,6 +108,9 @@ function SpeakingPage() {
               <p className="mt-4 max-w-md text-muted-foreground">
                 Share the basics and Ben's team will follow up to confirm fit, date, and scope.
               </p>
+              <p className="mt-4 max-w-md text-sm text-muted-foreground">
+                Speaking engagements start at $5,000; corporate events are priced on request.
+              </p>
             </FadeIn>
           </div>
           <div className="md:col-span-7">
