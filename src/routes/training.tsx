@@ -230,6 +230,9 @@ function TrainingPage() {
                 Tell us about your athlete. We'll assess, place them at the right
                 level, and map out next steps.
               </p>
+              <p className="mt-4 max-w-md text-sm text-muted-foreground">
+                1-on-1 basketball training: $250/hour (1-hour minimum).
+              </p>
             </FadeIn>
           </div>
           <div className="md:col-span-7">
