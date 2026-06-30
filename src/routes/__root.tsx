@@ -20,6 +20,8 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "../components/site-header";
 import { SiteFooter } from "../components/site-footer";
 import { ChatWidget } from "../components/chat-widget";
+import { InstallPrompt } from "../components/install-prompt";
+import { registerServiceWorker } from "../lib/pwa";
 import { Toaster } from "../components/ui/sonner";
 import { CartProvider } from "../lib/cart";
 import { CartDrawer } from "../components/cart-drawer";
@@ -88,7 +90,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
+      { name: "theme-color", content: "#0E0E10" },
+      { name: "mobile-web-app-capable", content: "yes" },
+      { name: "apple-mobile-web-app-capable", content: "yes" },
+      { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
+      { name: "apple-mobile-web-app-title", content: "OOO" },
+      { name: "application-name", content: "OOO Performance" },
       { title: "OOO Performance — Elite Basketball Development" },
       { name: "description", content: "OOO Performance — elite basketball development built by NBA Veteran Ben Gordon. Training, apparel, media, and community for athletes building something that lasts." },
       { name: "author", content: "Ben Gordon" },
@@ -108,6 +116,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
+      { rel: "manifest", href: "/manifest.webmanifest" },
+      { rel: "apple-touch-icon", href: "/icons/apple-touch-icon.png" },
+      { rel: "icon", type: "image/png", sizes: "32x32", href: "/icons/favicon-32.png" },
+      { rel: "icon", type: "image/png", sizes: "192x192", href: "/icons/icon-192.png" },
     ],
   }),
   shellComponent: RootShell,
@@ -133,6 +145,10 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  useEffect(() => {
+    registerServiceWorker();
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <CartProvider>
@@ -147,6 +163,7 @@ function RootComponent() {
         </div>
         <CartDrawer />
         <Toaster />
+        <InstallPrompt />
       </CartProvider>
     </QueryClientProvider>
   );
