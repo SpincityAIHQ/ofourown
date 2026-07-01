@@ -33,9 +33,9 @@ export type Program = {
 export const EVALUATION = {
   name: "Free Evaluation",
   priceLabel: "Free",
-  frequency: "1 per day",
-  capacity: "Cap 6",
-  note: "Resume-exempt. The free evaluation is the only entry point to training.",
+  frequency: "",
+  capacity: "",
+  note: "The free evaluation is the only entry point to training.",
 } as const;
 
 export const PROGRAMS: Program[] = [
@@ -129,7 +129,7 @@ export const PRICING_SUMMARY: SummaryRow[] = [
     option: "Free",
     price: "Free",
     perSession: "—",
-    details: "1 per day · cap 6 · resume-exempt",
+    details: "The only entry point to training",
   },
   ...PROGRAMS.flatMap((p) =>
     p.tiers.map((t) => ({

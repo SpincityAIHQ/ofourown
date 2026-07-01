@@ -42,9 +42,6 @@ function EvaluationPage() {
           </p>
           <div className="mx-auto mt-8 flex flex-wrap justify-center gap-x-8 gap-y-2 text-sm uppercase tracking-[0.15em] text-muted-foreground">
             <span>Free</span>
-            <span>1 per day</span>
-            <span>Cap 6</span>
-            <span>Resume-exempt</span>
           </div>
         </div>
       </section>

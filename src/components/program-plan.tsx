@@ -171,9 +171,6 @@ export function ProgramPlan({ withSummary = true }: { withSummary?: boolean }) {
               </p>
               <div className="mt-8 flex flex-wrap gap-x-8 gap-y-2 text-sm uppercase tracking-[0.15em] text-background/80">
                 <span>{EVALUATION.priceLabel}</span>
-                <span>{EVALUATION.frequency}</span>
-                <span>{EVALUATION.capacity}</span>
-                <span>Resume-exempt</span>
               </div>
             </div>
             <div className="md:col-span-5 md:text-right">
