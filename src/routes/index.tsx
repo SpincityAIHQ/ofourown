@@ -37,10 +37,10 @@ const VALUE_PROPS = [
 ] as const;
 
 const CREDENTIALS = [
-  { value: "11-Year", label: "NBA Career" },
+  { value: "12-Year", label: "NBA Veteran" },
   { value: "Sixth Man", label: "of the Year" },
-  { value: "NCAA", label: "Champion" },
-  { value: "Pro", label: "Development System" },
+  { value: "NCAA", label: "National Champion" },
+  { value: "5 Seasons", label: "Chicago Bulls" },
 ] as const;
 
 const CRED_PHOTOS = [
@@ -61,10 +61,10 @@ const BUILD = [
 ] as const;
 
 const PROGRAMS = [
-  { age: "Ages 6–10", name: "Youth Development", focus: "Fundamentals", hash: "#youth", key: "youth", apex: false },
-  { age: "Ages 11–14", name: "Elite Academy", focus: "Skill Development", hash: "#academy", key: "academy", apex: false },
-  { age: "Ages 15–18", name: "High School Elite", focus: "Position Training", hash: "#highschool", key: "highschool", apex: false },
-  { age: "Invite Only", name: "College / Pro", focus: "Pro Preparation", hash: "#collegepro", key: "collegepro", apex: true },
+  { name: "Group Training", focus: "Up to 10 players · 1 hr", from: "From $70/session", key: "group", apex: false },
+  { name: "Private Training", focus: "1-on-1 · 1 hr · ages 10+", from: "From $250/session", key: "private", apex: false },
+  { name: "Private Plus", focus: "1-on-1 · 90 min · skills + performance", from: "From $400/session", key: "private-plus", apex: true },
+  { name: "One-Day Camp", focus: "3 hrs · Ben + team", from: "$200/child", key: "camp", apex: false },
 ] as const;
 
 const ECOSYSTEM = [
@@ -110,7 +110,7 @@ function Index() {
             Elite Basketball Development.
           </h1>
           <p className="mt-4 font-display text-2xl text-background/90 md:text-4xl">
-            Built by NBA Veteran Ben Gordon.
+            Built by 12-Year NBA Veteran Ben Gordon.
           </p>
           <p className="mt-6 max-w-xl text-lg text-background/70 md:text-xl">
             Developing complete players from youth through professional.
@@ -120,7 +120,7 @@ function Index() {
               to="/evaluation"
               className="inline-flex h-12 items-center gap-2 bg-background px-6 text-sm uppercase tracking-wider text-foreground transition hover:opacity-90"
             >
-              Book Evaluation <ArrowRight className="h-4 w-4" />
+              Book Your Free Evaluation <ArrowRight className="h-4 w-4" />
             </Link>
             <a
               href="#programs"
@@ -154,12 +154,15 @@ function Index() {
         <FadeIn>
           <Eyebrow>The Standard</Eyebrow>
           <h2 className="max-w-3xl font-display text-4xl font-semibold leading-tight md:text-6xl">
-            Train under the philosophy of NBA veteran Ben Gordon.
+            Train under the philosophy of Ben Gordon.
           </h2>
+          <p className="mt-6 text-sm uppercase tracking-[0.2em] text-muted-foreground">
+            12-Year NBA Veteran · NBA Sixth Man of the Year · NCAA National Champion.
+          </p>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-            An 11-year NBA guard, NCAA champion, and NBA Sixth Man of the Year —
-            Ben built a professional development system and now puts it to work
-            for the next generation of players.
+            Across five seasons with the Chicago Bulls and a full NBA career, Ben
+            built a professional development system — and now puts it to work for
+            the next generation of players.
           </p>
         </FadeIn>
         <FadeIn delay={0.1}>
@@ -225,13 +228,16 @@ function Index() {
           <FadeIn>
             <Eyebrow>Programs</Eyebrow>
             <h2 className="font-display text-4xl font-semibold md:text-6xl">Find your level.</h2>
+            <p className="mt-4 max-w-2xl text-muted-foreground">
+              Package-only development. Start with a free evaluation — we place
+              players by skill, not age.
+            </p>
           </FadeIn>
           <div className="mt-12 grid gap-px bg-border md:grid-cols-2 lg:grid-cols-4">
             {PROGRAMS.map((p, i) => (
               <FadeIn key={p.name} delay={(i % 4) * 0.04}>
                 <Link
-                  to="/training"
-                  hash={p.hash.slice(1)}
+                  to="/programs"
                   className={`group flex h-full flex-col justify-between gap-10 p-8 transition ${
                     p.apex
                       ? "bg-foreground text-background hover:opacity-90"
@@ -239,16 +245,17 @@ function Index() {
                   }`}
                 >
                   <div>
-                    <span
-                      className={`inline-block border px-3 py-1 text-[10px] uppercase tracking-[0.2em] ${
-                        p.apex ? "border-background/50 text-background/80" : "border-border text-muted-foreground"
-                      }`}
-                    >
-                      {p.age}
-                    </span>
-                    <h3 className="mt-6 font-display text-2xl font-semibold">{p.name}</h3>
+                    {p.apex ? (
+                      <span className="inline-block border border-background/50 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-background/80">
+                        Flagship
+                      </span>
+                    ) : null}
+                    <h3 className={`font-display text-2xl font-semibold ${p.apex ? "mt-6" : ""}`}>{p.name}</h3>
                     <p className={`mt-2 text-sm ${p.apex ? "text-background/70" : "text-muted-foreground"}`}>
                       {p.focus}
+                    </p>
+                    <p className={`mt-4 text-sm uppercase tracking-[0.15em] ${p.apex ? "text-background/90" : "text-foreground"}`}>
+                      {p.from}
                     </p>
                   </div>
                   <div className="flex items-center justify-between">
@@ -265,13 +272,13 @@ function Index() {
           <FadeIn delay={0.1}>
             <div className="mt-10 flex flex-col items-start gap-4 border-t border-border pt-8 md:flex-row md:items-center md:justify-between">
               <p className="text-muted-foreground">
-                Not sure which fits? Book an evaluation and we'll place your athlete.
+                Not sure which fits? Book a free evaluation and we'll place your athlete.
               </p>
               <Link
                 to="/evaluation"
                 className="inline-flex h-12 items-center gap-2 bg-foreground px-6 text-sm uppercase tracking-wider text-background transition hover:opacity-90"
               >
-                Book Evaluation <ArrowRight className="h-4 w-4" />
+                Book Your Free Evaluation <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </FadeIn>

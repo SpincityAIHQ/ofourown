@@ -15,7 +15,7 @@ export type CapacityStatus = "enrolling" | "few" | "invite" | "closed";
 
 export type Capacity = {
   program: string;
-  /** Key matching a program tier (youth, academy, highschool, collegepro) or page slug. */
+  /** Key matching a program (group, private, private-plus, camp) or page slug. */
   key: string;
   season: string;
   spotsRemaining: number;
@@ -25,40 +25,40 @@ export type Capacity = {
 
 export const CAPACITY: Capacity[] = [
   {
-    program: "Youth Development",
-    key: "youth",
-    season: "Current session",
-    spotsRemaining: 0,
-    totalSpots: 0,
-    status: "enrolling",
-  },
-  {
-    program: "Elite Academy",
-    key: "academy",
-    season: "Current session",
-    spotsRemaining: 0,
-    totalSpots: 0,
-    status: "enrolling",
-  },
-  {
-    program: "High School Elite",
-    key: "highschool",
-    season: "Current session",
-    spotsRemaining: 0,
-    totalSpots: 0,
-    status: "enrolling",
-  },
-  {
-    program: "College / Pro",
-    key: "collegepro",
-    season: "Current session",
-    spotsRemaining: 0,
-    totalSpots: 0,
-    status: "invite",
-  },
-  {
-    program: "Evaluation",
+    program: "Free Evaluation",
     key: "evaluation",
+    season: "Current session",
+    spotsRemaining: 0,
+    totalSpots: 0,
+    status: "enrolling",
+  },
+  {
+    program: "Group Training",
+    key: "group",
+    season: "Current session",
+    spotsRemaining: 0,
+    totalSpots: 0,
+    status: "enrolling",
+  },
+  {
+    program: "Private Training",
+    key: "private",
+    season: "Current session",
+    spotsRemaining: 0,
+    totalSpots: 0,
+    status: "enrolling",
+  },
+  {
+    program: "Private Plus",
+    key: "private-plus",
+    season: "Current session",
+    spotsRemaining: 0,
+    totalSpots: 0,
+    status: "enrolling",
+  },
+  {
+    program: "One-Day Camp",
+    key: "camp",
     season: "Current session",
     spotsRemaining: 0,
     totalSpots: 0,

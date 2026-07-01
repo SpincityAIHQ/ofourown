@@ -80,10 +80,10 @@ function AboutPage() {
         </FadeIn>
         <FadeIn delay={0.1}>
           <div className="mt-10 grid grid-cols-2 border border-border md:grid-cols-4">
-            <Stat value="11" label="NBA seasons" />
+            <Stat value="12-Year" label="NBA Veteran" />
             <Stat value="6th Man" label="of the Year, 2004–05" />
-            <Stat value="2004" label="UConn national champion" />
-            <Stat value="#3 overall" label="2004 NBA Draft pick" />
+            <Stat value="NCAA" label="National Champion (UConn, 2004)" />
+            <Stat value="5 Seasons" label="Chicago Bulls" />
           </div>
         </FadeIn>
       </Section>
