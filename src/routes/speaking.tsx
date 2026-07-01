@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero, Section, Eyebrow } from "@/components/section";
-import { FadeIn, MediaSlot, VideoEmbed, TestimonialRow } from "@/components/media";
+import { FadeIn, VideoEmbed, TestimonialRow } from "@/components/media";
 import { SpeakingInquiryForm } from "@/components/speaking-inquiry-form";
 import speakingReel from "@/assets/speaking-reel.jpg";
 
