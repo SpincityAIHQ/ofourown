@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { createClient } from "@supabase/supabase-js";
 import { z } from "zod";
+import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import type { Database } from "@/integrations/supabase/types";
 import {
   createStripeClient,
@@ -28,6 +29,11 @@ const cartInputSchema = z.object({
     )
     .min(1)
     .max(50),
+  returnUrl: z.string().url(),
+  environment: envSchema,
+});
+
+const membershipInputSchema = z.object({
   returnUrl: z.string().url(),
   environment: envSchema,
 });
