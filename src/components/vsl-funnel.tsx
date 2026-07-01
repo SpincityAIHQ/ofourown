@@ -235,6 +235,7 @@ export function FunnelGate({
             <Check className="h-4 w-4" /> Email confirmed — scroll for the next step
           </div>
         ) : (
+          <>
           <form onSubmit={onSubmit} className="mt-10 flex w-full max-w-xl gap-2">
             <Input
               type="email"
@@ -252,6 +253,19 @@ export function FunnelGate({
               {loading ? "..." : ctaLabel}
             </Button>
           </form>
+          <button
+            type="button"
+            onClick={() => {
+              setUnlocked(true);
+              setTimeout(() => {
+                document.getElementById(`${id}-next`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }, 80);
+            }}
+            className="mt-4 text-xs uppercase tracking-[0.2em] text-background/60 underline underline-offset-4 hover:text-background"
+          >
+            Skip — go straight to the form
+          </button>
+          </>
         )}
 
         <div
