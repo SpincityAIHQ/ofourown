@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { PageHero, Section, Eyebrow } from "@/components/section";
 import { EmailCapture } from "@/components/email-capture";
-import { FadeIn, MediaSlot, VideoEmbed } from "@/components/media";
+import { FadeIn, MediaSlot } from "@/components/media";
 import { SKOOL_URL } from "@/lib/config";
 import communityPhoto from "@/assets/community-photo.jpg";
 
