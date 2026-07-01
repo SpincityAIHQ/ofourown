@@ -7,6 +7,81 @@ import { sendInternalTransactionalEmail } from "@/lib/email/send-internal.server
 // booking_request so Ben can follow up to schedule.
 const SERVICE_SLUGS = new Set(["coaching-call"]);
 
+type StripeSubscription = {
+  id: string;
+  customer: string;
+  status: string;
+  cancel_at_period_end?: boolean;
+  current_period_start?: number | null;
+  current_period_end?: number | null;
+  metadata?: { userId?: string } | null;
+  items?: {
+    data?: Array<{
+      current_period_start?: number | null;
+      current_period_end?: number | null;
+      price?: {
+        id?: string;
+        lookup_key?: string | null;
+        product?: string;
+        metadata?: { lovable_external_id?: string } | null;
+      };
+    }>;
+  };
+};
+
+async function handleSubscription(
+  type: string,
+  subRaw: Record<string, unknown>,
+  env: StripeEnv,
+) {
+  const sub = subRaw as unknown as StripeSubscription;
+  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+
+  if (type === "customer.subscription.deleted") {
+    await supabaseAdmin
+      .from("subscriptions")
+      .update({ status: "canceled", updated_at: new Date().toISOString() })
+      .eq("stripe_subscription_id", sub.id)
+      .eq("environment", env);
+    return;
+  }
+
+  const userId = sub.metadata?.userId;
+  if (!userId) {
+    console.error("[stripe-webhook] subscription without userId metadata", sub.id);
+    return;
+  }
+
+  const item = sub.items?.data?.[0];
+  const priceId =
+    item?.price?.lookup_key ||
+    item?.price?.metadata?.lovable_external_id ||
+    item?.price?.id ||
+    "";
+  const productId = (item?.price?.product as string) || "";
+  const periodStart = item?.current_period_start ?? sub.current_period_start ?? null;
+  const periodEnd = item?.current_period_end ?? sub.current_period_end ?? null;
+
+  const row = {
+    user_id: userId,
+    stripe_subscription_id: sub.id,
+    stripe_customer_id: sub.customer,
+    product_id: productId,
+    price_id: priceId,
+    status: sub.status,
+    current_period_start: periodStart ? new Date(periodStart * 1000).toISOString() : null,
+    current_period_end: periodEnd ? new Date(periodEnd * 1000).toISOString() : null,
+    cancel_at_period_end: sub.cancel_at_period_end ?? false,
+    environment: env,
+    updated_at: new Date().toISOString(),
+  };
+
+  const { error } = await supabaseAdmin
+    .from("subscriptions")
+    .upsert(row, { onConflict: "stripe_subscription_id" });
+  if (error) console.error("[stripe-webhook] subscription upsert error", error);
+}
+
 function formatMoney(
   amountCents: number | null | undefined,
   currency: string | null | undefined,
@@ -39,6 +114,14 @@ export const Route = createFileRoute("/api/public/stripe-webhook")({
         }
 
         if (event.type !== "checkout.session.completed") {
+          if (
+            event.type === "customer.subscription.created" ||
+            event.type === "customer.subscription.updated" ||
+            event.type === "customer.subscription.deleted"
+          ) {
+            await handleSubscription(event.type, event.data.object, env);
+            return new Response("ok", { status: 200 });
+          }
           return new Response("ignored", { status: 200 });
         }
 
