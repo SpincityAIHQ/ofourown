@@ -1,46 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { createHmac, timingSafeEqual } from "crypto";
-
-function verifyStripeSignature(payload: string, header: string, secret: string): boolean {
-  // header is e.g. "t=12345,v1=hex,v1=hex"
-  const parts = Object.fromEntries(
-    header.split(",").map((kv) => {
-      const [k, ...rest] = kv.split("=");
-      return [k, rest.join("=")];
-    }),
-  );
-  const timestamp = parts["t"];
-  const signature = parts["v1"];
-  if (!timestamp || !signature) return false;
-  const signedPayload = `${timestamp}.${payload}`;
-  const expected = createHmac("sha256", secret).update(signedPayload).digest("hex");
-  const sig = Buffer.from(signature, "hex");
-  const exp = Buffer.from(expected, "hex");
-  if (sig.length !== exp.length) return false;
-  return timingSafeEqual(sig, exp);
-}
+import { verifyWebhook, type StripeEnv } from "@/lib/stripe.server";
 
 export const Route = createFileRoute("/api/public/stripe-webhook")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const secret = process.env.STRIPE_WEBHOOK_SECRET;
-        if (!secret) {
-          return new Response("Webhook secret not configured", { status: 500 });
-        }
-        const sigHeader = request.headers.get("stripe-signature");
-        if (!sigHeader) return new Response("Missing signature", { status: 401 });
-
-        const rawBody = await request.text();
-        if (!verifyStripeSignature(rawBody, sigHeader, secret)) {
-          return new Response("Invalid signature", { status: 401 });
-        }
+        const url = new URL(request.url);
+        const envParam = (url.searchParams.get("env") ?? "sandbox") as StripeEnv;
+        const env: StripeEnv = envParam === "live" ? "live" : "sandbox";
 
         let event: { type: string; data: { object: Record<string, unknown> } };
         try {
-          event = JSON.parse(rawBody);
-        } catch {
-          return new Response("Bad JSON", { status: 400 });
+          event = await verifyWebhook(request, env);
+        } catch (err) {
+          console.error("[stripe-webhook] verify failed", err);
+          return new Response("Invalid signature", { status: 401 });
         }
 
         if (event.type !== "checkout.session.completed") {
