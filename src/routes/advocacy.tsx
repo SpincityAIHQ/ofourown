@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero, Section, Eyebrow } from "@/components/section";
-import { FadeIn, MediaSlot } from "@/components/media";
+import { FadeIn } from "@/components/media";
 
 export const Route = createFileRoute("/advocacy")({
   head: () => ({
