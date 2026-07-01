@@ -38,7 +38,7 @@ function BookPage() {
               <Eyebrow>About the book</Eyebrow>
               <h2 className="font-display text-4xl font-semibold md:text-5xl">The story behind the work.</h2>
               <p className="mt-4 text-lg text-muted-foreground">
-                Synopsis coming soon. The book will live in the shop once it's ready to ship; signed copies and special editions will be added there.
+                A long-form work on training, recovery, identity, and the long game — written from twelve years inside the league and the years since. The book will live in the shop when it ships, alongside signed copies and special editions.
               </p>
               <div className="mt-8">
                 <Link to="/shop" className="inline-flex h-12 items-center gap-2 bg-foreground px-6 text-sm uppercase tracking-wider text-background transition hover:opacity-90">
