@@ -5,13 +5,15 @@ export function Section({
   children,
   className,
   bleed = false,
+  id,
 }: {
   children: ReactNode;
   className?: string;
   bleed?: boolean;
+  id?: string;
 }) {
   return (
-    <section className={cn("py-20 md:py-28", className)}>
+    <section id={id} className={cn("py-20 md:py-28", className)}>
       <div className={cn(bleed ? "px-6" : "mx-auto max-w-6xl px-6")}>{children}</div>
     </section>
   );
