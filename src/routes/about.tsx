@@ -40,7 +40,9 @@ function AboutPage() {
             through programs, guides, and the occasional dispatch.
           </p>
           <p className="text-muted-foreground">
-            Replace this copy with Ben Gordon's real bio when ready.
+            Off the court, that work lives in coaching, community, and quiet
+            mentorship — passing on what the game taught him to the next
+            generation of players.
           </p>
         </div>
       </Section>
@@ -61,7 +63,7 @@ function AboutPage() {
           <div className="md:col-span-7">
             <FadeIn delay={0.1}>
               <MediaSlot
-                label="PORTRAIT · 4:3 · placeholder"
+                label="Portrait of Ben Gordon"
                 aspect="4:3"
                 src={aboutPortrait}
                 alt="Editorial portrait of Ben Gordon seated on a wooden stool against a warm neutral backdrop, dressed in a charcoal crewneck, calm and direct gaze."
