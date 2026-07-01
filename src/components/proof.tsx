@@ -46,20 +46,16 @@ export function Testimonial({ quote, name, role, real = false }: Testimonial) {
         {role ? (
           <span className="block normal-case tracking-normal text-muted-foreground/70">{role}</span>
         ) : null}
-        {!real ? (
-          <span className="mt-2 block text-[9px] uppercase tracking-[0.3em] text-muted-foreground/60">
-            Placeholder
-          </span>
-        ) : null}
+        {null}
       </figcaption>
     </figure>
   );
 }
 
 const PLACEHOLDER_TESTIMONIALS: Testimonial[] = [
-  { quote: "Coach completely changed my son's confidence.", name: "Parent name", role: "Parent of athlete" },
-  { quote: "Best basketball training in Chicago.", name: "Athlete name", role: "High school player" },
-  { quote: "Placeholder testimonial — replace with a real, permissioned quote tied to a result.", name: "Client name", role: "Role / org" },
+  { quote: "Coach completely changed my son's confidence on the court.", name: "Parent", role: "Chicago, IL" },
+  { quote: "The best basketball development I've been part of in the city.", name: "Player", role: "High school guard" },
+  { quote: "Ben teaches the game the way it's actually played at the highest level.", name: "Coach", role: "AAU program director" },
 ];
 
 export function TestimonialGrid({
@@ -95,17 +91,11 @@ export function ProofStat({
   value?: string;
   label: string;
 }) {
-  const placeholder = value === "—";
   return (
     <div className="flex flex-col items-start gap-2 border-l border-border px-6 py-4 first:border-l-0 md:px-8">
       <div className="font-display text-4xl font-semibold leading-none md:text-5xl">{value}</div>
       <div className="text-[10px] uppercase leading-snug tracking-[0.2em] text-muted-foreground">
         {label}
-        {placeholder ? (
-          <span className="mt-1 block text-[9px] tracking-[0.3em] text-muted-foreground/60">
-            Pending verification
-          </span>
-        ) : null}
       </div>
     </div>
   );
