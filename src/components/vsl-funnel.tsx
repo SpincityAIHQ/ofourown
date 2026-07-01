@@ -61,9 +61,6 @@ export function VSLHero({
             <div className="relative z-10 grid h-20 w-20 place-items-center rounded-full border border-background/40 bg-black/20 transition group-hover:scale-110 md:h-24 md:w-24">
               <Play className="h-8 w-8 translate-x-0.5 fill-background" />
             </div>
-            <span className="absolute bottom-4 right-4 z-10 text-[10px] uppercase tracking-[0.2em] text-background/75">
-              Video coming soon
-            </span>
           </button>
         </div>
         <div className="mt-8 flex justify-center">
