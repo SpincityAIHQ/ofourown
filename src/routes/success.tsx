@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { Section, Eyebrow } from "@/components/section";
+import { useCart } from "@/lib/cart";
 
 export const Route = createFileRoute("/success")({
   head: () => ({
@@ -13,6 +15,10 @@ export const Route = createFileRoute("/success")({
 });
 
 function SuccessPage() {
+  const { clear } = useCart();
+  useEffect(() => {
+    clear();
+  }, [clear]);
   return (
     <Section>
       <div className="mx-auto max-w-xl text-center">
