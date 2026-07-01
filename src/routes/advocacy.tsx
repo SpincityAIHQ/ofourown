@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero, Section, Eyebrow } from "@/components/section";
-import { FadeIn, MediaSlot } from "@/components/media";
+import { FadeIn } from "@/components/media";
 
 export const Route = createFileRoute("/advocacy")({
   head: () => ({
@@ -43,20 +43,6 @@ function AdvocacyPage() {
             </FadeIn>
           ))}
         </div>
-      </Section>
-      <Section className="border-b border-border">
-        <FadeIn>
-          <Eyebrow>Press & features</Eyebrow>
-          <h2 className="font-display text-4xl font-semibold md:text-5xl">Where the work has shown up.</h2>
-          <p className="mt-4 max-w-2xl text-muted-foreground">
-            Press logos and links will populate here as features clear.
-          </p>
-        </FadeIn>
-        <FadeIn delay={0.1}>
-          <div className="mt-10 grid grid-cols-2 gap-px bg-border sm:grid-cols-3 md:grid-cols-6">
-            {Array.from({ length: 6 }).map((_, i) => (<MediaSlot key={i} label={`PRESS ${i + 1}`} aspect="1:1" />))}
-          </div>
-        </FadeIn>
       </Section>
       <Section>
         <div className="border border-foreground p-8 md:p-12">

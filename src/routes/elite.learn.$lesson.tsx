@@ -66,7 +66,7 @@ function LessonPage() {
         {l.video_url ? (
           <VideoEmbed label={l.title} url={l.video_url} aspect="16:9" />
         ) : (
-          <VideoEmbed label="COMING SOON · video in production" aspect="16:9" />
+          <VideoEmbed label={`${l.title} — releasing to OOO Elite members`} aspect="16:9" />
         )}
       </div>
 
