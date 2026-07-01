@@ -88,7 +88,7 @@ function CheckoutPage() {
                   </p>
                 </div>
                 <p className="text-sm tabular-nums">
-                  {formatPrice(item.price_cents * item.quantity, item.currency)}
+                  {formatPrice((item.price_cents ?? 0) * item.quantity, item.currency)}
                 </p>
               </li>
             ))}

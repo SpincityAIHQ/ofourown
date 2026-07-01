@@ -26,6 +26,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CommunityRouteImport } from './routes/community'
 import { Route as CollectionRouteImport } from './routes/collection'
 import { Route as CoachingRouteImport } from './routes/coaching'
+import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CancelRouteImport } from './routes/cancel'
 import { Route as BookRouteImport } from './routes/book'
 import { Route as AdvocacyRouteImport } from './routes/advocacy'
@@ -128,6 +129,11 @@ const CoachingRoute = CoachingRouteImport.update({
   path: '/coaching',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CancelRoute = CancelRouteImport.update({
   id: '/cancel',
   path: '/cancel',
@@ -218,6 +224,7 @@ export interface FileRoutesByFullPath {
   '/advocacy': typeof AdvocacyRoute
   '/book': typeof BookRoute
   '/cancel': typeof CancelRoute
+  '/checkout': typeof CheckoutRoute
   '/coaching': typeof CoachingRoute
   '/collection': typeof CollectionRoute
   '/community': typeof CommunityRoute
@@ -253,6 +260,7 @@ export interface FileRoutesByTo {
   '/advocacy': typeof AdvocacyRoute
   '/book': typeof BookRoute
   '/cancel': typeof CancelRoute
+  '/checkout': typeof CheckoutRoute
   '/coaching': typeof CoachingRoute
   '/collection': typeof CollectionRoute
   '/community': typeof CommunityRoute
@@ -289,6 +297,7 @@ export interface FileRoutesById {
   '/advocacy': typeof AdvocacyRoute
   '/book': typeof BookRoute
   '/cancel': typeof CancelRoute
+  '/checkout': typeof CheckoutRoute
   '/coaching': typeof CoachingRoute
   '/collection': typeof CollectionRoute
   '/community': typeof CommunityRoute
@@ -326,6 +335,7 @@ export interface FileRouteTypes {
     | '/advocacy'
     | '/book'
     | '/cancel'
+    | '/checkout'
     | '/coaching'
     | '/collection'
     | '/community'
@@ -361,6 +371,7 @@ export interface FileRouteTypes {
     | '/advocacy'
     | '/book'
     | '/cancel'
+    | '/checkout'
     | '/coaching'
     | '/collection'
     | '/community'
@@ -396,6 +407,7 @@ export interface FileRouteTypes {
     | '/advocacy'
     | '/book'
     | '/cancel'
+    | '/checkout'
     | '/coaching'
     | '/collection'
     | '/community'
@@ -432,6 +444,7 @@ export interface RootRouteChildren {
   AdvocacyRoute: typeof AdvocacyRoute
   BookRoute: typeof BookRoute
   CancelRoute: typeof CancelRoute
+  CheckoutRoute: typeof CheckoutRoute
   CoachingRoute: typeof CoachingRoute
   CollectionRoute: typeof CollectionRoute
   CommunityRoute: typeof CommunityRoute
@@ -582,6 +595,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoachingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/cancel': {
       id: '/cancel'
       path: '/cancel'
@@ -713,6 +733,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdvocacyRoute: AdvocacyRoute,
   BookRoute: BookRoute,
   CancelRoute: CancelRoute,
+  CheckoutRoute: CheckoutRoute,
   CoachingRoute: CoachingRoute,
   CollectionRoute: CollectionRoute,
   CommunityRoute: CommunityRoute,
