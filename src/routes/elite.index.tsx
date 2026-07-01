@@ -16,9 +16,9 @@ export const Route = createFileRoute("/elite/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(pillarsQuery),
   head: () => ({
     meta: [
-      { title: "NBA Elite — The Complete Athlete | OOO Performance" },
-      { name: "description", content: "NBA Elite: the complete-athlete membership from OOO Performance. Five pillars — Performance, Body, Mind, Wealth, Path — for $29.99/month, all-access." },
-      { property: "og:title", content: "NBA Elite — The Complete Athlete" },
+      { title: "OOO Elite — The Complete Athlete | OOO Performance" },
+      { name: "description", content: "OOO Elite: the complete-athlete membership from OOO Performance. Five pillars — Performance, Body, Mind, Wealth, Path — for $29.99/month, all-access." },
+      { property: "og:title", content: "OOO Elite — The Complete Athlete" },
       { property: "og:description", content: "The complete-athlete membership. Five pillars, all-access, $29.99/month." },
       { property: "og:url", content: `${SITE_ORIGIN}/elite` },
       { name: "twitter:card", content: "summary" },
@@ -45,7 +45,7 @@ function ElitePage() {
       <section className="border-b border-border bg-foreground text-background">
         <div className="mx-auto max-w-6xl px-6 py-24 md:py-36">
           <p className="font-display text-sm uppercase tracking-[0.4em] text-background/60">
-            NBA Elite
+            OOO Elite
           </p>
           <h1 className="mt-6 font-display text-6xl font-semibold leading-[0.95] tracking-tight md:text-8xl">
             The Complete Athlete.
@@ -64,7 +64,7 @@ function ElitePage() {
               to="/elite/learn"
               className="inline-flex h-12 items-center gap-2 bg-background px-6 text-sm uppercase tracking-wider text-foreground transition hover:opacity-90"
             >
-              Join NBA Elite <ArrowRight className="h-4 w-4" />
+              Join OOO Elite <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
           <p className="mt-6 text-xs uppercase tracking-[0.2em] text-background/50">
@@ -157,7 +157,7 @@ function ElitePage() {
               to="/elite/learn"
               className="inline-flex h-12 items-center gap-2 bg-background px-6 text-sm uppercase tracking-wider text-foreground transition hover:opacity-90"
             >
-              Join NBA Elite — $29.99/mo <ArrowRight className="h-4 w-4" />
+              Join OOO Elite — $29.99/mo <ArrowRight className="h-4 w-4" />
             </Link>
             <Link to="/elite/learn" className="text-xs uppercase tracking-[0.2em] text-background/60 hover:text-background">
               Browse the academy

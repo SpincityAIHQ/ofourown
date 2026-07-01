@@ -7,7 +7,7 @@ const COLUMNS = [
     links: [
       { to: "/training", label: "Training" },
       { to: "/programs", label: "Programs & Pricing" },
-      { to: "/elite", label: "NBA Elite (membership)" },
+      { to: "/elite", label: "OOO Elite (membership)" },
       { to: "/philosophy", label: "Philosophy" },
       { to: "/evaluation", label: "Book Free Evaluation" },
       { to: "/fst", label: "Fascia Stretch Therapy" },
