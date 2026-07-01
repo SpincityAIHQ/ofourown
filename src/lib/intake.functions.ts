@@ -17,23 +17,29 @@ function getServerClient() {
   );
 }
 
-async function notify(subject: string, html: string) {
-  const apiKey = process.env.RESEND_API_KEY;
+async function notify(
+  subject: string,
+  heading: string,
+  lines: Array<{ label: string; value: string }>,
+  body?: string,
+) {
   const to = process.env.NOTIFY_EMAIL;
-  if (!apiKey || !to) return;
+  if (!to) return;
   try {
-    await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: "BenGordon.com <noreply@bengordon.com>",
-        to,
+    const { sendInternalTransactionalEmail } = await import(
+      "@/lib/email/send-internal.server"
+    );
+    await sendInternalTransactionalEmail({
+      templateName: "internal-notification",
+      recipientEmail: to,
+      idempotencyKey: `notify-${subject}-${Date.now()}`,
+      templateData: {
         subject,
-        html,
-      }),
+        heading,
+        submittedAt: new Date().toUTCString(),
+        lines,
+        body,
+      },
     });
   } catch (err) {
     console.error("[notify] failed", err);
@@ -63,8 +69,11 @@ export const submitLead = createServerFn({ method: "POST" })
     }
     await notify(
       `New lead — ${data.email}`,
-      `<p>New email signup: <strong>${data.email}</strong></p>
-       <p><strong>Source:</strong> ${data.source ?? "website"}</p>`,
+      `New email signup`,
+      [
+        { label: "Email", value: data.email },
+        { label: "Source", value: data.source ?? "website" },
+      ],
     );
     return { ok: true };
   });
@@ -147,8 +156,13 @@ export const submitInquiry = createServerFn({ method: "POST" })
     }
     await notify(
       `New inquiry (${data.reason}) — ${data.name}`,
-      `<p><strong>${data.name}</strong> (${data.email}) — ${data.reason}</p>
-       <p>${data.message.replace(/\n/g, "<br>")}</p>`,
+      `New inquiry from ${data.name}`,
+      [
+        { label: "Name", value: data.name },
+        { label: "Email", value: data.email },
+        { label: "Reason", value: data.reason },
+      ],
+      data.message,
     );
     return { ok: true };
   });
@@ -177,12 +191,17 @@ export const submitSpeakingInquiry = createServerFn({ method: "POST" })
     }
     await notify(
       `New speaking inquiry — ${data.name}`,
-      `<p><strong>${data.name}</strong> (${data.email}) — ${data.organization ?? "—"}</p>
-       <p><strong>Engagement:</strong> ${data.engagement_type ?? "—"}</p>
-       <p><strong>Event date:</strong> ${data.event_date ?? "—"}</p>
-       <p><strong>Audience size:</strong> ${data.audience_size ?? "—"}</p>
-       <p><strong>Budget:</strong> ${data.budget_range ?? "—"}</p>
-       <p><strong>Message:</strong><br>${(data.message ?? "—").replace(/\n/g, "<br>")}</p>`,
+      `New speaking inquiry from ${data.name}`,
+      [
+        { label: "Name", value: data.name },
+        { label: "Email", value: data.email },
+        { label: "Organization", value: data.organization ?? "—" },
+        { label: "Engagement", value: data.engagement_type ?? "—" },
+        { label: "Event date", value: data.event_date ?? "—" },
+        { label: "Audience size", value: data.audience_size ?? "—" },
+        { label: "Budget", value: data.budget_range ?? "—" },
+      ],
+      data.message ?? undefined,
     );
     return { ok: true };
   });
