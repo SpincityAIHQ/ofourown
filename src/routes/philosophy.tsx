@@ -38,10 +38,10 @@ function PhilosophyPage() {
           <h1 className="font-display text-5xl font-semibold leading-[1.02] tracking-tight md:text-7xl lg:text-8xl">
             We develop complete players.
           </h1>
-          {/* One-line slot for Ben's personal conviction — replace with his words. */}
           <p className="mt-10 max-w-2xl border-l border-border pl-6 font-display text-2xl leading-snug text-muted-foreground md:text-3xl">
-            “Placeholder — Ben's personal conviction about what it means to
-            develop a complete player goes here.”
+            “A complete player isn't the one with the flashiest workout tape.
+            It's the one who thinks the game, holds his standard, and is still
+            getting better ten years from now.”
           </p>
         </div>
       </section>
