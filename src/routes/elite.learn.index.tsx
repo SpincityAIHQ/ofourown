@@ -16,9 +16,9 @@ export const Route = createFileRoute("/elite/learn/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(pillarsQuery),
   head: () => ({
     meta: [
-      { title: "NBA Elite Academy — OOO Performance" },
-      { name: "description", content: "Browse the NBA Elite academy — five pillars of complete-athlete development across performance, body, mind, wealth, and path." },
-      { property: "og:title", content: "NBA Elite Academy" },
+      { title: "OOO Elite Academy — OOO Performance" },
+      { name: "description", content: "Browse the OOO Elite academy — five pillars of complete-athlete development across performance, body, mind, wealth, and path." },
+      { property: "og:title", content: "OOO Elite Academy" },
       { property: "og:description", content: "Five pillars of complete-athlete development." },
       { property: "og:url", content: `${SITE_ORIGIN}/elite/learn` },
       { name: "twitter:card", content: "summary" },
@@ -71,7 +71,7 @@ function LearnPage() {
     <>
       <section className="border-b border-border bg-foreground text-background">
         <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
-          <p className="font-display text-sm uppercase tracking-[0.4em] text-background/60">NBA Elite</p>
+          <p className="font-display text-sm uppercase tracking-[0.4em] text-background/60">OOO Elite</p>
           <h1 className="mt-4 font-display text-4xl font-semibold leading-tight tracking-tight md:text-6xl">
             The Academy.
           </h1>
@@ -140,7 +140,7 @@ function LearnPage() {
             to="/elite"
             className="inline-flex h-12 items-center gap-2 bg-foreground px-6 text-sm uppercase tracking-wider text-background transition hover:opacity-90"
           >
-            Join NBA Elite <ArrowRight className="h-4 w-4" />
+            Join OOO Elite <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </div>

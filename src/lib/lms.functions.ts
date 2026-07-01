@@ -4,7 +4,7 @@ import { z } from "zod";
 import type { Database } from "@/integrations/supabase/types";
 
 /**
- * NBA Elite LMS — read-only content layer (Phase B).
+ * OOO Elite LMS — read-only content layer (Phase B).
  *
  * Content is public this phase. Membership gating lands in Phase C: it happens
  * HERE (see canAccessLesson + getLessonBySlug), never in the components, so

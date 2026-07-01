@@ -21,7 +21,7 @@ const NAV: Item[] = [
     ],
   },
   { to: "/speaking", label: "Media" },
-  { to: "/elite", label: "NBA Elite" },
+  { to: "/elite", label: "OOO Elite" },
   {
     label: "Shop",
     children: [

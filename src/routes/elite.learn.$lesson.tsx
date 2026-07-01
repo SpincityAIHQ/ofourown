@@ -22,13 +22,13 @@ export const Route = createFileRoute("/elite/learn/$lesson")({
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [
-          { title: `${loaderData.lesson.title} — NBA Elite | OOO Performance` },
-          { name: "description", content: loaderData.lesson.description ?? `${loaderData.course.title} · ${loaderData.pillar.title} — NBA Elite academy lesson.` },
-          { property: "og:title", content: `${loaderData.lesson.title} — NBA Elite` },
+          { title: `${loaderData.lesson.title} — OOO Elite | OOO Performance` },
+          { name: "description", content: loaderData.lesson.description ?? `${loaderData.course.title} · ${loaderData.pillar.title} — OOO Elite academy lesson.` },
+          { property: "og:title", content: `${loaderData.lesson.title} — OOO Elite` },
           { property: "og:url", content: `${SITE_ORIGIN}/elite/learn/${loaderData.lesson.slug}` },
           { name: "twitter:card", content: "summary" },
         ]
-      : [{ title: "Lesson — NBA Elite | OOO Performance" }],
+      : [{ title: "Lesson — OOO Elite | OOO Performance" }],
   }),
   component: LessonPage,
   notFoundComponent: () => (
@@ -77,7 +77,7 @@ function LessonPage() {
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">{l.description}</p>
         ) : (
           <p className="mt-6 max-w-2xl text-muted-foreground">
-            Lesson content is in production. Join NBA Elite to get it the moment it drops.
+            Lesson content is in production. Join OOO Elite to get it the moment it drops.
           </p>
         )}
 
