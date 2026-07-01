@@ -32,11 +32,13 @@ function FSTPage() {
         eyebrow="Fascia Stretch Therapy"
         title="Move better. Recover faster. Hurt less."
         lede="Private FST sessions for athletes and everyday people — to restore range, calm the nervous system, and get out of pain."
+        primaryCta={{ label: "Book a session", href: "#book" }}
+        secondaryCta={{ label: "See what it is", href: "#what" }}
       />
 
       <SpotsBanner programKey="evaluation" message="Limited in-person FST availability — reserve your session" />
 
-      <Section className="border-b border-border">
+      <Section id="what" className="border-b border-border scroll-mt-20">
         <div className="grid gap-12 md:grid-cols-12 md:items-center">
           <div className="md:col-span-5">
             <FadeIn>
@@ -103,7 +105,7 @@ function FSTPage() {
         <div className="mt-10"><FadeIn delay={0.05}><TestimonialGrid /></FadeIn></div>
       </Section>
 
-      <Section>
+      <Section id="book" className="scroll-mt-20">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
             <FadeIn>
