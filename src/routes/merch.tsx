@@ -1,22 +1,35 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { ArrowRight } from "lucide-react";
 import { PageHero, Section, Eyebrow } from "@/components/section";
-import { FadeIn, MediaSlot } from "@/components/media";
-import merch1 from "@/assets/merch-1.jpg";
-import merch2 from "@/assets/merch-2.jpg";
-import merch3 from "@/assets/merch-3.jpg";
-import merch4 from "@/assets/merch-4.jpg";
-import merch5 from "@/assets/merch-5.jpg";
-import merch6 from "@/assets/merch-6.jpg";
+import { FadeIn } from "@/components/media";
+import { listProducts } from "@/lib/products.functions";
 
-const ITEMS = [
-  { name: "Signature tee", image: merch1, alt: "OfOurOwn signature tee in soft black cotton, folded on a neutral linen backdrop with the embroidered OOO mark visible." },
-  { name: "Black cap", image: merch2, alt: "OfOurOwn six-panel black cap with low-profile crown and tonal OOO embroidery, shot from a three-quarter angle." },
-  { name: "Heavyweight hoodie", image: merch3, alt: "OfOurOwn heavyweight pullover hoodie in washed charcoal, laid flat under warm window light." },
-  { name: "Insulated bottle", image: merch4, alt: "OfOurOwn insulated steel water bottle in matte black with subtle OOO wordmark, standing on a stone surface." },
-  { name: "Training shorts", image: merch5, alt: "OfOurOwn training shorts in oat-toned technical fabric, folded next to a gym towel on a wooden bench." },
-  { name: "Gym towel", image: merch6, alt: "OfOurOwn ribbed cotton gym towel in walnut brown, rolled tight beside a kettlebell." },
-];
+const MERCH_SLUGS = new Set([
+  "ooo-jersey-8",
+  "ooo-tracksuit-ivory",
+  "ooo-track-jacket-onyx",
+  "ooo-hoodie-black-ivory",
+  "ooo-hoodie-ivory-black",
+  "ooo-hoodie-split-hood",
+  "ooo-fleece-track-jacket",
+  "ooo-fleece-snap-pullover",
+  "ooo-zip-sweatsuit-black",
+]);
+
+const productsQuery = queryOptions({
+  queryKey: ["products"],
+  queryFn: () => listProducts(),
+});
+
+function formatPrice(cents: number | null, currency: string) {
+  if (cents == null) return "—";
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: currency.toUpperCase(),
+    maximumFractionDigits: 0,
+  }).format(cents / 100);
+}
 
 export const Route = createFileRoute("/merch")({
   head: () => ({
@@ -27,10 +40,13 @@ export const Route = createFileRoute("/merch")({
       { property: "og:description", content: "Apparel and goods from OfOurOwn." },
     ],
   }),
+  loader: ({ context }) => context.queryClient.ensureQueryData(productsQuery),
   component: MerchPage,
 });
 
 function MerchPage() {
+  const { data: products } = useSuspenseQuery(productsQuery);
+  const merch = products.filter((p) => MERCH_SLUGS.has(p.slug));
   return (
     <>
       <PageHero
@@ -39,16 +55,40 @@ function MerchPage() {
         lede="Apparel and goods from OfOurOwn — quiet, well-made, built for everyday."
       />
       <Section className="border-b border-border">
-        <div className="grid gap-px bg-border md:grid-cols-3">
-          {ITEMS.map((item, i) => (
-            <FadeIn key={item.name} delay={(i % 3) * 0.04} className="bg-background">
-              <div className="flex h-full flex-col gap-4 p-6">
-                <MediaSlot label={`MERCH · product ${i + 1}`} aspect="1:1" src={item.image} alt={item.alt} />
-                <p className="text-sm text-muted-foreground">{item.name}</p>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
+        {merch.length === 0 ? (
+          <p className="text-muted-foreground">New pieces coming soon.</p>
+        ) : (
+          <div className="grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
+            {merch.map((p, i) => (
+              <FadeIn key={p.id} delay={(i % 3) * 0.04} className="bg-background">
+                <Link
+                  to="/shop/$slug"
+                  params={{ slug: p.slug }}
+                  className="group flex h-full flex-col gap-4 p-6"
+                >
+                  <div className="aspect-square w-full overflow-hidden border border-border bg-muted">
+                    {p.image_url ? (
+                      <img
+                        src={p.image_url}
+                        alt={p.tagline ? `${p.name} — ${p.tagline}` : p.name}
+                        loading="lazy"
+                        decoding="async"
+                        className="h-full w-full object-cover transition group-hover:opacity-90"
+                      />
+                    ) : null}
+                  </div>
+                  <div className="flex items-baseline justify-between gap-4">
+                    <p className="font-display text-xl font-semibold">{p.name}</p>
+                    <p className="text-sm text-muted-foreground">{formatPrice(p.price_cents, p.currency)}</p>
+                  </div>
+                  {p.tagline ? (
+                    <p className="text-sm text-muted-foreground">{p.tagline}</p>
+                  ) : null}
+                </Link>
+              </FadeIn>
+            ))}
+          </div>
+        )}
       </Section>
       <Section>
         <FadeIn>
