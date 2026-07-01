@@ -90,21 +90,16 @@ function CommunityPage() {
         </p>
       </Section>
 
-      {/* Photo + video */}
+      {/* Photo */}
       <Section className="border-b border-border">
-        <div className="grid gap-6 md:grid-cols-2">
-          <FadeIn>
-            <MediaSlot
-              label="OOO community"
-              aspect="4:3"
-              src={communityPhoto}
-              alt="Ben Gordon courtside in a community gym, leaning in to talk with a young player."
-            />
-          </FadeIn>
-          <FadeIn delay={0.05}>
-            <VideoEmbed label="INSIDE OOO · community film · 4:3" aspect="16:9" />
-          </FadeIn>
-        </div>
+        <FadeIn>
+          <MediaSlot
+            label="OOO community"
+            aspect="16:9"
+            src={communityPhoto}
+            alt="Ben Gordon courtside in a community gym, leaning in to talk with a young player."
+          />
+        </FadeIn>
       </Section>
 
       {/* Membership band */}
