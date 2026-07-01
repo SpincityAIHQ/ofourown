@@ -40,6 +40,8 @@ function CoachingPage() {
         nextLabel="See why most coaches miss"
         mediaSrc={coachingVslCover}
         mediaAlt="Ben Gordon mid-coaching on a quiet basketball court — whiteboard at his side, sleeves pushed up, walking a private client through a play in warm gym light."
+        primaryCta={{ label: "Apply now", href: "#cta" }}
+        secondaryCta={{ label: "See the offer", href: "#offer" }}
       />
 
       <SpotsBanner programKey="collegepro" message="A small roster by design — a few coaching slots open each year" />
