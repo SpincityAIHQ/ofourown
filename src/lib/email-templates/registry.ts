@@ -19,8 +19,10 @@ export interface TemplateEntry {
  */
 import { template as bookingConfirmation } from './booking-confirmation'
 import { template as orderConfirmation } from './order-confirmation'
+import { template as internalNotification } from './internal-notification'
 
 export const TEMPLATES: Record<string, TemplateEntry> = {
   'booking-confirmation': bookingConfirmation,
   'order-confirmation': orderConfirmation,
+  'internal-notification': internalNotification,
 }
