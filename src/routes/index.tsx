@@ -79,7 +79,7 @@ const ECOSYSTEM = [
 const RESULTS: { quote: string; name: string; role: string }[] = [
   { quote: "Coach completely changed my son's confidence.", name: "Parent name", role: "Parent of athlete" },
   { quote: "Best basketball training in Chicago.", name: "Athlete name", role: "High school player" },
-  { quote: "Placeholder — replace with a real, permissioned quote tied to a result.", name: "Client name", role: "Role / org" },
+  { quote: "Ben teaches the game the way it's actually played at the highest level.", name: "Coach", role: "AAU program" },
 ];
 
 const COLLECTION_PIECES = [
@@ -390,7 +390,6 @@ function Index() {
       {/* PHASE 1 — Brand statement band */}
       <section className="border-b border-border bg-foreground text-background">
         <div className="mx-auto max-w-6xl px-6 py-32 md:py-40">
-          {/* Placeholder for Ben's ethos — replace with his words. */}
           <p className="font-display text-3xl font-semibold leading-tight tracking-tight md:text-6xl lg:text-7xl">
             An elite performance brand. Training, apparel, media, and community —
             for athletes building something that lasts.

@@ -91,7 +91,7 @@ function FSTPage() {
               </p>
             </FadeIn>
           </div>
-          <div className="md:col-span-7"><FadeIn delay={0.1}><MediaSlot label="PHOTO · session · placeholder" aspect="4:3" src={fstSession} alt="Ben Gordon mid-session, seated on a stretch table working a hip-opener with controlled breath and quiet focus." /></FadeIn></div>
+          <div className="md:col-span-7"><FadeIn delay={0.1}><MediaSlot label="FST session with Ben Gordon" aspect="4:3" src={fstSession} alt="Ben Gordon mid-session, seated on a stretch table working a hip-opener with controlled breath and quiet focus." /></FadeIn></div>
         </div>
       </Section>
 

@@ -46,7 +46,7 @@ function SupplementsPage() {
               </div>
             </FadeIn>
           </div>
-          <div className="md:col-span-7"><FadeIn delay={0.1}><MediaSlot label="SUPPLEMENT · product · placeholder" aspect="4:3" src={supplementProduct} alt="OfOurOwn daily recovery supplement bottle in matte amber glass, lit by warm window light against a soft neutral backdrop." /></FadeIn></div>
+          <div className="md:col-span-7"><FadeIn delay={0.1}><MediaSlot label="OfOurOwn recovery supplement" aspect="4:3" src={supplementProduct} alt="OfOurOwn daily recovery supplement bottle in matte amber glass, lit by warm window light against a soft neutral backdrop." /></FadeIn></div>
         </div>
         <p className="mt-12 max-w-3xl border-t border-border pt-6 text-xs leading-relaxed text-muted-foreground/70">
           These statements have not been evaluated by the Food and Drug

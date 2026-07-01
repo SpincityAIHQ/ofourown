@@ -95,7 +95,7 @@ function CommunityPage() {
         <div className="grid gap-6 md:grid-cols-2">
           <FadeIn>
             <MediaSlot
-              label="COMMUNITY · placeholder"
+              label="OOO community"
               aspect="4:3"
               src={communityPhoto}
               alt="Ben Gordon courtside in a community gym, leaning in to talk with a young player."

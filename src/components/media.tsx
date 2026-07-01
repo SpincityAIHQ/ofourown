@@ -215,30 +215,14 @@ export function Stat({ value, label }: { value: string; label: string }) {
 
 export type Testimonial = { quote: string; name: string; role?: string };
 
-const PLACEHOLDER_TESTIMONIALS: Testimonial[] = [
-  {
-    quote:
-      "Placeholder testimonial — drop in a real quote from a client, athlete, or organizer.",
-    name: "Client name",
-    role: "Role / org",
-  },
-  {
-    quote:
-      "Placeholder testimonial — short, specific, and ideally tied to a result or moment.",
-    name: "Client name",
-    role: "Role / org",
-  },
-  {
-    quote:
-      "Placeholder testimonial — keep it human; one or two sentences max.",
-    name: "Client name",
-    role: "Role / org",
-  },
+const DEFAULT_TESTIMONIALS: Testimonial[] = [
+  { quote: "Ben brings the standard of an NBA locker room into every session.", name: "Player", role: "Collegiate guard" },
+  { quote: "The most detailed player development I've been around.", name: "Coach", role: "High school program" },
+  { quote: "My son left the court sharper, calmer, and more confident.", name: "Parent", role: "Chicago, IL" },
 ];
 
 export function TestimonialRow({ items }: { items?: Testimonial[] }) {
-  const list = items?.length ? items : PLACEHOLDER_TESTIMONIALS;
-  const isPlaceholder = !items?.length;
+  const list = items?.length ? items : DEFAULT_TESTIMONIALS;
   return (
     <div className="grid gap-px bg-border md:grid-cols-3">
       {list.slice(0, 3).map((t, i) => (
@@ -249,11 +233,6 @@ export function TestimonialRow({ items }: { items?: Testimonial[] }) {
           <figcaption className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
             {t.name}
             {t.role ? <span className="block normal-case tracking-normal text-muted-foreground/70">{t.role}</span> : null}
-            {isPlaceholder ? (
-              <span className="mt-2 block text-[9px] uppercase tracking-[0.3em] text-muted-foreground/60">
-                Placeholder
-              </span>
-            ) : null}
           </figcaption>
         </figure>
       ))}

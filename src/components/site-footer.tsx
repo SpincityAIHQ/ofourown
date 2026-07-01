@@ -64,10 +64,6 @@ export function SiteFooter() {
           </p>
           <div className="mt-6">
             <StarRating />
-            {/* Rotating-quote placeholder — swap for real, permissioned quotes. */}
-            <p className="mt-3 max-w-xs font-display text-base leading-snug text-muted-foreground">
-              “Placeholder client quote — rotating testimonials appear here once collected.”
-            </p>
           </div>
         </div>
         {COLUMNS.map((col) => (
@@ -91,7 +87,7 @@ export function SiteFooter() {
             Stay close
           </p>
           <p className="mt-4 text-sm text-muted-foreground">
-            Social & community links coming soon.
+            Follow the work through the newsletter and the community.
           </p>
         </div>
       </div>
