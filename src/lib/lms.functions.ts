@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { createClient } from "@supabase/supabase-js";
 import { z } from "zod";
+import { getRequest } from "@tanstack/react-start/server";
 import type { Database } from "@/integrations/supabase/types";
 
 /**
@@ -19,6 +20,46 @@ function getServerClient() {
       auth: { storage: undefined, persistSession: false, autoRefreshToken: false },
     },
   );
+}
+
+function getEnvName(): "sandbox" | "live" {
+  return process.env.NODE_ENV === "production" ? "live" : "sandbox";
+}
+
+/**
+ * Reads the bearer token off the incoming request (if any) and returns the
+ * viewer's membership state. Public callers get { isMember: false }; signed-in
+ * OOO Elite members get { isMember: true }. This is the ONLY place membership
+ * is decided — never in components.
+ */
+async function getViewerAccess(): Promise<{ userId: string | null; isMember: boolean }> {
+  try {
+    const req = getRequest();
+    const authHeader = req?.headers.get("authorization") ?? "";
+    if (!authHeader.startsWith("Bearer ")) return { userId: null, isMember: false };
+    const token = authHeader.slice(7);
+    if (!token) return { userId: null, isMember: false };
+
+    const supabase = createClient<Database>(
+      process.env.SUPABASE_URL!,
+      process.env.SUPABASE_PUBLISHABLE_KEY!,
+      {
+        global: { headers: { Authorization: `Bearer ${token}` } },
+        auth: { storage: undefined, persistSession: false, autoRefreshToken: false },
+      },
+    );
+    const { data: userRes } = await supabase.auth.getUser();
+    const userId = userRes?.user?.id ?? null;
+    if (!userId) return { userId: null, isMember: false };
+
+    const { data: hasSub } = await supabase.rpc("has_active_subscription", {
+      user_uuid: userId,
+      check_env: getEnvName(),
+    });
+    return { userId, isMember: !!hasSub };
+  } catch {
+    return { userId: null, isMember: false };
+  }
 }
 
 export type Lesson = {
@@ -94,10 +135,32 @@ function sortTree(pillars: Pillar[]): Pillar[] {
  * gated content (video). For now everyone can; Phase C swaps in the real
  * membership check. This is the ONLY place access should be decided.
  */
-export function canAccessLesson(lesson: Pick<Lesson, "is_free" | "status">): boolean {
-  // Phase C: return isMember || lesson.is_free;
-  void lesson;
-  return true;
+export function canAccessLesson(
+  lesson: Pick<Lesson, "is_free" | "status">,
+  isMember: boolean,
+): boolean {
+  if (lesson.is_free) return true;
+  return isMember;
+}
+
+/** Strip gated media URLs (video, downloadable resource) for non-members. */
+function gateLesson<T extends Pick<Lesson, "is_free" | "status" | "video_url" | "resource_url">>(
+  lesson: T,
+  isMember: boolean,
+): T {
+  if (canAccessLesson(lesson, isMember)) return lesson;
+  return { ...lesson, video_url: null, resource_url: null };
+}
+
+function gateTree(pillars: Pillar[], isMember: boolean): Pillar[] {
+  for (const p of pillars) {
+    for (const c of p.courses) {
+      for (const m of c.modules) {
+        m.lessons = m.lessons.map((l) => gateLesson(l, isMember));
+      }
+    }
+  }
+  return pillars;
 }
 
 /** Full catalog tree: pillars → courses → modules → lessons. */
@@ -112,7 +175,8 @@ export const listPillars = createServerFn({ method: "GET" }).handler(
       console.error("[listPillars]", error);
       return [];
     }
-    return sortTree(data ?? []);
+    const { isMember } = await getViewerAccess();
+    return gateTree(sortTree(data ?? []), isMember);
   },
 );
 
@@ -132,7 +196,9 @@ export const getPillarBySlug = createServerFn({ method: "GET" })
       console.error("[getPillarBySlug]", error);
       return null;
     }
-    return row ? sortTree([row])[0] : null;
+    if (!row) return null;
+    const { isMember } = await getViewerAccess();
+    return gateTree(sortTree([row]), isMember)[0];
   });
 
 export type CourseWithContext = Course & {
@@ -157,7 +223,10 @@ export const getCourseBySlug = createServerFn({ method: "GET" })
     }
     if (!row) return null;
     row.modules = [...(row.modules ?? [])].sort(byOrder);
-    for (const m of row.modules) m.lessons = [...(m.lessons ?? [])].sort(byOrder);
+    const { isMember } = await getViewerAccess();
+    for (const m of row.modules) {
+      m.lessons = [...(m.lessons ?? [])].sort(byOrder).map((l) => gateLesson(l, isMember));
+    }
     return row;
   });
 
@@ -195,10 +264,8 @@ export const getLessonBySlug = createServerFn({ method: "GET" })
 
     const { module: mod, ...lessonFields } = row;
     const course = mod.course;
-    const lesson: Lesson = { ...lessonFields };
-
-    // Phase C seam — withhold gated video from non-members in one place.
-    if (!canAccessLesson(lesson)) lesson.video_url = null;
+    const { isMember } = await getViewerAccess();
+    const lesson: Lesson = gateLesson({ ...lessonFields }, isMember);
 
     // prev/next across the whole course, in module→lesson order.
     const { data: mods } = await supabase
