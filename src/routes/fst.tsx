@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { BookingForm } from "@/components/booking-form";
 import { FadeIn, MediaSlot } from "@/components/media";
 import { PageHero, Section, Eyebrow } from "@/components/section";
@@ -44,6 +44,14 @@ function FSTPage() {
               <h2 className="font-display text-4xl font-semibold md:text-5xl">Assisted stretch, end-to-end.</h2>
               <p className="mt-4 max-w-md text-muted-foreground">
                 Ben's FST work focuses on guided self-stretch positions that restore range, ease tension, and improve how you move and recover without turning recovery into another performance.
+              </p>
+              <p className="mt-4 max-w-md text-sm text-muted-foreground">
+                Training with us? This same performance &amp; recovery work is built
+                into{" "}
+                <Link to="/programs" className="text-foreground underline underline-offset-2 hover:opacity-80">
+                  Private Plus
+                </Link>
+                {" "}sessions.
               </p>
             </FadeIn>
           </div>

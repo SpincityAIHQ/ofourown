@@ -7,7 +7,7 @@ const COLUMNS = [
     links: [
       { to: "/training", label: "Training" },
       { to: "/philosophy", label: "Philosophy" },
-      { to: "/evaluation", label: "Book Evaluation" },
+      { to: "/evaluation", label: "Book Free Evaluation" },
       { to: "/fst", label: "Fascia Stretch Therapy" },
       { to: "/coaching", label: "Coaching" },
       { to: "/wellness", label: "Wellness" },

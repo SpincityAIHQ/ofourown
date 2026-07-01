@@ -12,7 +12,8 @@ const NAV: Item[] = [
   {
     label: "Train",
     children: [
-      { to: "/training", label: "Training", blurb: "Elite basketball development, youth through pro." },
+      { to: "/training", label: "Training", blurb: "Package-only basketball development." },
+      { to: "/programs", label: "Programs & Pricing", blurb: "Groups, private, Private Plus, camps." },
       { to: "/philosophy", label: "Philosophy", blurb: "How we develop complete players." },
       { to: "/fst", label: "Fascia Stretch Therapy", blurb: "Mobility & recovery sessions." },
       { to: "/coaching", label: "Coaching", blurb: "Mentorship for athletes & operators." },
@@ -123,7 +124,7 @@ export function SiteHeader() {
             to="/evaluation"
             className="hidden h-9 items-center bg-foreground px-4 text-xs uppercase tracking-wider text-background transition hover:opacity-90 lg:inline-flex"
           >
-            Book Evaluation
+            Book Free Evaluation
           </Link>
           <CartButton />
           <button
@@ -177,7 +178,7 @@ export function SiteHeader() {
               onClick={() => setMobile(false)}
               className="mt-3 inline-flex h-11 items-center justify-center bg-foreground px-6 text-xs uppercase tracking-wider text-background"
             >
-              Book Evaluation
+              Book Your Free Evaluation
             </Link>
           </nav>
         </div>

@@ -16,6 +16,7 @@ import { Route as SupplementsRouteImport } from './routes/supplements'
 import { Route as SuccessRouteImport } from './routes/success'
 import { Route as SpeakingRouteImport } from './routes/speaking'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as PhilosophyRouteImport } from './routes/philosophy'
 import { Route as MerchRouteImport } from './routes/merch'
 import { Route as ManualsRouteImport } from './routes/manuals'
@@ -72,6 +73,11 @@ const SpeakingRoute = SpeakingRouteImport.update({
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgramsRoute = ProgramsRouteImport.update({
+  id: '/programs',
+  path: '/programs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PhilosophyRoute = PhilosophyRouteImport.update({
@@ -203,6 +209,7 @@ export interface FileRoutesByFullPath {
   '/manuals': typeof ManualsRoute
   '/merch': typeof MerchRoute
   '/philosophy': typeof PhilosophyRoute
+  '/programs': typeof ProgramsRoute
   '/shop': typeof ShopRouteWithChildren
   '/speaking': typeof SpeakingRoute
   '/success': typeof SuccessRoute
@@ -234,6 +241,7 @@ export interface FileRoutesByTo {
   '/manuals': typeof ManualsRoute
   '/merch': typeof MerchRoute
   '/philosophy': typeof PhilosophyRoute
+  '/programs': typeof ProgramsRoute
   '/shop': typeof ShopRouteWithChildren
   '/speaking': typeof SpeakingRoute
   '/success': typeof SuccessRoute
@@ -266,6 +274,7 @@ export interface FileRoutesById {
   '/manuals': typeof ManualsRoute
   '/merch': typeof MerchRoute
   '/philosophy': typeof PhilosophyRoute
+  '/programs': typeof ProgramsRoute
   '/shop': typeof ShopRouteWithChildren
   '/speaking': typeof SpeakingRoute
   '/success': typeof SuccessRoute
@@ -299,6 +308,7 @@ export interface FileRouteTypes {
     | '/manuals'
     | '/merch'
     | '/philosophy'
+    | '/programs'
     | '/shop'
     | '/speaking'
     | '/success'
@@ -330,6 +340,7 @@ export interface FileRouteTypes {
     | '/manuals'
     | '/merch'
     | '/philosophy'
+    | '/programs'
     | '/shop'
     | '/speaking'
     | '/success'
@@ -361,6 +372,7 @@ export interface FileRouteTypes {
     | '/manuals'
     | '/merch'
     | '/philosophy'
+    | '/programs'
     | '/shop'
     | '/speaking'
     | '/success'
@@ -393,6 +405,7 @@ export interface RootRouteChildren {
   ManualsRoute: typeof ManualsRoute
   MerchRoute: typeof MerchRoute
   PhilosophyRoute: typeof PhilosophyRoute
+  ProgramsRoute: typeof ProgramsRoute
   ShopRoute: typeof ShopRouteWithChildren
   SpeakingRoute: typeof SpeakingRoute
   SuccessRoute: typeof SuccessRoute
@@ -458,6 +471,13 @@ declare module '@tanstack/react-router' {
       path: '/shop'
       fullPath: '/shop'
       preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/programs': {
+      id: '/programs'
+      path: '/programs'
+      fullPath: '/programs'
+      preLoaderRoute: typeof ProgramsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/philosophy': {
@@ -642,6 +662,7 @@ const rootRouteChildren: RootRouteChildren = {
   ManualsRoute: ManualsRoute,
   MerchRoute: MerchRoute,
   PhilosophyRoute: PhilosophyRoute,
+  ProgramsRoute: ProgramsRoute,
   ShopRoute: ShopRouteWithChildren,
   SpeakingRoute: SpeakingRoute,
   SuccessRoute: SuccessRoute,
