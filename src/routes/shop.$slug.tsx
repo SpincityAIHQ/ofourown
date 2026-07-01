@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { useState } from "react";
 import { getProductBySlug } from "@/lib/products.functions";
 import { Section, Eyebrow } from "@/components/section";
 import { Button } from "@/components/ui/button";
@@ -53,19 +54,26 @@ function ProductPage() {
   const { slug } = Route.useParams();
   const { data: product } = useSuspenseQuery(productQuery(slug));
   const { add } = useCart();
+  const needsSize = product ? /available sizes:/i.test(product.description ?? "") : false;
+  const SIZES = ["S", "M", "L", "XL", "XXL"];
+  const [size, setSize] = useState<string>("");
 
   if (!product) return null;
 
   function addToCart() {
     if (!product) return;
+    if (needsSize && !size) {
+      toast.error("Please select a size");
+      return;
+    }
     add({
-      slug: product.slug,
-      name: product.name,
+      slug: needsSize ? `${product.slug}--${size.toLowerCase()}` : product.slug,
+      name: needsSize ? `${product.name} — Size ${size}` : product.name,
       price_cents: product.price_cents,
       currency: product.currency,
       image_url: product.image_url,
     });
-    toast.success(`${product.name} added to cart`);
+    toast.success(`${product.name}${needsSize ? ` (${size})` : ""} added to cart`);
   }
 
   return (
@@ -95,6 +103,28 @@ function ProductPage() {
           </p>
           {product.description ? (
             <p className="mt-6 whitespace-pre-wrap leading-relaxed">{product.description}</p>
+          ) : null}
+          {needsSize ? (
+            <div className="mt-8">
+              <p className="text-xs uppercase tracking-wider text-muted-foreground">Size</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {SIZES.map((s) => (
+                  <button
+                    key={s}
+                    type="button"
+                    onClick={() => setSize(s)}
+                    className={`h-11 min-w-11 border px-4 text-sm uppercase tracking-wider transition ${
+                      size === s
+                        ? "border-foreground bg-foreground text-background"
+                        : "border-border hover:border-foreground"
+                    }`}
+                    aria-pressed={size === s}
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
+            </div>
           ) : null}
           <div className="mt-10">
             {product.stripe_price_id ? (
