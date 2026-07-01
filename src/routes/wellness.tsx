@@ -36,6 +36,8 @@ function WellnessPage() {
         nextLabel="See why you're tired"
         mediaSrc={wellnessVslCover}
         mediaAlt="Ben Gordon stretching alone on a yoga mat in a quiet sunlit studio, sleeves rolled, focused on breath and position — cover for the private wellness consult."
+        primaryCta={{ label: "Apply now", href: "#cta" }}
+        secondaryCta={{ label: "See the offer", href: "#offer" }}
       />
 
       <FunnelSection
