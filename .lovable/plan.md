@@ -1,38 +1,70 @@
+# Launch & Monetize Plan
 
-## Plan: Apply Ben Gordon reference photos to the site
+Site is built. To flip it live and start making money, we need three things: **payments live, traffic in, leads out**. Here's the order.
 
-You uploaded 6 reference photos of Ben Gordon. Here's how I'll use them.
+## Phase 1 — Money can actually move (Day 1)
 
-### What I can do with these references
+1. **Enable Stripe payments (seamless)**
+   - Currently `checkout.functions.ts` exists but no live Stripe connection is wired through Lovable's built-in payments.
+   - Run `enable_stripe_payments` → user completes the short form (email, business name).
+   - Test mode works instantly; live mode after account claim.
 
-The `edit_image` tool accepts multiple input images and can blend/extend them into new scenes while keeping the subject's likeness. That means I can take these 6 references and produce all 36 site images with a recognizable Ben Gordon — not a generic athlete.
+2. **Load real products into Stripe**
+   - Push the 9 merch SKUs (jerseys, tracksuits, hoodies, fleeces, sweatsuit) from the DB into Stripe with correct prices + size variants.
+   - Add the Book ($TBD), Manuals, Supplements as products.
+   - Wire checkout button on `/shop/$slug` to real Stripe price IDs.
 
-### Reference photo roles
+3. **Verify the webhook**
+   - `src/routes/api/public/stripe-webhook.ts` → confirm `orders` table writes on `checkout.session.completed`.
+   - Test end-to-end with a $1 product in test mode.
 
-- `Ben_Gordon.jpg` (gym, smiling, black tee) → **primary likeness anchor** for training/wellness/coaching action shots
-- `images_3.jpeg` (charcoal check shirt, neutral) → wardrobe + lighting anchor for editorial portraits (About, Book cover, Speaking)
-- `images_4.jpeg` / `images_5.jpeg` / `images_7.jpeg` (clean headshots, multiple angles) → likeness reinforcement for face-forward shots
-- `images_6.jpeg` (moody studio portrait) → mood/grade reference for darker editorial pieces (Advocacy, Community)
+4. **Publish the site**
+   - Deploy to `oooelitebasketballtraining.com`.
+   - Confirm all forms hit the DB + email `ooollc@icloud.com`.
 
-### Build steps
+## Phase 2 — Turn on the front door (Week 1)
 
-1. **Save references** → upload all 6 to `src/assets/refs/` via `lovable-assets` so the edit tool can pull them by URL across multiple generations.
-2. **Generate the 36 images** in batches by category, each call passing 2–3 of the reference photos plus the scene prompt from the asset list I already shared. Categories:
-   - Brand (logo, favicon, OG defaults) — 3 images
-   - Training funnel (VSL cover, drills, court stills) — 6
-   - Wellness funnel (recovery, FST table, breathwork) — 6
-   - Coaching (1:1, whiteboard, portrait) — 4
-   - Speaking (stage, audience, podium portrait) — 4
-   - Shop (book mockup, manuals, supplements, merch) — 6
-   - Home / About / Community / Advocacy — 7
-3. **Wire into the site** — replace every `MediaSlot`/`VideoEmbed` placeholder with the generated `.asset.json` imports across the 13 route files and shared components.
-4. **QA pass** — visual check of each page to confirm likeness is consistent and grading reads as one cohesive editorial set (warm daylight, muted earth tones, as previously approved).
+5. **SEO scan + fixes**
+   - Run SEO review, fix findings (titles, meta, sitemap, schema.org LocalBusiness + Person for Ben).
+   - Submit sitemap to Google Search Console.
 
-### What to expect
+6. **Analytics + pixels**
+   - GA4 + Meta Pixel + TikTok Pixel on all routes.
+   - Track: lead form submit, booking submit, add-to-cart, purchase.
 
-- Likeness will be **strong but not photographic** — it's AI-edited, not real photography. Faces will read as Ben from a distance; up close, fine features may drift between shots. That's the trade-off vs. a real photoshoot.
-- I'll do the full set in one pass and you review. Anything off, I regenerate that single slot.
+7. **Lead magnet on `/`**
+   - Free "3 Guard Finishing Drills" PDF → email capture → auto-adds to `leads` → triggers welcome email + GHL sync.
+   - This is the top of every funnel.
 
-### Approve to proceed
+## Phase 3 — First dollars in (Week 2)
 
-Say "go" and I'll execute steps 1–4 in build mode. If you'd rather I generate a small test batch first (e.g. 3 hero shots) before committing to all 36, say "test batch first."
+8. **Launch the two highest-margin offers first**
+   - **$250/hr Training** (Chicago local) → Google Search + Meta local radius ads.
+   - **Merch drop** → IG/TikTok organic + $30/day Meta Advantage+ Shopping.
+   - Skip Speaking ads (inbound only, PR-driven).
+
+9. **Booking confirmation → payment link**
+   - When a training booking is approved, auto-send a Stripe payment link for the deposit. Right now bookings notify Ben but don't collect money.
+
+10. **FST prepay flow**
+    - Add "Book & Pay" buttons on `/fst` (30/60/90/+30 min) → Stripe checkout → confirmed slot.
+    - Highest-conversion offer because it's transactional, not application-gated.
+
+## Phase 4 — Compound (Weeks 3–4)
+
+11. **Email nurture** — 5-email welcome sequence for new leads (already have infra).
+12. **Testimonials capture** — post-service email asking for a video review, feeds `/proof` and ad creative.
+13. **Retargeting** — Meta + Google retarget everyone who hit a funnel but didn't convert.
+
+## What I need from you to start
+
+Pick which of these I do **right now**:
+- **A.** Enable Stripe + wire real checkout on merch (fastest path to revenue).
+- **B.** SEO pass + publish + analytics (fastest path to traffic).
+- **C.** Lead magnet + email nurture (fastest path to a list).
+- **D.** All three in order (A → B → C), one plan per phase.
+
+Also need from you (I can't do these):
+- Confirm Stripe business details (email, legal name) when the form pops up.
+- The lead-magnet PDF file (or approve me generating a placeholder).
+- Ad budget/month so I size the campaigns correctly.
