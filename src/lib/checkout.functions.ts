@@ -90,10 +90,13 @@ export const createCartCheckoutSession = createServerFn({ method: "POST" })
     );
 
     const slugs = data.items.map((i) => i.slug);
+    // Strip size/variant suffix (e.g. "ooo-jersey-8--m") to resolve base product.
+    const baseSlug = (s: string) => s.split("--")[0];
+    const baseSlugs = Array.from(new Set(slugs.map(baseSlug)));
     const { data: products, error } = await supabase
       .from("products")
       .select("slug, name, stripe_price_id")
-      .in("slug", slugs)
+      .in("slug", baseSlugs)
       .eq("is_active", true);
 
     if (error || !products?.length) throw new Error("Products not found.");
@@ -101,11 +104,14 @@ export const createCartCheckoutSession = createServerFn({ method: "POST" })
     const bySlug = new Map(products.map((p) => [p.slug, p]));
     const body = new URLSearchParams({ mode: "payment" });
     data.items.forEach((item, idx) => {
-      const p = bySlug.get(item.slug);
+      const p = bySlug.get(baseSlug(item.slug));
       if (!p) throw new Error(`Product ${item.slug} not found.`);
       if (!p.stripe_price_id) throw new Error(`${p.name} is coming soon.`);
       body.append(`line_items[${idx}][price]`, p.stripe_price_id);
       body.append(`line_items[${idx}][quantity]`, String(item.quantity));
+      // Preserve size selection in Stripe metadata for fulfillment.
+      const variant = item.slug.includes("--") ? item.slug.split("--").slice(1).join("--") : "";
+      if (variant) body.append(`metadata[line_${idx}_variant]`, variant);
     });
 
     const siteUrl = process.env.SITE_URL ?? "https://bengordon.com";
