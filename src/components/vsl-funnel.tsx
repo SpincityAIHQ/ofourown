@@ -17,6 +17,8 @@ export function VSLHero({
   nextLabel = "Watch why",
   mediaSrc,
   mediaAlt,
+  primaryCta,
+  secondaryCta,
 }: {
   eyebrow: string;
   headline: string;
@@ -25,6 +27,8 @@ export function VSLHero({
   nextLabel?: string;
   mediaSrc?: string;
   mediaAlt?: string;
+  primaryCta?: { label: string; href: string };
+  secondaryCta?: { label: string; href: string };
 }) {
   return (
     <section className="border-b border-border bg-background">
@@ -37,6 +41,26 @@ export function VSLHero({
           <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground md:text-xl">
             {subhead}
           </p>
+          {primaryCta || secondaryCta ? (
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              {primaryCta ? (
+                <a
+                  href={primaryCta.href}
+                  className="inline-flex h-12 items-center gap-2 bg-foreground px-6 text-sm uppercase tracking-wider text-background transition hover:opacity-90"
+                >
+                  {primaryCta.label} <ArrowRight className="h-4 w-4" />
+                </a>
+              ) : null}
+              {secondaryCta ? (
+                <a
+                  href={secondaryCta.href}
+                  className="inline-flex h-12 items-center gap-2 border border-foreground px-6 text-sm uppercase tracking-wider transition hover:bg-foreground hover:text-background"
+                >
+                  {secondaryCta.label}
+                </a>
+              ) : null}
+            </div>
+          ) : null}
         </div>
         <div className="mt-10 aspect-video w-full overflow-hidden border border-foreground bg-foreground">
           <button
@@ -211,6 +235,7 @@ export function FunnelGate({
             <Check className="h-4 w-4" /> Email confirmed — scroll for the next step
           </div>
         ) : (
+          <>
           <form onSubmit={onSubmit} className="mt-10 flex w-full max-w-xl gap-2">
             <Input
               type="email"
@@ -228,6 +253,19 @@ export function FunnelGate({
               {loading ? "..." : ctaLabel}
             </Button>
           </form>
+          <button
+            type="button"
+            onClick={() => {
+              setUnlocked(true);
+              setTimeout(() => {
+                document.getElementById(`${id}-next`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }, 80);
+            }}
+            className="mt-4 text-xs uppercase tracking-[0.2em] text-background/60 underline underline-offset-4 hover:text-background"
+          >
+            Skip — go straight to the form
+          </button>
+          </>
         )}
 
         <div

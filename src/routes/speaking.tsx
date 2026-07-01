@@ -38,6 +38,8 @@ function SpeakingPage() {
         eyebrow="Speaking"
         title="Book Ben Gordon to speak."
         lede="Keynotes, team talks, college visits, corporate events, and intimate room work — built around your audience and the moment you're trying to create."
+        primaryCta={{ label: "Inquire now", href: "#inquire" }}
+        secondaryCta={{ label: "See formats", href: "#formats" }}
       />
 
       <Section className="border-b border-border">
@@ -57,7 +59,7 @@ function SpeakingPage() {
         </div>
       </Section>
 
-      <Section className="border-b border-border">
+      <Section id="formats" className="border-b border-border scroll-mt-20">
         <FadeIn>
           <Eyebrow>Formats</Eyebrow>
           <h2 className="font-display text-4xl font-semibold md:text-5xl">Built around your audience.</h2>
@@ -82,7 +84,7 @@ function SpeakingPage() {
         <div className="mt-10"><FadeIn delay={0.1}><TestimonialRow /></FadeIn></div>
       </Section>
 
-      <Section>
+      <Section id="inquire" className="scroll-mt-20">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
             <FadeIn>
