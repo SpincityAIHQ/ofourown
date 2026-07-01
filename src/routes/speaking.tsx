@@ -47,7 +47,7 @@ function SpeakingPage() {
               <Eyebrow>Watch</Eyebrow>
               <h2 className="font-display text-4xl font-semibold md:text-5xl">A look at the room.</h2>
               <p className="mt-4 max-w-md text-muted-foreground">
-                Speaker reel coming soon — for now, the page leads with a still from the room.
+                A quiet frame from the stage — keynotes, team talks, and the room work behind them.
               </p>
             </FadeIn>
           </div>
@@ -72,23 +72,6 @@ function SpeakingPage() {
             </FadeIn>
           ))}
         </div>
-      </Section>
-
-      <Section className="border-b border-border">
-        <FadeIn>
-          <Eyebrow>Past rooms</Eyebrow>
-          <h2 className="font-display text-4xl font-semibold md:text-5xl">Where Ben has spoken.</h2>
-          <p className="mt-4 max-w-2xl text-muted-foreground">
-            Logo wall coming — drop in event marks, schools, and organizations once cleared for publication.
-          </p>
-        </FadeIn>
-        <FadeIn delay={0.1}>
-          <div className="mt-10 grid grid-cols-2 gap-px bg-border sm:grid-cols-3 md:grid-cols-6">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <MediaSlot key={i} label={`LOGO ${i + 1}`} aspect="1:1" />
-            ))}
-          </div>
-        </FadeIn>
       </Section>
 
       <Section className="border-b border-border">
