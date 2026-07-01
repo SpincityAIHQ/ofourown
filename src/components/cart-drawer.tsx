@@ -1,9 +1,6 @@
-import { useState } from "react";
-import { useServerFn } from "@tanstack/react-start";
-import { toast } from "sonner";
+import { useNavigate } from "@tanstack/react-router";
 import { ShoppingBag, X, Minus, Plus, Trash2 } from "lucide-react";
 import { useCart, formatPrice } from "@/lib/cart";
-import { createCartCheckoutSession } from "@/lib/checkout.functions";
 import { Button } from "@/components/ui/button";
 
 export function CartButton() {
@@ -28,22 +25,12 @@ export function CartButton() {
 export function CartDrawer() {
   const { items, isOpen, closeCart, setQuantity, remove, subtotalCents, currency, count } =
     useCart();
-  const checkout = useServerFn(createCartCheckoutSession);
-  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  async function handleCheckout() {
+  function handleCheckout() {
     if (!items.length) return;
-    setLoading(true);
-    try {
-      const { url } = await checkout({
-        data: { items: items.map((i) => ({ slug: i.slug, quantity: i.quantity })) },
-      });
-      if (url) window.location.href = url;
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Could not start checkout.");
-    } finally {
-      setLoading(false);
-    }
+    closeCart();
+    navigate({ to: "/checkout" });
   }
 
   if (!isOpen) return null;
@@ -141,10 +128,9 @@ export function CartDrawer() {
             </p>
             <Button
               onClick={handleCheckout}
-              disabled={loading}
               className="mt-4 h-12 w-full rounded-none uppercase tracking-wider"
             >
-              {loading ? "Starting checkout..." : "Checkout"}
+              Checkout
             </Button>
           </div>
         ) : null}
