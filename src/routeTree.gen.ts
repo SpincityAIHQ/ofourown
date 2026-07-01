@@ -31,10 +31,13 @@ import { Route as BookRouteImport } from './routes/book'
 import { Route as AdvocacyRouteImport } from './routes/advocacy'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EliteIndexRouteImport } from './routes/elite.index'
 import { Route as ShopSlugRouteImport } from './routes/shop.$slug'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as EliteLearnIndexRouteImport } from './routes/elite.learn.index'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
+import { Route as EliteLearnLessonRouteImport } from './routes/elite.learn.$lesson'
 import { Route as ApiPublicStripeWebhookRouteImport } from './routes/api/public/stripe-webhook'
 import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
@@ -150,6 +153,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EliteIndexRoute = EliteIndexRouteImport.update({
+  id: '/elite/',
+  path: '/elite/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ShopSlugRoute = ShopSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -165,9 +173,19 @@ const ApiChatRoute = ApiChatRouteImport.update({
   path: '/api/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EliteLearnIndexRoute = EliteLearnIndexRouteImport.update({
+  id: '/elite/learn/',
+  path: '/elite/learn/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
   id: '/lovable/email/suppression',
   path: '/lovable/email/suppression',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EliteLearnLessonRoute = EliteLearnLessonRouteImport.update({
+  id: '/elite/learn/$lesson',
+  path: '/elite/learn/$lesson',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicStripeWebhookRoute = ApiPublicStripeWebhookRouteImport.update({
@@ -220,8 +238,11 @@ export interface FileRoutesByFullPath {
   '/api/chat': typeof ApiChatRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/shop/$slug': typeof ShopSlugRoute
+  '/elite/': typeof EliteIndexRoute
   '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
+  '/elite/learn/$lesson': typeof EliteLearnLessonRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/elite/learn/': typeof EliteLearnIndexRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
@@ -252,8 +273,11 @@ export interface FileRoutesByTo {
   '/api/chat': typeof ApiChatRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/shop/$slug': typeof ShopSlugRoute
+  '/elite': typeof EliteIndexRoute
   '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
+  '/elite/learn/$lesson': typeof EliteLearnLessonRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/elite/learn': typeof EliteLearnIndexRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
@@ -285,8 +309,11 @@ export interface FileRoutesById {
   '/api/chat': typeof ApiChatRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/shop/$slug': typeof ShopSlugRoute
+  '/elite/': typeof EliteIndexRoute
   '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
+  '/elite/learn/$lesson': typeof EliteLearnLessonRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/elite/learn/': typeof EliteLearnIndexRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
@@ -319,8 +346,11 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/email/unsubscribe'
     | '/shop/$slug'
+    | '/elite/'
     | '/api/public/stripe-webhook'
+    | '/elite/learn/$lesson'
     | '/lovable/email/suppression'
+    | '/elite/learn/'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
@@ -351,8 +381,11 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/email/unsubscribe'
     | '/shop/$slug'
+    | '/elite'
     | '/api/public/stripe-webhook'
+    | '/elite/learn/$lesson'
     | '/lovable/email/suppression'
+    | '/elite/learn'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
@@ -383,8 +416,11 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/email/unsubscribe'
     | '/shop/$slug'
+    | '/elite/'
     | '/api/public/stripe-webhook'
+    | '/elite/learn/$lesson'
     | '/lovable/email/suppression'
+    | '/elite/learn/'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
@@ -415,8 +451,11 @@ export interface RootRouteChildren {
   WellnessRoute: typeof WellnessRoute
   ApiChatRoute: typeof ApiChatRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
+  EliteIndexRoute: typeof EliteIndexRoute
   ApiPublicStripeWebhookRoute: typeof ApiPublicStripeWebhookRoute
+  EliteLearnLessonRoute: typeof EliteLearnLessonRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
+  EliteLearnIndexRoute: typeof EliteLearnIndexRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
   LovableEmailTransactionalSendRoute: typeof LovableEmailTransactionalSendRoute
@@ -578,6 +617,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/elite/': {
+      id: '/elite/'
+      path: '/elite'
+      fullPath: '/elite/'
+      preLoaderRoute: typeof EliteIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/shop/$slug': {
       id: '/shop/$slug'
       path: '/$slug'
@@ -599,11 +645,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/elite/learn/': {
+      id: '/elite/learn/'
+      path: '/elite/learn'
+      fullPath: '/elite/learn/'
+      preLoaderRoute: typeof EliteLearnIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lovable/email/suppression': {
       id: '/lovable/email/suppression'
       path: '/lovable/email/suppression'
       fullPath: '/lovable/email/suppression'
       preLoaderRoute: typeof LovableEmailSuppressionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/elite/learn/$lesson': {
+      id: '/elite/learn/$lesson'
+      path: '/elite/learn/$lesson'
+      fullPath: '/elite/learn/$lesson'
+      preLoaderRoute: typeof EliteLearnLessonRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/stripe-webhook': {
@@ -672,8 +732,11 @@ const rootRouteChildren: RootRouteChildren = {
   WellnessRoute: WellnessRoute,
   ApiChatRoute: ApiChatRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
+  EliteIndexRoute: EliteIndexRoute,
   ApiPublicStripeWebhookRoute: ApiPublicStripeWebhookRoute,
+  EliteLearnLessonRoute: EliteLearnLessonRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
+  EliteLearnIndexRoute: EliteLearnIndexRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
   LovableEmailTransactionalSendRoute: LovableEmailTransactionalSendRoute,
