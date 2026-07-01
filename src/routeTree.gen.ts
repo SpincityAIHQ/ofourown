@@ -29,8 +29,10 @@ import { Route as CoachingRouteImport } from './routes/coaching'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CancelRouteImport } from './routes/cancel'
 import { Route as BookRouteImport } from './routes/book'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdvocacyRouteImport } from './routes/advocacy'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EliteIndexRouteImport } from './routes/elite.index'
 import { Route as ShopSlugRouteImport } from './routes/shop.$slug'
@@ -40,6 +42,7 @@ import { Route as EliteLearnIndexRouteImport } from './routes/elite.learn.index'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as EliteLearnLessonRouteImport } from './routes/elite.learn.$lesson'
 import { Route as ApiPublicStripeWebhookRouteImport } from './routes/api/public/stripe-webhook'
+import { Route as AuthenticatedEliteSubscribeRouteImport } from './routes/_authenticated/elite.subscribe'
 import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
@@ -144,6 +147,11 @@ const BookRoute = BookRouteImport.update({
   path: '/book',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdvocacyRoute = AdvocacyRouteImport.update({
   id: '/advocacy',
   path: '/advocacy',
@@ -152,6 +160,10 @@ const AdvocacyRoute = AdvocacyRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -199,6 +211,12 @@ const ApiPublicStripeWebhookRoute = ApiPublicStripeWebhookRouteImport.update({
   path: '/api/public/stripe-webhook',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedEliteSubscribeRoute =
+  AuthenticatedEliteSubscribeRouteImport.update({
+    id: '/elite/subscribe',
+    path: '/elite/subscribe',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const LovableEmailTransactionalSendRoute =
   LovableEmailTransactionalSendRouteImport.update({
     id: '/lovable/email/transactional/send',
@@ -222,6 +240,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/advocacy': typeof AdvocacyRoute
+  '/auth': typeof AuthRoute
   '/book': typeof BookRoute
   '/cancel': typeof CancelRoute
   '/checkout': typeof CheckoutRoute
@@ -246,6 +265,7 @@ export interface FileRoutesByFullPath {
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/shop/$slug': typeof ShopSlugRoute
   '/elite/': typeof EliteIndexRoute
+  '/elite/subscribe': typeof AuthenticatedEliteSubscribeRoute
   '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
   '/elite/learn/$lesson': typeof EliteLearnLessonRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
@@ -258,6 +278,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/advocacy': typeof AdvocacyRoute
+  '/auth': typeof AuthRoute
   '/book': typeof BookRoute
   '/cancel': typeof CancelRoute
   '/checkout': typeof CheckoutRoute
@@ -282,6 +303,7 @@ export interface FileRoutesByTo {
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/shop/$slug': typeof ShopSlugRoute
   '/elite': typeof EliteIndexRoute
+  '/elite/subscribe': typeof AuthenticatedEliteSubscribeRoute
   '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
   '/elite/learn/$lesson': typeof EliteLearnLessonRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
@@ -293,8 +315,10 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/advocacy': typeof AdvocacyRoute
+  '/auth': typeof AuthRoute
   '/book': typeof BookRoute
   '/cancel': typeof CancelRoute
   '/checkout': typeof CheckoutRoute
@@ -319,6 +343,7 @@ export interface FileRoutesById {
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/shop/$slug': typeof ShopSlugRoute
   '/elite/': typeof EliteIndexRoute
+  '/_authenticated/elite/subscribe': typeof AuthenticatedEliteSubscribeRoute
   '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
   '/elite/learn/$lesson': typeof EliteLearnLessonRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
@@ -333,6 +358,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/advocacy'
+    | '/auth'
     | '/book'
     | '/cancel'
     | '/checkout'
@@ -357,6 +383,7 @@ export interface FileRouteTypes {
     | '/email/unsubscribe'
     | '/shop/$slug'
     | '/elite/'
+    | '/elite/subscribe'
     | '/api/public/stripe-webhook'
     | '/elite/learn/$lesson'
     | '/lovable/email/suppression'
@@ -369,6 +396,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/advocacy'
+    | '/auth'
     | '/book'
     | '/cancel'
     | '/checkout'
@@ -393,6 +421,7 @@ export interface FileRouteTypes {
     | '/email/unsubscribe'
     | '/shop/$slug'
     | '/elite'
+    | '/elite/subscribe'
     | '/api/public/stripe-webhook'
     | '/elite/learn/$lesson'
     | '/lovable/email/suppression'
@@ -403,8 +432,10 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/about'
     | '/advocacy'
+    | '/auth'
     | '/book'
     | '/cancel'
     | '/checkout'
@@ -429,6 +460,7 @@ export interface FileRouteTypes {
     | '/email/unsubscribe'
     | '/shop/$slug'
     | '/elite/'
+    | '/_authenticated/elite/subscribe'
     | '/api/public/stripe-webhook'
     | '/elite/learn/$lesson'
     | '/lovable/email/suppression'
@@ -440,8 +472,10 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   AdvocacyRoute: typeof AdvocacyRoute
+  AuthRoute: typeof AuthRoute
   BookRoute: typeof BookRoute
   CancelRoute: typeof CancelRoute
   CheckoutRoute: typeof CheckoutRoute
@@ -616,6 +650,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/advocacy': {
       id: '/advocacy'
       path: '/advocacy'
@@ -628,6 +669,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -693,6 +741,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicStripeWebhookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/elite/subscribe': {
+      id: '/_authenticated/elite/subscribe'
+      path: '/elite/subscribe'
+      fullPath: '/elite/subscribe'
+      preLoaderRoute: typeof AuthenticatedEliteSubscribeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/lovable/email/transactional/send': {
       id: '/lovable/email/transactional/send'
       path: '/lovable/email/transactional/send'
@@ -717,6 +772,17 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedEliteSubscribeRoute: typeof AuthenticatedEliteSubscribeRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedEliteSubscribeRoute: AuthenticatedEliteSubscribeRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 interface ShopRouteChildren {
   ShopSlugRoute: typeof ShopSlugRoute
 }
@@ -729,8 +795,10 @@ const ShopRouteWithChildren = ShopRoute._addFileChildren(ShopRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   AdvocacyRoute: AdvocacyRoute,
+  AuthRoute: AuthRoute,
   BookRoute: BookRoute,
   CancelRoute: CancelRoute,
   CheckoutRoute: CheckoutRoute,
