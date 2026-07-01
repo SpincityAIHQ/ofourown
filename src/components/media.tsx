@@ -193,9 +193,6 @@ export function VideoEmbed({
       <div className="relative z-10 grid h-16 w-16 place-items-center rounded-full border border-background/40 bg-black/30 md:h-20 md:w-20">
         <Play className="h-7 w-7 translate-x-0.5 fill-background" />
       </div>
-      <span className="absolute bottom-3 right-4 z-10 text-[10px] uppercase tracking-[0.2em] text-background/75">
-        {label}
-      </span>
     </div>
   );
 }
