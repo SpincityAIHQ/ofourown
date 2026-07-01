@@ -137,7 +137,7 @@ function LearnPage() {
         <div className="mt-20 flex flex-col items-start gap-4 border-t border-border pt-10 md:flex-row md:items-center md:justify-between">
           <p className="text-muted-foreground">All-access membership · $29.99/month.</p>
           <Link
-            to="/elite"
+            to="/elite/subscribe"
             className="inline-flex h-12 items-center gap-2 bg-foreground px-6 text-sm uppercase tracking-wider text-background transition hover:opacity-90"
           >
             Join OOO Elite <ArrowRight className="h-4 w-4" />
