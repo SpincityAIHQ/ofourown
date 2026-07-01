@@ -39,6 +39,14 @@ export const Route = createFileRoute("/api/public/stripe-webhook")({
         }
 
         if (event.type !== "checkout.session.completed") {
+          if (
+            event.type === "customer.subscription.created" ||
+            event.type === "customer.subscription.updated" ||
+            event.type === "customer.subscription.deleted"
+          ) {
+            await handleSubscription(event.type, event.data.object, env);
+            return new Response("ok", { status: 200 });
+          }
           return new Response("ignored", { status: 200 });
         }
 
