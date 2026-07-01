@@ -1,7 +1,9 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate, useRouter } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X, User } from "lucide-react";
 import { CartButton } from "./cart-drawer";
+import { supabase } from "@/integrations/supabase/client";
+import { useQueryClient } from "@tanstack/react-query";
 import { cn } from "@/lib/utils";
 
 type Leaf = { to: string; label: string; blurb?: string };
@@ -97,6 +99,41 @@ function DesktopGroup({ label, children }: { label: string; children: Leaf[] }) 
 
 export function SiteHeader() {
   const [mobile, setMobile] = useState(false);
+  const [email, setEmail] = useState<string | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+  const router = useRouter();
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    let alive = true;
+    supabase.auth.getUser().then(({ data }) => {
+      if (alive) setEmail(data.user?.email ?? null);
+    });
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
+      setEmail(session?.user?.email ?? null);
+    });
+    return () => { alive = false; sub.subscription.unsubscribe(); };
+  }, []);
+
+  useEffect(() => {
+    function onClick(e: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) setMenuOpen(false);
+    }
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, []);
+
+  async function handleSignOut() {
+    setMenuOpen(false);
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    await supabase.auth.signOut();
+    navigate({ to: "/", replace: true });
+    router.invalidate();
+  }
+
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
@@ -121,6 +158,45 @@ export function SiteHeader() {
           )}
         </nav>
         <div className="flex items-center gap-3">
+          {email ? (
+            <div ref={menuRef} className="relative hidden lg:block">
+              <button
+                type="button"
+                onClick={() => setMenuOpen((v) => !v)}
+                className="inline-flex h-9 items-center gap-1.5 border border-border px-3 text-xs uppercase tracking-wider text-muted-foreground transition hover:text-foreground"
+                aria-expanded={menuOpen}
+              >
+                <User className="h-3.5 w-3.5" />
+                Account
+              </button>
+              {menuOpen ? (
+                <div className="absolute right-0 top-full z-50 mt-2 w-56 border border-border bg-background shadow-sm">
+                  <div className="border-b border-border px-4 py-3 text-xs text-muted-foreground">{email}</div>
+                  <Link
+                    to="/elite/learn"
+                    onClick={() => setMenuOpen(false)}
+                    className="block px-4 py-3 text-sm hover:bg-accent"
+                  >
+                    My academy
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={handleSignOut}
+                    className="block w-full border-t border-border px-4 py-3 text-left text-sm hover:bg-accent"
+                  >
+                    Sign out
+                  </button>
+                </div>
+              ) : null}
+            </div>
+          ) : (
+            <Link
+              to="/auth"
+              className="hidden h-9 items-center px-3 text-xs uppercase tracking-wider text-muted-foreground transition hover:text-foreground lg:inline-flex"
+            >
+              Sign in
+            </Link>
+          )}
           <Link
             to="/evaluation"
             className="hidden h-9 items-center bg-foreground px-4 text-xs uppercase tracking-wider text-background transition hover:opacity-90 lg:inline-flex"
@@ -181,6 +257,23 @@ export function SiteHeader() {
             >
               Book Your Free Evaluation
             </Link>
+            {email ? (
+              <button
+                type="button"
+                onClick={() => { setMobile(false); void handleSignOut(); }}
+                className="mt-2 inline-flex h-11 items-center justify-center border border-border px-6 text-xs uppercase tracking-wider text-muted-foreground"
+              >
+                Sign out ({email})
+              </button>
+            ) : (
+              <Link
+                to="/auth"
+                onClick={() => setMobile(false)}
+                className="mt-2 inline-flex h-11 items-center justify-center border border-border px-6 text-xs uppercase tracking-wider text-muted-foreground"
+              >
+                Sign in
+              </Link>
+            )}
           </nav>
         </div>
       ) : null}
