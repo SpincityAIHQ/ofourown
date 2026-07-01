@@ -61,7 +61,7 @@ function ElitePage() {
               <span className="text-sm uppercase tracking-[0.2em] text-background/60">/ month</span>
             </div>
             <Link
-              to="/elite/learn"
+              to="/elite/subscribe"
               className="inline-flex h-12 items-center gap-2 bg-background px-6 text-sm uppercase tracking-wider text-foreground transition hover:opacity-90"
             >
               Join OOO Elite <ArrowRight className="h-4 w-4" />
@@ -154,7 +154,7 @@ function ElitePage() {
           </h2>
           <div className="mt-10 flex flex-col items-center gap-4">
             <Link
-              to="/elite/learn"
+              to="/elite/subscribe"
               className="inline-flex h-12 items-center gap-2 bg-background px-6 text-sm uppercase tracking-wider text-foreground transition hover:opacity-90"
             >
               Join OOO Elite — $29.99/mo <ArrowRight className="h-4 w-4" />
