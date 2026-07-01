@@ -322,21 +322,6 @@ function Index() {
         </div>
       </Section>
 
-      {/* PHASE 8 — In Motion video strip */}
-      <Section className="border-b border-border">
-        <FadeIn>
-          <Eyebrow>In Motion</Eyebrow>
-          <h2 className="font-display text-4xl font-semibold md:text-6xl">See the work.</h2>
-        </FadeIn>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {["Slow-motion workout", "Ben coaching", "Kids celebrating"].map((label, i) => (
-            <FadeIn key={label} delay={i * 0.05}>
-              <VideoEmbed label={label} aspect="16:9" />
-            </FadeIn>
-          ))}
-        </div>
-      </Section>
-
       {/* PHASE 7 — Results / social proof */}
       <Section className="border-b border-border">
         <FadeIn>
