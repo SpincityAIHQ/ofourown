@@ -32,7 +32,7 @@ function BookPage() {
       />
       <Section className="border-b border-border">
         <div className="grid gap-12 md:grid-cols-12 md:items-center">
-          <div className="md:col-span-5"><FadeIn><MediaSlot label="BOOK · cover · 3:4 placeholder" aspect="3:4" src={bookCover} alt="Cover of the forthcoming book Of Our Own by Ben Gordon — minimalist editorial design with the title set in a refined serif over a textured neutral ground." /></FadeIn></div>
+          <div className="md:col-span-5"><FadeIn><MediaSlot label="Of Our Own — book cover" aspect="3:4" src={bookCover} alt="Cover of the forthcoming book Of Our Own by Ben Gordon — minimalist editorial design with the title set in a refined serif over a textured neutral ground." /></FadeIn></div>
           <div className="md:col-span-7">
             <FadeIn delay={0.05}>
               <Eyebrow>About the book</Eyebrow>
