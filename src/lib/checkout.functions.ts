@@ -72,7 +72,7 @@ export const createCheckoutSession = createServerFn({ method: "POST" })
         return_url: data.returnUrl,
         automatic_tax: { enabled: true },
         billing_address_collection: "auto",
-        shipping_address_collection: { allowed_countries: ["US", "CA"] },
+        shipping_address_collection: { allowed_countries: ["US"] },
         payment_intent_data: { description: product.name },
         metadata: {
           product_slug: product.slug,
@@ -131,7 +131,7 @@ export const createCartCheckoutSession = createServerFn({ method: "POST" })
         return_url: data.returnUrl,
         automatic_tax: { enabled: true },
         billing_address_collection: "auto",
-        shipping_address_collection: { allowed_countries: ["US", "CA"] },
+        shipping_address_collection: { allowed_countries: ["US"] },
         metadata,
       } as Parameters<typeof stripe.checkout.sessions.create>[0]);
 

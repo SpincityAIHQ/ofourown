@@ -1,5 +1,26 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { verifyWebhook, type StripeEnv } from "@/lib/stripe.server";
+import { sendInternalTransactionalEmail } from "@/lib/email/send-internal.server";
+
+// Product base slugs (before any `--variant` suffix) that represent 1:1
+// services rather than shippable merch. Paid service purchases also file a
+// booking_request so Ben can follow up to schedule.
+const SERVICE_SLUGS = new Set(["coaching-call"]);
+
+function formatMoney(
+  amountCents: number | null | undefined,
+  currency: string | null | undefined,
+): string | undefined {
+  if (amountCents == null) return undefined;
+  try {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: (currency ?? "usd").toUpperCase(),
+    }).format(amountCents / 100);
+  } catch {
+    return `$${(amountCents / 100).toFixed(2)}`;
+  }
+}
 
 export const Route = createFileRoute("/api/public/stripe-webhook")({
   server: {
@@ -24,7 +45,7 @@ export const Route = createFileRoute("/api/public/stripe-webhook")({
         const session = event.data.object as {
           id: string;
           customer?: string | null;
-          customer_details?: { email?: string } | null;
+          customer_details?: { email?: string; name?: string } | null;
           customer_email?: string | null;
           amount_total?: number | null;
           currency?: string | null;
@@ -34,21 +55,28 @@ export const Route = createFileRoute("/api/public/stripe-webhook")({
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
         let productId: string | null = null;
+        let productName: string | null = null;
         const slug = session.metadata?.product_slug;
+        const baseSlug = slug ? slug.split("--")[0] : null;
         if (slug) {
           const { data: p } = await supabaseAdmin
             .from("products")
-            .select("id")
-            .eq("slug", slug)
+            .select("id, name")
+            .eq("slug", baseSlug ?? slug)
             .maybeSingle();
           productId = p?.id ?? null;
+          productName = p?.name ?? null;
         }
+
+        const customerEmail =
+          session.customer_details?.email ?? session.customer_email ?? null;
+        const customerName = session.customer_details?.name ?? "Athlete";
 
         const { error } = await supabaseAdmin.from("orders").upsert(
           {
             stripe_session_id: session.id,
             stripe_customer_id: session.customer ?? null,
-            email: session.customer_details?.email ?? session.customer_email ?? null,
+            email: customerEmail,
             product_id: productId,
             amount_total: session.amount_total ?? null,
             currency: session.currency ?? null,
@@ -61,6 +89,62 @@ export const Route = createFileRoute("/api/public/stripe-webhook")({
         if (error) {
           console.error("[stripe-webhook] insert error", error);
           return new Response("DB error", { status: 500 });
+        }
+
+        const isService = !!baseSlug && SERVICE_SLUGS.has(baseSlug);
+
+        if (isService && customerEmail) {
+          const { error: bookingError } = await supabaseAdmin
+            .from("booking_requests")
+            .insert({
+              type: baseSlug ?? "coaching",
+              name: customerName,
+              email: customerEmail,
+              notes: `Paid via Stripe. Product: ${productName ?? slug}. Session: ${session.id}`,
+              status: "paid",
+            });
+          if (bookingError) {
+            console.error("[stripe-webhook] booking insert error", bookingError);
+          }
+
+          const notifyEmail = process.env.NOTIFY_EMAIL;
+          if (notifyEmail) {
+            try {
+              await sendInternalTransactionalEmail({
+                templateName: "booking-confirmation",
+                recipientEmail: notifyEmail,
+                templateData: {
+                  type: baseSlug ?? "coaching",
+                  name: customerName,
+                  email: customerEmail,
+                  notes: `PAID · ${formatMoney(session.amount_total, session.currency) ?? ""} · ${productName ?? slug}`,
+                  submittedAt: new Date().toUTCString(),
+                },
+                idempotencyKey: `booking-${session.id}`,
+              });
+            } catch (e) {
+              console.error("[stripe-webhook] notify email failed", e);
+            }
+          }
+        }
+
+        if (customerEmail) {
+          try {
+            await sendInternalTransactionalEmail({
+              templateName: "order-confirmation",
+              recipientEmail: customerEmail,
+              templateData: {
+                customerName,
+                productName: productName ?? "your order",
+                amountFormatted: formatMoney(session.amount_total, session.currency),
+                orderId: session.id,
+                isService,
+              },
+              idempotencyKey: `order-${session.id}`,
+            });
+          } catch (e) {
+            console.error("[stripe-webhook] customer email failed", e);
+          }
         }
 
         return new Response("ok", { status: 200 });
