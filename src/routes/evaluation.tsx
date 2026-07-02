@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Check } from "lucide-react";
-import { Section, Eyebrow } from "@/components/section";
+import { Eyebrow } from "@/components/section";
 import { FadeIn } from "@/components/media";
 import { SpotsBanner } from "@/components/urgency";
 import { BookingForm } from "@/components/booking-form";
