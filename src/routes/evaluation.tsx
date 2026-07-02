@@ -31,45 +31,35 @@ function EvaluationPage() {
   return (
     <>
       <section className="border-b border-border">
-        <div className="mx-auto max-w-4xl px-6 py-24 text-center md:py-32">
-          <Eyebrow>Evaluation</Eyebrow>
-          <h1 className="font-display text-5xl font-semibold leading-[1.02] tracking-tight md:text-7xl">
-            Book Your Free Evaluation.
-          </h1>
-          <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground md:text-xl">
-            Every athlete starts here — it's free, and it's the only way in. We
-            assess the player in front of us and place them by skill, not age.
-          </p>
-          <div className="mx-auto mt-8 flex flex-wrap justify-center gap-x-8 gap-y-2 text-sm uppercase tracking-[0.15em] text-muted-foreground">
-            <span>Free</span>
+        <div className="mx-auto max-w-6xl px-6 py-10 md:py-16">
+          <div className="grid gap-10 md:grid-cols-12 md:gap-14">
+            <div className="md:col-span-5">
+              <Eyebrow>Evaluation · Free</Eyebrow>
+              <h1 className="mt-3 font-display text-4xl font-semibold leading-[1.02] tracking-tight md:text-6xl">
+                Book Your Free Evaluation.
+              </h1>
+              <p className="mt-5 text-base text-muted-foreground md:text-lg">
+                Every athlete starts here. We assess the player in front of us and place them by skill, not age.
+              </p>
+              <ul className="mt-6 space-y-3">
+                {COVERS.map((c) => (
+                  <li key={c} className="flex items-start gap-3 text-sm md:text-base">
+                    <Check className="mt-1 h-4 w-4 shrink-0" />
+                    <span>{c}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="md:col-span-7">
+              <FadeIn>
+                <BookingForm type="training" />
+              </FadeIn>
+            </div>
           </div>
         </div>
       </section>
 
       <SpotsBanner programKey="evaluation" />
-
-      <Section>
-        <div className="grid gap-16 md:grid-cols-12">
-          <div className="md:col-span-5">
-            <FadeIn>
-              <Eyebrow>What it covers</Eyebrow>
-              <ul className="mt-8 space-y-5">
-                {COVERS.map((c) => (
-                  <li key={c} className="flex items-start gap-3 text-lg">
-                    <Check className="mt-1 h-5 w-5 shrink-0" />
-                    <span>{c}</span>
-                  </li>
-                ))}
-              </ul>
-            </FadeIn>
-          </div>
-          <div className="md:col-span-7">
-            <FadeIn delay={0.05}>
-              <BookingForm type="training" />
-            </FadeIn>
-          </div>
-        </div>
-      </Section>
     </>
   );
 }
