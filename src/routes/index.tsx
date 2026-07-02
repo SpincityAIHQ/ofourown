@@ -69,7 +69,7 @@ const PROGRAMS = [
 
 const ECOSYSTEM = [
   { to: "/training", label: "Training", blurb: "Elite development, youth through pro.", image: trainingCover, soon: false },
-  { to: "/collection", label: "Apparel", blurb: "The OOO Performance Collection.", image: merchApparel.url, soon: true },
+  { to: "/merch", label: "Apparel", blurb: "The OOO Performance Collection.", image: merchApparel.url, soon: false },
   { to: "/speaking", label: "Media", blurb: "Talks, film, and the OOO voice.", image: speakingReel, soon: false },
   { to: "/community", label: "Recruiting", blurb: "College & pro pathway guidance.", image: communityPhoto, soon: true },
   { to: "/training", label: "Events", blurb: "Camps, clinics, and showcases.", image: fstSession, soon: true },
