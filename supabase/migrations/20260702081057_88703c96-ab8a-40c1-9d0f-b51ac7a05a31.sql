@@ -1,0 +1,1 @@
+UPDATE public.products SET image_url = '/__l5e/assets-v1/ca51dbaa-450b-46ef-b14f-5f4b25c71191/coaching-call.jpg' WHERE slug = 'coaching-call';
