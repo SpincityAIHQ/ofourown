@@ -19,6 +19,7 @@ import { Route as ShopRouteImport } from './routes/shop'
 import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as PhilosophyRouteImport } from './routes/philosophy'
 import { Route as MerchRouteImport } from './routes/merch'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as ManualsRouteImport } from './routes/manuals'
 import { Route as FstRouteImport } from './routes/fst'
 import { Route as EvaluationRouteImport } from './routes/evaluation'
@@ -38,11 +39,14 @@ import { Route as EliteIndexRouteImport } from './routes/elite.index'
 import { Route as ShopSlugRouteImport } from './routes/shop.$slug'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
+import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as EliteLearnIndexRouteImport } from './routes/elite.learn.index'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as EliteLearnLessonRouteImport } from './routes/elite.learn.$lesson'
 import { Route as ApiPublicStripeWebhookRouteImport } from './routes/api/public/stripe-webhook'
 import { Route as AuthenticatedEliteSubscribeRouteImport } from './routes/_authenticated/elite.subscribe'
+import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
@@ -95,6 +99,11 @@ const PhilosophyRoute = PhilosophyRouteImport.update({
 const MerchRoute = MerchRouteImport.update({
   id: '/merch',
   path: '/merch',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ManualsRoute = ManualsRouteImport.update({
@@ -191,6 +200,18 @@ const ApiChatRoute = ApiChatRouteImport.update({
   path: '/api/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Char91DotwellKnownChar93OauthProtectedResourceRoute =
+  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
+    id: '/.well-known/oauth-protected-resource',
+    path: '/.well-known/oauth-protected-resource',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char91DotmcpChar93ListToolsRoute =
+  Char91DotmcpChar93ListToolsRouteImport.update({
+    id: '/.mcp/list-tools',
+    path: '/.mcp/list-tools',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const EliteLearnIndexRoute = EliteLearnIndexRouteImport.update({
   id: '/elite/learn/',
   path: '/elite/learn/',
@@ -216,6 +237,12 @@ const AuthenticatedEliteSubscribeRoute =
     id: '/elite/subscribe',
     path: '/elite/subscribe',
     getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const Char91DotmcpChar93InvokeToolToolRoute =
+  Char91DotmcpChar93InvokeToolToolRouteImport.update({
+    id: '/.mcp/invoke-tool/$tool',
+    path: '/.mcp/invoke-tool/$tool',
+    getParentRoute: () => rootRouteImport,
   } as any)
 const LovableEmailTransactionalSendRoute =
   LovableEmailTransactionalSendRouteImport.update({
@@ -251,6 +278,7 @@ export interface FileRoutesByFullPath {
   '/evaluation': typeof EvaluationRoute
   '/fst': typeof FstRoute
   '/manuals': typeof ManualsRoute
+  '/mcp': typeof McpRoute
   '/merch': typeof MerchRoute
   '/philosophy': typeof PhilosophyRoute
   '/programs': typeof ProgramsRoute
@@ -261,10 +289,13 @@ export interface FileRoutesByFullPath {
   '/training': typeof TrainingRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/wellness': typeof WellnessRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/api/chat': typeof ApiChatRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/shop/$slug': typeof ShopSlugRoute
   '/elite/': typeof EliteIndexRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/elite/subscribe': typeof AuthenticatedEliteSubscribeRoute
   '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
   '/elite/learn/$lesson': typeof EliteLearnLessonRoute
@@ -289,6 +320,7 @@ export interface FileRoutesByTo {
   '/evaluation': typeof EvaluationRoute
   '/fst': typeof FstRoute
   '/manuals': typeof ManualsRoute
+  '/mcp': typeof McpRoute
   '/merch': typeof MerchRoute
   '/philosophy': typeof PhilosophyRoute
   '/programs': typeof ProgramsRoute
@@ -299,10 +331,13 @@ export interface FileRoutesByTo {
   '/training': typeof TrainingRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/wellness': typeof WellnessRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/api/chat': typeof ApiChatRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/shop/$slug': typeof ShopSlugRoute
   '/elite': typeof EliteIndexRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/elite/subscribe': typeof AuthenticatedEliteSubscribeRoute
   '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
   '/elite/learn/$lesson': typeof EliteLearnLessonRoute
@@ -329,6 +364,7 @@ export interface FileRoutesById {
   '/evaluation': typeof EvaluationRoute
   '/fst': typeof FstRoute
   '/manuals': typeof ManualsRoute
+  '/mcp': typeof McpRoute
   '/merch': typeof MerchRoute
   '/philosophy': typeof PhilosophyRoute
   '/programs': typeof ProgramsRoute
@@ -339,10 +375,13 @@ export interface FileRoutesById {
   '/training': typeof TrainingRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/wellness': typeof WellnessRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/api/chat': typeof ApiChatRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/shop/$slug': typeof ShopSlugRoute
   '/elite/': typeof EliteIndexRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/_authenticated/elite/subscribe': typeof AuthenticatedEliteSubscribeRoute
   '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
   '/elite/learn/$lesson': typeof EliteLearnLessonRoute
@@ -369,6 +408,7 @@ export interface FileRouteTypes {
     | '/evaluation'
     | '/fst'
     | '/manuals'
+    | '/mcp'
     | '/merch'
     | '/philosophy'
     | '/programs'
@@ -379,10 +419,13 @@ export interface FileRouteTypes {
     | '/training'
     | '/unsubscribe'
     | '/wellness'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/api/chat'
     | '/email/unsubscribe'
     | '/shop/$slug'
     | '/elite/'
+    | '/.mcp/invoke-tool/$tool'
     | '/elite/subscribe'
     | '/api/public/stripe-webhook'
     | '/elite/learn/$lesson'
@@ -407,6 +450,7 @@ export interface FileRouteTypes {
     | '/evaluation'
     | '/fst'
     | '/manuals'
+    | '/mcp'
     | '/merch'
     | '/philosophy'
     | '/programs'
@@ -417,10 +461,13 @@ export interface FileRouteTypes {
     | '/training'
     | '/unsubscribe'
     | '/wellness'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/api/chat'
     | '/email/unsubscribe'
     | '/shop/$slug'
     | '/elite'
+    | '/.mcp/invoke-tool/$tool'
     | '/elite/subscribe'
     | '/api/public/stripe-webhook'
     | '/elite/learn/$lesson'
@@ -446,6 +493,7 @@ export interface FileRouteTypes {
     | '/evaluation'
     | '/fst'
     | '/manuals'
+    | '/mcp'
     | '/merch'
     | '/philosophy'
     | '/programs'
@@ -456,10 +504,13 @@ export interface FileRouteTypes {
     | '/training'
     | '/unsubscribe'
     | '/wellness'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/api/chat'
     | '/email/unsubscribe'
     | '/shop/$slug'
     | '/elite/'
+    | '/.mcp/invoke-tool/$tool'
     | '/_authenticated/elite/subscribe'
     | '/api/public/stripe-webhook'
     | '/elite/learn/$lesson'
@@ -486,6 +537,7 @@ export interface RootRouteChildren {
   EvaluationRoute: typeof EvaluationRoute
   FstRoute: typeof FstRoute
   ManualsRoute: typeof ManualsRoute
+  McpRoute: typeof McpRoute
   MerchRoute: typeof MerchRoute
   PhilosophyRoute: typeof PhilosophyRoute
   ProgramsRoute: typeof ProgramsRoute
@@ -496,9 +548,12 @@ export interface RootRouteChildren {
   TrainingRoute: typeof TrainingRoute
   UnsubscribeRoute: typeof UnsubscribeRoute
   WellnessRoute: typeof WellnessRoute
+  Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
+  Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   ApiChatRoute: typeof ApiChatRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   EliteIndexRoute: typeof EliteIndexRoute
+  Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   ApiPublicStripeWebhookRoute: typeof ApiPublicStripeWebhookRoute
   EliteLearnLessonRoute: typeof EliteLearnLessonRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
@@ -578,6 +633,13 @@ declare module '@tanstack/react-router' {
       path: '/merch'
       fullPath: '/merch'
       preLoaderRoute: typeof MerchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/manuals': {
@@ -713,6 +775,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/.well-known/oauth-protected-resource': {
+      id: '/.well-known/oauth-protected-resource'
+      path: '/.well-known/oauth-protected-resource'
+      fullPath: '/.well-known/oauth-protected-resource'
+      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.mcp/list-tools': {
+      id: '/.mcp/list-tools'
+      path: '/.mcp/list-tools'
+      fullPath: '/.mcp/list-tools'
+      preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/elite/learn/': {
       id: '/elite/learn/'
       path: '/elite/learn'
@@ -747,6 +823,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/elite/subscribe'
       preLoaderRoute: typeof AuthenticatedEliteSubscribeRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/.mcp/invoke-tool/$tool': {
+      id: '/.mcp/invoke-tool/$tool'
+      path: '/.mcp/invoke-tool/$tool'
+      fullPath: '/.mcp/invoke-tool/$tool'
+      preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/lovable/email/transactional/send': {
       id: '/lovable/email/transactional/send'
@@ -809,6 +892,7 @@ const rootRouteChildren: RootRouteChildren = {
   EvaluationRoute: EvaluationRoute,
   FstRoute: FstRoute,
   ManualsRoute: ManualsRoute,
+  McpRoute: McpRoute,
   MerchRoute: MerchRoute,
   PhilosophyRoute: PhilosophyRoute,
   ProgramsRoute: ProgramsRoute,
@@ -819,9 +903,13 @@ const rootRouteChildren: RootRouteChildren = {
   TrainingRoute: TrainingRoute,
   UnsubscribeRoute: UnsubscribeRoute,
   WellnessRoute: WellnessRoute,
+  Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
+  Char91DotwellKnownChar93OauthProtectedResourceRoute:
+    Char91DotwellKnownChar93OauthProtectedResourceRoute,
   ApiChatRoute: ApiChatRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   EliteIndexRoute: EliteIndexRoute,
+  Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   ApiPublicStripeWebhookRoute: ApiPublicStripeWebhookRoute,
   EliteLearnLessonRoute: EliteLearnLessonRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
@@ -833,3 +921,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

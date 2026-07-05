@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "sdk_version": "0.20.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "ofourown-mcp",
+      "version": "0.1.0",
+      "title": "OfOurOwn — Ben Gordon"
+    },
+    "tools": [
+      {
+        "name": "list_programs",
+        "title": "List programs and services",
+        "description": "Return the full catalog of OfOurOwn programs — training packages, FST, wellness, coaching, and speaking — with pricing and page URLs.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_page",
+        "title": "Get page summary",
+        "description": "Get a short summary and URL for a named page on the OfOurOwn site (home, about, training, programs, evaluation, wellness, fst, coaching, speaking, shop, contact).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "page": {
+              "type": "string",
+              "enum": [
+                "home",
+                "about",
+                "training",
+                "programs",
+                "evaluation",
+                "wellness",
+                "fst",
+                "coaching",
+                "speaking",
+                "shop",
+                "contact"
+              ],
+              "description": "Which page to summarize."
+            }
+          },
+          "required": [
+            "page"
+          ]
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
