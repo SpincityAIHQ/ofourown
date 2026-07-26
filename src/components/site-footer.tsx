@@ -5,6 +5,7 @@ const COLUMNS = [
   {
     title: "Develop",
     links: [
+      { to: "/consultation", label: "Consultation" },
       { to: "/training", label: "Training" },
       { to: "/programs", label: "Programs & Pricing" },
       { to: "/elite", label: "OOO Elite (membership)" },
@@ -29,6 +30,7 @@ const COLUMNS = [
   {
     title: "Company",
     links: [
+      { to: "/music", label: "Music" },
       { to: "/about", label: "About" },
       { to: "/community", label: "Community" },
       { to: "/advocacy", label: "Advocacy" },

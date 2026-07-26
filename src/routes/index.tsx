@@ -68,6 +68,8 @@ const PROGRAMS = [
 ] as const;
 
 const ECOSYSTEM = [
+  { to: "/consultation", label: "Consultation", blurb: "Direct 1-on-1 time with Ben — parents & coaches.", image: undefined, soon: true },
+  { to: "/music", label: "Music", blurb: "The other side of the work.", image: undefined, soon: true },
   { to: "/training", label: "Training", blurb: "Elite development, youth through pro.", image: trainingCover, soon: false },
   { to: "/merch", label: "Apparel", blurb: "The OOO Performance Collection.", image: merchApparel.url, soon: false },
   { to: "/speaking", label: "Media", blurb: "Talks, film, and the OOO voice.", image: speakingReel, soon: false },

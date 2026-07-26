@@ -18,12 +18,14 @@ import { Route as SpeakingRouteImport } from './routes/speaking'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as PhilosophyRouteImport } from './routes/philosophy'
+import { Route as MusicRouteImport } from './routes/music'
 import { Route as MerchRouteImport } from './routes/merch'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as ManualsRouteImport } from './routes/manuals'
 import { Route as FstRouteImport } from './routes/fst'
 import { Route as EvaluationRouteImport } from './routes/evaluation'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ConsultationRouteImport } from './routes/consultation'
 import { Route as CommunityRouteImport } from './routes/community'
 import { Route as CollectionRouteImport } from './routes/collection'
 import { Route as CoachingRouteImport } from './routes/coaching'
@@ -96,6 +98,11 @@ const PhilosophyRoute = PhilosophyRouteImport.update({
   path: '/philosophy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MusicRoute = MusicRouteImport.update({
+  id: '/music',
+  path: '/music',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MerchRoute = MerchRouteImport.update({
   id: '/merch',
   path: '/merch',
@@ -124,6 +131,11 @@ const EvaluationRoute = EvaluationRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConsultationRoute = ConsultationRouteImport.update({
+  id: '/consultation',
+  path: '/consultation',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CommunityRoute = CommunityRouteImport.update({
@@ -274,12 +286,14 @@ export interface FileRoutesByFullPath {
   '/coaching': typeof CoachingRoute
   '/collection': typeof CollectionRoute
   '/community': typeof CommunityRoute
+  '/consultation': typeof ConsultationRoute
   '/contact': typeof ContactRoute
   '/evaluation': typeof EvaluationRoute
   '/fst': typeof FstRoute
   '/manuals': typeof ManualsRoute
   '/mcp': typeof McpRoute
   '/merch': typeof MerchRoute
+  '/music': typeof MusicRoute
   '/philosophy': typeof PhilosophyRoute
   '/programs': typeof ProgramsRoute
   '/shop': typeof ShopRouteWithChildren
@@ -316,12 +330,14 @@ export interface FileRoutesByTo {
   '/coaching': typeof CoachingRoute
   '/collection': typeof CollectionRoute
   '/community': typeof CommunityRoute
+  '/consultation': typeof ConsultationRoute
   '/contact': typeof ContactRoute
   '/evaluation': typeof EvaluationRoute
   '/fst': typeof FstRoute
   '/manuals': typeof ManualsRoute
   '/mcp': typeof McpRoute
   '/merch': typeof MerchRoute
+  '/music': typeof MusicRoute
   '/philosophy': typeof PhilosophyRoute
   '/programs': typeof ProgramsRoute
   '/shop': typeof ShopRouteWithChildren
@@ -360,12 +376,14 @@ export interface FileRoutesById {
   '/coaching': typeof CoachingRoute
   '/collection': typeof CollectionRoute
   '/community': typeof CommunityRoute
+  '/consultation': typeof ConsultationRoute
   '/contact': typeof ContactRoute
   '/evaluation': typeof EvaluationRoute
   '/fst': typeof FstRoute
   '/manuals': typeof ManualsRoute
   '/mcp': typeof McpRoute
   '/merch': typeof MerchRoute
+  '/music': typeof MusicRoute
   '/philosophy': typeof PhilosophyRoute
   '/programs': typeof ProgramsRoute
   '/shop': typeof ShopRouteWithChildren
@@ -404,12 +422,14 @@ export interface FileRouteTypes {
     | '/coaching'
     | '/collection'
     | '/community'
+    | '/consultation'
     | '/contact'
     | '/evaluation'
     | '/fst'
     | '/manuals'
     | '/mcp'
     | '/merch'
+    | '/music'
     | '/philosophy'
     | '/programs'
     | '/shop'
@@ -446,12 +466,14 @@ export interface FileRouteTypes {
     | '/coaching'
     | '/collection'
     | '/community'
+    | '/consultation'
     | '/contact'
     | '/evaluation'
     | '/fst'
     | '/manuals'
     | '/mcp'
     | '/merch'
+    | '/music'
     | '/philosophy'
     | '/programs'
     | '/shop'
@@ -489,12 +511,14 @@ export interface FileRouteTypes {
     | '/coaching'
     | '/collection'
     | '/community'
+    | '/consultation'
     | '/contact'
     | '/evaluation'
     | '/fst'
     | '/manuals'
     | '/mcp'
     | '/merch'
+    | '/music'
     | '/philosophy'
     | '/programs'
     | '/shop'
@@ -533,12 +557,14 @@ export interface RootRouteChildren {
   CoachingRoute: typeof CoachingRoute
   CollectionRoute: typeof CollectionRoute
   CommunityRoute: typeof CommunityRoute
+  ConsultationRoute: typeof ConsultationRoute
   ContactRoute: typeof ContactRoute
   EvaluationRoute: typeof EvaluationRoute
   FstRoute: typeof FstRoute
   ManualsRoute: typeof ManualsRoute
   McpRoute: typeof McpRoute
   MerchRoute: typeof MerchRoute
+  MusicRoute: typeof MusicRoute
   PhilosophyRoute: typeof PhilosophyRoute
   ProgramsRoute: typeof ProgramsRoute
   ShopRoute: typeof ShopRouteWithChildren
@@ -628,6 +654,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PhilosophyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/music': {
+      id: '/music'
+      path: '/music'
+      fullPath: '/music'
+      preLoaderRoute: typeof MusicRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/merch': {
       id: '/merch'
       path: '/merch'
@@ -668,6 +701,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/consultation': {
+      id: '/consultation'
+      path: '/consultation'
+      fullPath: '/consultation'
+      preLoaderRoute: typeof ConsultationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/community': {
@@ -888,12 +928,14 @@ const rootRouteChildren: RootRouteChildren = {
   CoachingRoute: CoachingRoute,
   CollectionRoute: CollectionRoute,
   CommunityRoute: CommunityRoute,
+  ConsultationRoute: ConsultationRoute,
   ContactRoute: ContactRoute,
   EvaluationRoute: EvaluationRoute,
   FstRoute: FstRoute,
   ManualsRoute: ManualsRoute,
   McpRoute: McpRoute,
   MerchRoute: MerchRoute,
+  MusicRoute: MusicRoute,
   PhilosophyRoute: PhilosophyRoute,
   ProgramsRoute: ProgramsRoute,
   ShopRoute: ShopRouteWithChildren,

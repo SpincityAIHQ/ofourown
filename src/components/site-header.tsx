@@ -11,6 +11,8 @@ type Item = Leaf | { label: string; children: Leaf[] };
 
 const NAV: Item[] = [
   { to: "/", label: "Home" },
+  { to: "/consultation", label: "Consultation" },
+  { to: "/music", label: "Music" },
   {
     label: "Train",
     children: [
@@ -19,6 +21,7 @@ const NAV: Item[] = [
       { to: "/philosophy", label: "Philosophy", blurb: "How we develop complete players." },
       { to: "/fst", label: "Fascia Stretch Therapy", blurb: "Mobility & recovery sessions." },
       { to: "/coaching", label: "Coaching", blurb: "Mentorship for athletes & operators." },
+      { to: "/consultation", label: "Consultation", blurb: "Direct 1-on-1 time with Ben — for parents & coaches." },
       { to: "/wellness", label: "Wellness", blurb: "Recovery, nutrition, and longevity." },
     ],
   },
