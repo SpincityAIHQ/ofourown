@@ -11,6 +11,8 @@ type Item = Leaf | { label: string; children: Leaf[] };
 
 const NAV: Item[] = [
   { to: "/", label: "Home" },
+  { to: "/consultation", label: "Consultation" },
+  { to: "/music", label: "Music" },
   {
     label: "Train",
     children: [
@@ -25,7 +27,6 @@ const NAV: Item[] = [
   },
   { to: "/speaking", label: "Media" },
   { to: "/elite", label: "OOO Elite" },
-  { to: "/music", label: "Music" },
   {
     label: "Shop",
     children: [

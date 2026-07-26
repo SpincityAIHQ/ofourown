@@ -5,6 +5,7 @@ const COLUMNS = [
   {
     title: "Develop",
     links: [
+      { to: "/consultation", label: "Consultation" },
       { to: "/training", label: "Training" },
       { to: "/programs", label: "Programs & Pricing" },
       { to: "/elite", label: "OOO Elite (membership)" },
@@ -12,7 +13,6 @@ const COLUMNS = [
       { to: "/evaluation", label: "Book Free Evaluation" },
       { to: "/fst", label: "Fascia Stretch Therapy" },
       { to: "/coaching", label: "Coaching" },
-      { to: "/consultation", label: "Consultation" },
       { to: "/wellness", label: "Wellness" },
     ],
   },
@@ -30,9 +30,9 @@ const COLUMNS = [
   {
     title: "Company",
     links: [
+      { to: "/music", label: "Music" },
       { to: "/about", label: "About" },
       { to: "/community", label: "Community" },
-      { to: "/music", label: "Music" },
       { to: "/advocacy", label: "Advocacy" },
       { to: "/contact", label: "Contact" },
     ],
