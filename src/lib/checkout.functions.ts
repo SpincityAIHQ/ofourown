@@ -51,7 +51,7 @@ function getPublicSupabase() {
 }
 
 export const createCheckoutSession = createServerFn({ method: "POST" })
-  .validator((input: unknown) => singleInputSchema.parse(input))
+  .inputValidator((input: unknown) => singleInputSchema.parse(input))
   .handler(async ({ data }): Promise<CheckoutResult> => {
     try {
       const supabase = getPublicSupabase();
@@ -94,7 +94,7 @@ export const createCheckoutSession = createServerFn({ method: "POST" })
   });
 
 export const createCartCheckoutSession = createServerFn({ method: "POST" })
-  .validator((input: unknown) => cartInputSchema.parse(input))
+  .inputValidator((input: unknown) => cartInputSchema.parse(input))
   .handler(async ({ data }): Promise<CheckoutResult> => {
     try {
       const supabase = getPublicSupabase();
@@ -156,7 +156,7 @@ const ELITE_PRICE_LOOKUP = "ooo_elite_monthly";
  */
 export const createEliteMembershipCheckout = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .validator((input: unknown) => membershipInputSchema.parse(input))
+  .inputValidator((input: unknown) => membershipInputSchema.parse(input))
   .handler(async ({ data, context }): Promise<CheckoutResult> => {
     try {
       const { userId, claims } = context as { userId: string; claims: { email?: string } };
