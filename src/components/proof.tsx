@@ -15,19 +15,19 @@ export type Testimonial = {
   real?: boolean;
 };
 
-export function StarRating({
-  count = 5,
-  className,
-}: {
-  count?: number;
-  className?: string;
-}) {
+export function StarRating({ count = 5, className }: { count?: number; className?: string }) {
   return (
-    <div className={cn("flex items-center gap-0.5", className)} aria-label={`${count} out of 5 stars`}>
+    <div
+      className={cn("flex items-center gap-0.5", className)}
+      aria-label={`${count} out of 5 stars`}
+    >
       {Array.from({ length: 5 }).map((_, i) => (
         <Star
           key={i}
-          className={cn("h-4 w-4", i < count ? "fill-foreground text-foreground" : "text-muted-foreground/40")}
+          className={cn(
+            "h-4 w-4",
+            i < count ? "fill-foreground text-foreground" : "text-muted-foreground/40",
+          )}
         />
       ))}
     </div>
@@ -35,6 +35,7 @@ export function StarRating({
 }
 
 export function Testimonial({ quote, name, role, real = false }: Testimonial) {
+  if (!real) return null;
   return (
     <figure className="flex h-full flex-col justify-between gap-6 bg-background p-8">
       <div>
@@ -53,9 +54,21 @@ export function Testimonial({ quote, name, role, real = false }: Testimonial) {
 }
 
 const PLACEHOLDER_TESTIMONIALS: Testimonial[] = [
-  { quote: "Coach completely changed my son's confidence on the court.", name: "Parent", role: "Chicago, IL" },
-  { quote: "The best basketball development I've been part of in the city.", name: "Player", role: "High school guard" },
-  { quote: "Ben teaches the game the way it's actually played at the highest level.", name: "Coach", role: "AAU program director" },
+  {
+    quote: "Coach completely changed my son's confidence on the court.",
+    name: "Parent",
+    role: "Chicago, IL",
+  },
+  {
+    quote: "The best basketball development I've been part of in the city.",
+    name: "Player",
+    role: "High school guard",
+  },
+  {
+    quote: "Ben teaches the game the way it's actually played at the highest level.",
+    name: "Coach",
+    role: "AAU program director",
+  },
 ];
 
 export function TestimonialGrid({
@@ -65,13 +78,11 @@ export function TestimonialGrid({
   items?: Testimonial[];
   columns?: 2 | 3;
 }) {
-  const list = items?.length ? items : PLACEHOLDER_TESTIMONIALS;
+  const list = (items ?? []).filter((item) => item.real === true);
+  if (list.length === 0) return null;
   return (
     <div
-      className={cn(
-        "grid gap-px bg-border",
-        columns === 2 ? "md:grid-cols-2" : "md:grid-cols-3",
-      )}
+      className={cn("grid gap-px bg-border", columns === 2 ? "md:grid-cols-2" : "md:grid-cols-3")}
     >
       {list.map((t, i) => (
         <Testimonial key={i} {...t} />
@@ -84,13 +95,7 @@ export function TestimonialGrid({
  * A single proof statistic. Values default to "—" until verified — pass a real
  * value only once permissioned.
  */
-export function ProofStat({
-  value = "—",
-  label,
-}: {
-  value?: string;
-  label: string;
-}) {
+export function ProofStat({ value = "—", label }: { value?: string; label: string }) {
   return (
     <div className="flex flex-col items-start gap-2 border-l border-border px-6 py-4 first:border-l-0 md:px-8">
       <div className="font-display text-4xl font-semibold leading-none md:text-5xl">{value}</div>

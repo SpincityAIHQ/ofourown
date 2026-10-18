@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import { StarRating } from "@/components/proof";
 
 const COLUMNS = [
   {
@@ -61,12 +60,9 @@ export function SiteFooter() {
             OOO <span className="text-muted-foreground">Performance</span>
           </p>
           <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-            An elite performance brand built by NBA Veteran Ben Gordon. Training,
-            apparel, media, and community — for athletes building something that lasts.
+            An elite performance brand built by NBA Veteran Ben Gordon. Training, apparel, media,
+            and community — for athletes building something that lasts.
           </p>
-          <div className="mt-6">
-            <StarRating />
-          </div>
         </div>
         {COLUMNS.map((col) => (
           <div key={col.title} className="md:col-span-2">
@@ -98,7 +94,9 @@ export function SiteFooter() {
         <div className="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-6 text-xs text-muted-foreground md:flex-row md:items-center md:justify-between">
           <p>© {new Date().getFullYear()} OOO Performance. All rights reserved.</p>
           <p className="max-w-2xl text-muted-foreground/70">
-            Information on this site is for general education only and is not medical, mental-health, financial, or legal advice. Always consult a qualified professional for your situation.
+            Information on this site is for general education only and is not medical,
+            mental-health, financial, or legal advice. Always consult a qualified professional for
+            your situation.
           </p>
         </div>
       </div>

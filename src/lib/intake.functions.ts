@@ -59,7 +59,7 @@ const leadSchema = z.object({
 });
 
 export const submitLead = createServerFn({ method: "POST" })
-  .inputValidator((input: unknown) => leadSchema.parse(input))
+  .validator((input: unknown) => leadSchema.parse(input))
   .handler(async ({ data }) => {
     const supabase = getServerClient();
     const { error } = await supabase.from("leads").insert(data);
@@ -91,7 +91,7 @@ const bookingSchema = z.object({
 });
 
 export const submitBooking = createServerFn({ method: "POST" })
-  .inputValidator((input: unknown) => bookingSchema.parse(input))
+  .validator((input: unknown) => bookingSchema.parse(input))
   .handler(async ({ data }) => {
     const supabase = getServerClient();
     const { error } = await supabase.from("booking_requests").insert(data);
@@ -146,7 +146,7 @@ const inquirySchema = z.object({
 });
 
 export const submitInquiry = createServerFn({ method: "POST" })
-  .inputValidator((input: unknown) => inquirySchema.parse(input))
+  .validator((input: unknown) => inquirySchema.parse(input))
   .handler(async ({ data }) => {
     const supabase = getServerClient();
     const { error } = await supabase.from("inquiries").insert(data);
@@ -181,7 +181,7 @@ const speakingSchema = z.object({
 });
 
 export const submitSpeakingInquiry = createServerFn({ method: "POST" })
-  .inputValidator((input: unknown) => speakingSchema.parse(input))
+  .validator((input: unknown) => speakingSchema.parse(input))
   .handler(async ({ data }) => {
     const supabase = getServerClient();
     const { error } = await supabase.from("speaking_inquiries").insert(data);

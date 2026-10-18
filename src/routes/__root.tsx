@@ -48,11 +48,13 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({ error, reset }: { error: unknown; reset: () => void }) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
+    reportLovableError(error instanceof Error ? error : new Error(String(error)), {
+      boundary: "tanstack_root_error_component",
+    });
   }, [error]);
 
   return (
@@ -98,18 +100,38 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "apple-mobile-web-app-title", content: "OOO" },
       { name: "application-name", content: "OOO Performance" },
       { title: "OOO Performance — Elite Basketball Development" },
-      { name: "description", content: "OOO Performance — elite basketball development built by NBA Veteran Ben Gordon. Training, apparel, media, and community for athletes building something that lasts." },
+      {
+        name: "description",
+        content:
+          "OOO Performance — elite basketball development built by NBA Veteran Ben Gordon. Training, apparel, media, and community for athletes building something that lasts.",
+      },
       { name: "author", content: "Ben Gordon" },
       { property: "og:site_name", content: "OOO Performance" },
       { property: "og:title", content: "OOO Performance — Elite Basketball Development" },
-      { property: "og:description", content: "Elite basketball development built by NBA Veteran Ben Gordon. Training, apparel, media, and community." },
+      {
+        property: "og:description",
+        content:
+          "Elite basketball development built by NBA Veteran Ben Gordon. Training, apparel, media, and community.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
       { name: "twitter:title", content: "OOO Performance — Elite Basketball Development" },
-      { name: "twitter:description", content: "Elite basketball development built by NBA Veteran Ben Gordon. Training, apparel, media, and community." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/91edbcbd-0031-4427-a7eb-5e49a8488d51/id-preview-4cb82412--c36aa13e-931b-46f2-a19c-17ef0a97b3f6.lovable.app-1782237511100.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/91edbcbd-0031-4427-a7eb-5e49a8488d51/id-preview-4cb82412--c36aa13e-931b-46f2-a19c-17ef0a97b3f6.lovable.app-1782237511100.png" },
+      {
+        name: "twitter:description",
+        content:
+          "Elite basketball development built by NBA Veteran Ben Gordon. Training, apparel, media, and community.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/91edbcbd-0031-4427-a7eb-5e49a8488d51/id-preview-4cb82412--c36aa13e-931b-46f2-a19c-17ef0a97b3f6.lovable.app-1782237511100.png",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/91edbcbd-0031-4427-a7eb-5e49a8488d51/id-preview-4cb82412--c36aa13e-931b-46f2-a19c-17ef0a97b3f6.lovable.app-1782237511100.png",
+      },
     ],
     links: [
       {
@@ -153,8 +175,14 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <CartProvider>
         <div className="flex min-h-screen flex-col">
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-background focus:p-4"
+          >
+            Skip to content
+          </a>
           <SiteHeader />
-          <main className="flex-1">
+          <main id="main-content" className="flex-1">
             {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
             <Outlet />
           </main>

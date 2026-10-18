@@ -146,9 +146,65 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3, .font-display {
+  h1,
+  h2,
+  h3,
+  .font-display {
     font-family: "Fraunces", ui-serif, Georgia, serif;
     font-feature-settings: "ss01", "ss02";
     letter-spacing: -0.02em;
+  }
+}
+
+/* OOO's evaluation-first editorial system. */
+html {
+  scroll-behavior: smooth;
+}
+.ooo-eyebrow {
+  font-family: "Inter", sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.6;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--muted-foreground);
+}
+.ooo-text-link {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid var(--border);
+  padding-block: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: border-color 0.2s;
+}
+.ooo-text-link:hover {
+  border-color: var(--foreground);
+}
+.ooo-court-lines {
+  background-image: linear-gradient(90deg, transparent 49.9%, #ffffff08 50%, transparent 50.1%);
+}
+.ooo-faq summary::-webkit-details-marker {
+  display: none;
+}
+.ooo-faq[open] .ooo-faq-icon {
+  transform: rotate(45deg);
+}
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }

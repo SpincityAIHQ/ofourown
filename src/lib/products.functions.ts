@@ -52,7 +52,7 @@ export const listProducts = createServerFn({ method: "GET" }).handler(
 const slugSchema = z.object({ slug: z.string().trim().min(1).max(120) });
 
 export const getProductBySlug = createServerFn({ method: "GET" })
-  .inputValidator((input: unknown) => slugSchema.parse(input))
+  .validator((input: unknown) => slugSchema.parse(input))
   .handler(async ({ data }): Promise<Product | null> => {
     const supabase = getServerClient();
     const { data: row, error } = await supabase

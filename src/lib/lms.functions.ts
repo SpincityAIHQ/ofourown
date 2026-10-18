@@ -183,7 +183,7 @@ export const listPillars = createServerFn({ method: "GET" }).handler(
 const slugSchema = z.object({ slug: z.string().trim().min(1).max(160) });
 
 export const getPillarBySlug = createServerFn({ method: "GET" })
-  .inputValidator((input: unknown) => slugSchema.parse(input))
+  .validator((input: unknown) => slugSchema.parse(input))
   .handler(async ({ data }): Promise<Pillar | null> => {
     const supabase = getServerClient();
     const { data: row, error } = await supabase
@@ -206,7 +206,7 @@ export type CourseWithContext = Course & {
 };
 
 export const getCourseBySlug = createServerFn({ method: "GET" })
-  .inputValidator((input: unknown) => slugSchema.parse(input))
+  .validator((input: unknown) => slugSchema.parse(input))
   .handler(async ({ data }): Promise<CourseWithContext | null> => {
     const supabase = getServerClient();
     const { data: row, error } = await supabase
@@ -245,7 +245,7 @@ type LessonWithContextRow = Lesson & {
 };
 
 export const getLessonBySlug = createServerFn({ method: "GET" })
-  .inputValidator((input: unknown) => slugSchema.parse(input))
+  .validator((input: unknown) => slugSchema.parse(input))
   .handler(async ({ data }): Promise<LessonContext | null> => {
     const supabase = getServerClient();
     const { data: row, error } = await supabase
