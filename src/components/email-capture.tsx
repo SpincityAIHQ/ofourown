@@ -36,17 +36,15 @@ export function EmailCapture({
   }
 
   if (done) {
-    return (
-      <p className="text-sm text-muted-foreground">
-        Thanks — you'll hear from Ben soon.
-      </p>
-    );
+    return <p className="text-sm text-muted-foreground">Thanks — you'll hear from Ben soon.</p>;
   }
 
   return (
     <form onSubmit={onSubmit} className="flex w-full max-w-md gap-2">
       <Input
         type="email"
+        aria-label="Email address for OOO Performance updates"
+        autoComplete="email"
         required
         value={email}
         onChange={(e) => setEmail(e.target.value)}

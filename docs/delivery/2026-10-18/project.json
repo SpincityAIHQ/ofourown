@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "method_version": "1.1",
+  "project_id": "cecc8f75-8e11-49c1-8271-9fa81c9488e5",
+  "created_at": "2026-10-18T10:21:15.020779+00:00",
+  "revision": "ui-campaign-2026-10-18-v2",
+  "reported_state": "demo",
+  "brief": {
+    "client_name": "Ben Gordon / OOO Performance",
+    "project_name": "Evaluation-first UI and campaign delivery",
+    "decision_owner": "Spin",
+    "source_refs": [
+      "Google Drive: OOO Performance Business Plan (July 1, 2026)",
+      "GitHub: SpincityAIHQ/ofourown main",
+      "Lovable: c36aa13e-931b-46f2-a19c-17ef0a97b3f6"
+    ],
+    "platform": "Existing Lovable / TanStack app with GitHub sync",
+    "existing_project_url": "https://lovable.dev/projects/c36aa13e-931b-46f2-a19c-17ef0a97b3f6",
+    "goal": {
+      "metric": "requested delivery",
+      "definition": "Healthy evaluation-focused UI and completed campaign assets in Google Drive",
+      "target": 1,
+      "deadline": "2026-10-18T23:59:59-04:00",
+      "baseline": "Prior UI with placeholder sections; campaign assets not delivered"
+    },
+    "audience": "Adult athletes and parents/guardians of eligible basketball players",
+    "offer": "Free evaluation request leading to skill-based training placement",
+    "approved_price": "Existing published training pricing preserved; no campaign price claims",
+    "delivery_capacity": "Evaluation dates and location confirmed by OOO team; not verified in this run",
+    "components": [
+      "app",
+      "acquisition"
+    ],
+    "authorization": {
+      "scope_reference": "User Oct18 instruction to improve Ben UI/UX and create/place ads and emails in Drive",
+      "publish": true,
+      "outbound": false,
+      "spend_limit": 0,
+      "budget_period": "this task",
+      "allowed_channels": [
+        "existing website UI",
+        "Google Drive deliverables"
+      ],
+      "expires_at": "2026-10-18T23:59:59-04:00"
+    }
+  },
+  "links": {
+    "project": "https://lovable.dev/projects/c36aa13e-931b-46f2-a19c-17ef0a97b3f6",
+    "source_repo": "https://github.com/SpincityAIHQ/ofourown",
+    "preview": "https://id-preview--c36aa13e-931b-46f2-a19c-17ef0a97b3f6.lovable.app",
+    "live": "https://oooelitebasketballtraining.com/",
+    "campaign_delivery": "https://drive.google.com/drive/folders/1EzI5o9fOO5BZ2CVwSR4CIgEcGLL1ifDX"
+  },
+  "gates": {
+    "source_offer": {
+      "status": "pass",
+      "evidence": [
+        {
+          "reference": "sources.md and blueprint.md; production browser inspection; Drive folder readback",
+          "observed_at": "2026-10-18T10:21:00Z",
+          "revision": "ui-campaign-2026-10-18-v2",
+          "result": "See scoped evidence in emerald.md",
+          "scope": "Limited UI/content change only; no live booking submission or campaign activation."
+        }
+      ],
+      "reason": "Verified within the limited UI/content delivery scope.",
+      "owner": "Spin"
+    },
+    "demo": {
+      "status": "pass",
+      "evidence": [
+        {
+          "reference": "sources.md and blueprint.md; production browser inspection; Drive folder readback",
+          "observed_at": "2026-10-18T10:21:00Z",
+          "revision": "ui-campaign-2026-10-18-v2",
+          "result": "See scoped evidence in emerald.md",
+          "scope": "Limited UI/content change only; no live booking submission or campaign activation."
+        }
+      ],
+      "reason": "Verified within the limited UI/content delivery scope.",
+      "owner": "Spin"
+    },
+    "core_value": {
+      "status": "pending",
+      "evidence": [],
+      "reason": "Not certified in this UI/content slice. See blueprint.md and emerald.md for exact test scope and owner dependencies.",
+      "owner": "Spin"
+    },
+    "access_data": {
+      "status": "pending",
+      "evidence": [],
+      "reason": "Not certified in this UI/content slice. See blueprint.md and emerald.md for exact test scope and owner dependencies.",
+      "owner": "Spin"
+    },
+    "conversion_measurement": {
+      "status": "pending",
+      "evidence": [],
+      "reason": "Not certified in this UI/content slice. See blueprint.md and emerald.md for exact test scope and owner dependencies.",
+      "owner": "Spin"
+    },
+    "operating_authority": {
+      "status": "pass",
+      "evidence": [
+        {
+          "reference": "sources.md and blueprint.md; production browser inspection; Drive folder readback",
+          "observed_at": "2026-10-18T10:21:00Z",
+          "revision": "ui-campaign-2026-10-18-v2",
+          "result": "See scoped evidence in emerald.md",
+          "scope": "Limited UI/content change only; no live booking submission or campaign activation."
+        }
+      ],
+      "reason": "Verified within the limited UI/content delivery scope.",
+      "owner": "Spin"
+    },
+    "handoff": {
+      "status": "pending",
+      "evidence": [],
+      "reason": "Assets placed; owner sender/date/capacity setup and controlled live test remain.",
+      "owner": "Spin"
+    }
+  },
+  "delivery_state_note": "Website UI is published; overall app end-to-end and campaign operation remain uncertified."
+}

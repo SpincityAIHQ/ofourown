@@ -63,8 +63,6 @@ function DesktopGroup({ label, children }: { label: string; children: Leaf[] }) 
     <div
       ref={ref}
       className="relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
       onKeyDown={(event) => {
         if (event.key === "Escape") setOpen(false);
       }}
