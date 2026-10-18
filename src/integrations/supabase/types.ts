@@ -16,6 +16,14 @@ export type Database = {
     Tables: {
       booking_requests: {
         Row: {
+          athlete_age_band: string | null
+          utm_source: string | null
+          utm_medium: string | null
+          utm_campaign: string | null
+          utm_term: string | null
+          utm_content: string | null
+          landing_path: string | null
+
           created_at: string
           email: string
           goals: string | null
@@ -28,6 +36,14 @@ export type Database = {
           type: string
         }
         Insert: {
+          athlete_age_band?: string | null
+          utm_source?: string | null
+          utm_medium?: string | null
+          utm_campaign?: string | null
+          utm_term?: string | null
+          utm_content?: string | null
+          landing_path?: string | null
+
           created_at?: string
           email: string
           goals?: string | null
@@ -40,6 +56,14 @@ export type Database = {
           type: string
         }
         Update: {
+          athlete_age_band?: string | null
+          utm_source?: string | null
+          utm_medium?: string | null
+          utm_campaign?: string | null
+          utm_term?: string | null
+          utm_content?: string | null
+          landing_path?: string | null
+
           created_at?: string
           email?: string
           goals?: string | null

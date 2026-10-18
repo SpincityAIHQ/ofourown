@@ -2,19 +2,16 @@ import { createServerFn } from "@tanstack/react-start";
 import { createClient } from "@supabase/supabase-js";
 import { z } from "zod";
 import type { Database } from "@/integrations/supabase/types";
+import { bookingSchema, bookingNotificationNotes } from "@/lib/booking-schema";
 
 function getServerClient() {
-  return createClient<Database>(
-    process.env.SUPABASE_URL!,
-    process.env.SUPABASE_PUBLISHABLE_KEY!,
-    {
-      auth: {
-        storage: undefined,
-        persistSession: false,
-        autoRefreshToken: false,
-      },
+  return createClient<Database>(process.env.SUPABASE_URL!, process.env.SUPABASE_PUBLISHABLE_KEY!, {
+    auth: {
+      storage: undefined,
+      persistSession: false,
+      autoRefreshToken: false,
     },
-  );
+  });
 }
 
 async function notify(
@@ -26,9 +23,7 @@ async function notify(
   const to = process.env.NOTIFY_EMAIL;
   if (!to) return;
   try {
-    const { sendInternalTransactionalEmail } = await import(
-      "@/lib/email/send-internal.server"
-    );
+    const { sendInternalTransactionalEmail } = await import("@/lib/email/send-internal.server");
     await sendInternalTransactionalEmail({
       templateName: "internal-notification",
       recipientEmail: to,
@@ -67,31 +62,23 @@ export const submitLead = createServerFn({ method: "POST" })
       console.error("[submitLead]", error);
       throw new Error("Could not save your email. Please try again.");
     }
-    await notify(
-      `New lead — ${data.email}`,
-      `New email signup`,
-      [
-        { label: "Email", value: data.email },
-        { label: "Source", value: data.source ?? "website" },
-      ],
-    );
+    await notify(`New lead — ${data.email}`, `New email signup`, [
+      { label: "Email", value: data.email },
+      { label: "Source", value: data.source ?? "website" },
+    ]);
     return { ok: true };
   });
 
 /* ---------------- BOOKING REQUESTS ---------------- */
 
-const bookingSchema = z.object({
-  type: z.enum(["training", "wellness", "fst", "coaching"]),
-  name: z.string().trim().min(1).max(120),
-  email: z.string().trim().email().max(255),
-  phone: z.string().trim().max(40).optional(),
-  goals: z.string().trim().max(2000).optional(),
-  preferred_time: z.string().trim().max(200).optional(),
-  notes: z.string().trim().max(2000).optional(),
-});
-
 export const submitBooking = createServerFn({ method: "POST" })
-  .inputValidator((input: unknown) => bookingSchema.parse(input))
+  .inputValidator((input: unknown) => {
+    const parsed = bookingSchema.safeParse(input);
+    if (!parsed.success) {
+      throw new Error(parsed.error.issues[0]?.message ?? "Check your request details.");
+    }
+    return parsed.data;
+  })
   .handler(async ({ data }) => {
     const supabase = getServerClient();
     const { error } = await supabase.from("booking_requests").insert(data);
@@ -99,6 +86,7 @@ export const submitBooking = createServerFn({ method: "POST" })
       console.error("[submitBooking]", error);
       throw new Error("Could not submit your booking. Please try again.");
     }
+    const notificationNotes = bookingNotificationNotes(data);
     const notifyTo = process.env.NOTIFY_EMAIL;
     if (notifyTo) {
       try {
@@ -111,7 +99,7 @@ export const submitBooking = createServerFn({ method: "POST" })
             (data.phone ? `Phone: ${data.phone}\n` : "") +
             (data.preferred_time ? `Preferred: ${data.preferred_time}\n` : "") +
             (data.goals ? `\nGoals:\n${data.goals}\n` : "") +
-            (data.notes ? `\nNotes:\n${data.notes}\n` : ""),
+            (notificationNotes ? `\nNotes:\n${notificationNotes}\n` : ""),
         });
         await sendInternalTransactionalEmail({
           templateName: "booking-confirmation",
@@ -124,7 +112,7 @@ export const submitBooking = createServerFn({ method: "POST" })
             phone: data.phone,
             preferredTime: data.preferred_time,
             goals: data.goals,
-            notes: data.notes,
+            notes: notificationNotes,
             submittedAt: new Date().toUTCString(),
             calendarUrl,
           },

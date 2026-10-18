@@ -22,6 +22,7 @@ import { SiteFooter } from "../components/site-footer";
 import { ChatWidget } from "../components/chat-widget";
 import { InstallPrompt } from "../components/install-prompt";
 import { registerServiceWorker } from "../lib/pwa";
+import { captureCampaignAttribution } from "../lib/campaign-attribution";
 import { Toaster } from "../components/ui/sonner";
 import { CartProvider } from "../lib/cart";
 import { CartDrawer } from "../components/cart-drawer";
@@ -169,6 +170,7 @@ function RootComponent() {
 
   useEffect(() => {
     registerServiceWorker();
+    captureCampaignAttribution();
   }, []);
 
   return (

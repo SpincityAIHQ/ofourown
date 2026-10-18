@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { submitBooking } from "@/lib/intake.functions";
+import { ATHLETE_AGE_BANDS } from "@/lib/booking-schema";
+import { captureCampaignAttribution } from "@/lib/campaign-attribution";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -25,6 +27,14 @@ export function BookingForm({ type }: { type: "training" | "wellness" | "fst" | 
       goals: String(fd.get("goals") ?? "") || undefined,
       preferred_time: String(fd.get("preferred_time") ?? "") || undefined,
       notes: String(fd.get("notes") ?? "") || undefined,
+      ...(isEvaluation
+        ? {
+            athlete_age_band: String(
+              fd.get("athlete_age_band") ?? "",
+            ) as (typeof ATHLETE_AGE_BANDS)[number]["value"],
+          }
+        : {}),
+      ...captureCampaignAttribution(),
     };
     setLoading(true);
     setError("");
@@ -63,6 +73,32 @@ export function BookingForm({ type }: { type: "training" | "wellness" | "fst" | 
         </Label>
         <Input id="name" name="name" autoComplete="name" required maxLength={120} />
       </div>
+      {isEvaluation ? (
+        <div className="grid gap-2">
+          <Label htmlFor="athlete_age_band">Athlete's age group</Label>
+          <select
+            id="athlete_age_band"
+            name="athlete_age_band"
+            required
+            defaultValue=""
+            aria-describedby="age-help"
+            className="h-11 w-full min-w-0 rounded-none border border-input bg-transparent px-3 text-sm"
+          >
+            <option value="" disabled>
+              Choose an age group
+            </option>
+            {ATHLETE_AGE_BANDS.map((band) => (
+              <option key={band.value} value={band.value}>
+                {band.label}
+              </option>
+            ))}
+          </select>
+          <p id="age-help" className="text-xs leading-relaxed text-muted-foreground">
+            Training starts at age 8. Ages 8–9 train in groups; private training starts at 10. No
+            date of birth needed.
+          </p>
+        </div>
+      ) : null}
       <div className="grid gap-2 md:grid-cols-2">
         <div className="grid gap-2">
           <Label htmlFor="email">Email</Label>
