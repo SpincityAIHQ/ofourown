@@ -17,3 +17,9 @@ Verification:
 No live form submission, recipient email, customer confirmation, campaign launch, ad spend, payment, or downstream CRM conversion was tested or enabled. Dates/location, sender merge fields, consent/suppression, and a controlled recipient-approved delivery test remain campaign activation prerequisites.
 
 Technical references reviewed: Supabase changelog, Supabase row-level security documentation, and PostgreSQL table modification documentation. No package API migration was needed.
+
+## Existing service type correction
+
+The database's original booking type constraint accepted only `training` and `wellness`, while the existing form/server contract also supported `fst` and `coaching`. The public FST page uses `BookingForm type="fst"`, so its requests were blocked at insertion. Migration `20261018105133_booking_service_types.sql` extends the existing constraint to those same four approved source values. Unknown service types remain rejected. The coaching page currently uses an email waitlist; no new booking CTA, service, pricing, or scheduling promise was added.
+
+The existing schema regression now covers the three non-training types and an unknown type. A rolled-back anonymous-role database fixture verifies acceptance and persistence of all four supported types, rejection of an unknown type, and denied public reads. All eight historical requests remain and no fixture survives. The application notification handler is not invoked by this database-only check.

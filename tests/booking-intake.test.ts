@@ -13,7 +13,7 @@ const adultRequest = {
   athlete_age_band: "8-9",
 };
 
-test("evaluation eligibility is required server-side without collecting a birth date", () => {
+test("booking types and evaluation age groups are validated without collecting a birth date", () => {
   const valid = bookingSchema.parse(adultRequest);
   assert.equal(valid.athlete_age_band, "8-9");
   assert.equal(
@@ -29,10 +29,16 @@ test("evaluation eligibility is required server-side without collecting a birth 
     bookingSchema.safeParse({ ...adultRequest, utm_source: "x".repeat(121) }).success,
     false,
   );
+  for (const type of ["wellness", "fst", "coaching"]) {
+    assert.equal(
+      bookingSchema.safeParse({ type, name: "QA adult", email: "qa@example.invalid" }).success,
+      true,
+      `${type} must remain a supported request without a training age group`,
+    );
+  }
   assert.equal(
-    bookingSchema.safeParse({ type: "wellness", name: "QA adult", email: "qa@example.invalid" })
-      .success,
-    true,
+    bookingSchema.safeParse({ ...adultRequest, type: "unknown-service" }).success,
+    false,
   );
   assert.equal(bookingNotificationNotes(valid), "Athlete age group: 8–9 years");
 });
